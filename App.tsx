@@ -1,15 +1,11 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { HeaderBackButton } from "@react-navigation/stack";
 import HomeScreen from "./Home";
 import Settings from "./Settings";
 import GameSetup from "./GameSetup";
 
 const Stack = createStackNavigator();
-const navigationOptions = ({ navigation }: any) => ({
-  headerLeft: <HeaderBackButton onPress={() => navigation.goBack(null)} />,
-});
 
 export default function App() {
   return (
@@ -17,7 +13,7 @@ export default function App() {
       <Stack.Navigator
         screenOptions={{
           gestureEnabled: false,
-          headerShown: false,
+          headerShown: false
         }}
       >
         <Stack.Screen name="Home" component={HomeScreen} />

@@ -5,6 +5,10 @@ import { Button, StyleSheet, Text, View } from "react-native";
 function GameSetup({ navigation }: any) {
   return (
     <View style={styles.container}>
+      <Button
+        title="Back"
+        onPress={() => navigation.goBack()}
+      />
       <Text>Setup</Text>
       <StatusBar style="auto" />
       <Button
