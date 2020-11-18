@@ -1,10 +1,10 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "./Pages/Home/Home";
-import Settings from "./Pages/Settings/Settings";
-import GameSetup from "./Pages/GameSetup/GameSetup";
-import Game from "./Pages/Game/Game";
+import HomeScreen from "./pages/Home/Home";
+import Settings from "./pages/Settings/Settings";
+import GameSetup from "./pages/GameSetup/GameSetup";
+import Game from "./pages/Game/Game";
 
 const Stack = createStackNavigator();
 
