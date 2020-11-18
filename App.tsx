@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "./Home";
-import Settings from "./Settings";
-import GameSetup from "./GameSetup";
+import HomeScreen from "./Pages/Home/Home";
+import Settings from "./Pages/Settings/Settings";
+import GameSetup from "./Pages/GameSetup/GameSetup";
 
 const Stack = createStackNavigator();
 
