@@ -1,28 +1,18 @@
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
-function GameSetup({ navigation }: any) {
+function Game() {
+  const navigation = useNavigation();
+  
   return (
     <View style={styles.container}>
       <Button
         title="Back"
         onPress={() => navigation.goBack()}
       />
-      <Text>Setup</Text>
-      <Button
-        title="+ Add Player"
-        onPress={AddPlayer}
-      />
-      <Button
-        title="Play"
-        onPress={() => navigation.navigate("Game")}
-      />
     </View>
   );
-}
-
-function AddPlayer() {
-  
 }
 
 const styles = StyleSheet.create({
@@ -34,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameSetup;
+export default Game;
