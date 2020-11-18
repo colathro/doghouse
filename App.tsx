@@ -8,15 +8,16 @@ import GameSetup from "./GameSetup";
 
 const Stack = createStackNavigator();
 const navigationOptions = ({ navigation }: any) => ({
-    headerLeft: <HeaderBackButton onPress={() => navigation.goBack(null)} />,
-})
+  headerLeft: <HeaderBackButton onPress={() => navigation.goBack(null)} />,
+});
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false
+          gestureEnabled: false,
+          headerShown: false,
         }}
       >
         <Stack.Screen name="Home" component={HomeScreen} />
