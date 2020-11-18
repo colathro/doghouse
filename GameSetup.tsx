@@ -2,21 +2,25 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
-function HomeScreen({ navigation }: any) {
+function GameSetup({ navigation }: any) {
   return (
     <View style={styles.container}>
-      <Text>Hello, Turtle!</Text>
+      <Text>Setup</Text>
       <StatusBar style="auto" />
       <Button
-        title="Settings"
-        onPress={() => navigation.navigate("Settings")}
+        title="+ Add Player"
+        onPress={AddPlayer}
       />
       <Button
         title="Play"
-        onPress={() => navigation.navigate("GameSetup")}
+        onPress={() => navigation.navigate("Game")}
       />
     </View>
   );
+}
+
+function AddPlayer() {
+  
 }
 
 const styles = StyleSheet.create({
@@ -28,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default GameSetup;
