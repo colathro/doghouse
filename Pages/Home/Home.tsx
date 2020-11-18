@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button } from "components";
+import { StyleSheet, Text, View } from "react-native";
 
 function HomeScreen({ navigation }: any) {
   return (
@@ -11,10 +12,7 @@ function HomeScreen({ navigation }: any) {
         title="Settings"
         onPress={() => navigation.navigate("Settings")}
       />
-      <Button
-        title="Play"
-        onPress={() => navigation.navigate("GameSetup")}
-      />
+      <Button title="Play" onPress={() => navigation.navigate("GameSetup")} />
     </View>
   );
 }
