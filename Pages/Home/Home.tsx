@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Button } from "components";
 import { StyleSheet, Text, View } from "react-native";
@@ -7,7 +6,6 @@ function HomeScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <Text>Hello, Turtle!</Text>
-      <StatusBar style="auto" />
       <Button
         title="Settings"
         onPress={() => navigation.navigate("Settings")}

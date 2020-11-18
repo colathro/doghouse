@@ -1,9 +1,6 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-
-
 
 function Settings() {
   const navigation = useNavigation();
@@ -15,7 +12,6 @@ function Settings() {
         onPress={() => navigation.goBack()}
       />
       <Text>Settings</Text>
-      <StatusBar style="auto" />
     </View>
   );
 }
