@@ -1,28 +1,28 @@
 import React from "react";
+import { game } from "states";
+import { observer } from "mobx-react-lite";
 import { Button, StyleSheet, Text, View } from "react-native";
 
 function GameSetup({ navigation }: any) {
   return (
     <View style={styles.container}>
+      <Button title="Back" onPress={() => navigation.goBack()} />
+      <Text>Setup{game.players.join()}</Text>
       <Button
-        title="Back"
-        onPress={() => navigation.goBack()}
-      />
-      <Text>Setup</Text>
-      <Button
-        title="+ Add Player"
-        onPress={AddPlayer}
+        title="+ Player"
+        onPress={() => {
+          game.addPlayer("test");
+        }}
       />
       <Button
-        title="Play"
-        onPress={() => navigation.navigate("Game")}
+        title="- Player"
+        onPress={() => {
+          game.removePlayer();
+        }}
       />
+      <Button title="Play" onPress={() => navigation.navigate("Game")} />
     </View>
   );
-}
-
-function AddPlayer() {
-  
 }
 
 const styles = StyleSheet.create({
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameSetup;
+export default observer(GameSetup);

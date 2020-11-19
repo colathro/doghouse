@@ -10,7 +10,8 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
-      "components": ["./components"]
+      "components": ["./components/index.ts"],
+      "states": ["states/index.ts"]
     }
   }
 }

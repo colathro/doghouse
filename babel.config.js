@@ -7,7 +7,8 @@ module.exports = function (api) {
         "module-resolver",
         {
           alias: {
-            components: "./components",
+            components: "./components/index.ts",
+            states: "./states/index.ts",
           },
         },
       ],
