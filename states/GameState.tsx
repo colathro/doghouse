@@ -1,19 +1,28 @@
 import { makeAutoObservable } from "mobx";
 
-class GameState {
+class GameStateObject {
   constructor() {
     makeAutoObservable(this);
   }
 
-  public players: string[] = ["Colton"];
+  public players: string[] = [
+    "colton",
+    "matt",
+    "owyn",
+    "zach",
+    "ariana",
+    "megan",
+  ];
 
   addPlayer(name: string) {
     this.players.push(name);
   }
 
-  removePlayer() {
-    this.players.pop();
+  removePlayer(ind: number) {
+    // delete keyword does not work as this.players is converted to a
+    // MobX Observed Array, so changes won't be found.
+    this.players.splice(ind, 1);
   }
 }
 
-export const game = new GameState();
+export const GameState = new GameStateObject();

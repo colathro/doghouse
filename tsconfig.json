@@ -7,11 +7,6 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true,
-    "baseUrl": "./",
-    "paths": {
-      "components": ["./components/index.ts"],
-      "states": ["states/index.ts"]
-    }
+    "strict": true
   }
 }
