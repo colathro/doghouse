@@ -3,10 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
-import HomeScreen from "./pages/Home/Home";
-import Settings from "./pages/Settings/Settings";
-import GameSetup from "./pages/GameSetup/GameSetup";
-import Game from "./pages/Game/Game";
+import HomeScreen from "./Pages/Home/Home";
+import Settings from "./Pages/Settings/Settings";
+import GameSetup from "./Pages/GameSetup/GameSetup";
+import Game from "./Pages/Game/Game";
 import { LogBox, View, StyleSheet } from "react-native";
 
 LogBox.ignoreLogs(["Require cycle:"]);
