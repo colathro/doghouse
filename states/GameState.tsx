@@ -15,7 +15,9 @@ class GameStateObject {
   ];
 
   addPlayer(name: string) {
-    this.players.push(name);
+    if (typeof name!='undefined' && name !== "") {
+      this.players.push(name);
+    }
   }
 
   removePlayer(ind: number) {

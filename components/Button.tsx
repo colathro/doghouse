@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   NativeTouchEvent,
   NativeSyntheticEvent,
+  View,
 } from "react-native";
 
 type props = {
@@ -14,13 +15,22 @@ type props = {
 
 export const Button: React.FC<props> = (props: props): JSX.Element => {
   return (
-    <TouchableOpacity style={styles.button} onPress={props.onPress}>
-      <Text style={styles.buttonText}>{props.title}</Text>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.button} onPress={props.onPress}>
+        <Text style={styles.buttonText}>{props.title}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    height: 60,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 10,
+  },
   button: {
     alignItems: "center",
     justifyContent: "center",
@@ -31,6 +41,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     borderColor: "black",
     borderWidth: 3,
+    position: "relative",
   },
   buttonText: {
     color: "black",

@@ -11,18 +11,19 @@ export const AdjustPlayers: React.FC = observer(
 
     return (
       <View style={styles.container}>
-        <Text>Players:</Text>
+        <Text style={styles.header}>Players</Text>
         <Players />
-        <Button
-          title="+ Player"
-          onPress={() => {
-            GameState.addPlayer(playerInput);
-          }}
-        />
         <TextInput
           style={styles.textbox}
           onChangeText={(player) => onChangePlayerInput(player)}
           value={playerInput}
+        />
+        <Button
+          title="+ Player"
+          onPress={() => {
+            GameState.addPlayer(playerInput);
+            onChangePlayerInput("");
+          }}
         />
       </View>
     );
@@ -47,4 +48,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 3,
   },
+  header: {
+    fontFamily: "Tw-Bold",
+    fontSize: 32,
+    margin: 12,
+  }
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import { GameState } from "../../states";
 import { observer } from "mobx-react-lite";
-import { Button, Players, Header } from "../../components";
+import { Button, Header, AdjustPlayers } from "../../components";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
 function GameSetup({ navigation }: any) {
@@ -12,8 +12,10 @@ function GameSetup({ navigation }: any) {
       <View style={styles.wrapper}>
         <Header title="Game Setup" navigation={navigation}></Header>
         <View style={styles.container}>
-          <Players />
-          <Button title="Play" onPress={() => navigation.navigate("Game")} />
+          <AdjustPlayers />
+          <Button 
+            title="Play" 
+            onPress={() => navigation.navigate("Game")} />
         </View>
       </View>
     </View>
