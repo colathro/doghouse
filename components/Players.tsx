@@ -19,7 +19,7 @@ export const Players: React.FC = observer(
           <TouchableOpacity
             key={ind}
             onPress={() => {
-              GameState.removePlayer(ind);
+              GameState.removePlayer(val.name);
             }}
           >
             <Text style={val.selected ? styles.playerSelected : styles.player}>
