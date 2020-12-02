@@ -13,7 +13,7 @@ import {
 
 export const Players: React.FC = observer(
   (): JSX.Element => {
-    const [playerInput, onChangePlayerInput] = React.useState("");
+    const [selectedPlayer, onChangeSelectedPlayer] = React.useState(-1);
 
     return (
       <View style={styles.container}>
@@ -21,10 +21,20 @@ export const Players: React.FC = observer(
           <TouchableOpacity
             key={ind}
             onPress={() => {
-              GameState.removePlayer(ind);
+              if (selectedPlayer == ind) {
+                onChangeSelectedPlayer(-1);
+                GameState.removePlayer(ind);
+              }
+              onChangeSelectedPlayer(ind);
             }}
           >
-            <Text style={styles.player}>{val}</Text>
+            <Text
+              style={
+                selectedPlayer == ind ? styles.playerSelected : styles.player
+              }
+            >
+              {val}
+            </Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -45,5 +55,11 @@ const styles = StyleSheet.create({
     fontFamily: "Tw-Bold",
     fontSize: 28,
     margin: 12,
+  },
+  playerSelected: {
+    fontFamily: "Tw-Bold",
+    fontSize: 28,
+    margin: 12,
+    color: "red",
   },
 });

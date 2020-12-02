@@ -32,13 +32,9 @@ export const AdjustPlayers: React.FC = observer(
 
 const styles = StyleSheet.create({
   container: {
-    height: 200,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  },
-  short: {
-    height: 200,
   },
   textbox: {
     height: 30,
@@ -52,5 +48,5 @@ const styles = StyleSheet.create({
     fontFamily: "Tw-Bold",
     fontSize: 32,
     margin: 12,
-  }
+  },
 });
