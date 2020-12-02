@@ -13,27 +13,17 @@ import {
 
 export const Players: React.FC = observer(
   (): JSX.Element => {
-    const [selectedPlayer, onChangeSelectedPlayer] = React.useState(-1);
-
     return (
       <View style={styles.container}>
         {GameState.players.map((val, ind) => (
           <TouchableOpacity
             key={ind}
             onPress={() => {
-              if (selectedPlayer == ind) {
-                onChangeSelectedPlayer(-1);
-                GameState.removePlayer(ind);
-              }
-              onChangeSelectedPlayer(ind);
+              GameState.removePlayer(ind);
             }}
           >
-            <Text
-              style={
-                selectedPlayer == ind ? styles.playerSelected : styles.player
-              }
-            >
-              {val}
+            <Text style={val.selected ? styles.playerSelected : styles.player}>
+              {val.name}
             </Text>
           </TouchableOpacity>
         ))}
