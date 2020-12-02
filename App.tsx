@@ -7,7 +7,9 @@ import HomeScreen from "./pages/home/Home";
 import Settings from "./pages/settings/Settings";
 import GameSetup from "./pages/gamesetup/GameSetup";
 import Game from "./pages/game/Game";
-import { LogBox, View, StyleSheet } from "react-native";
+import { LogBox, View, StyleSheet, FlexAlignType } from "react-native";
+import { GameState } from "./states";
+import { observer } from "mobx-react-lite";
 
 LogBox.ignoreLogs(["Require cycle:"]);
 
@@ -47,4 +49,6 @@ const loadResources = async () => {
     "Tw-Reg": require("./assets/fonts/tccm.ttf"),
     "Tw-Bold": require("./assets/fonts/tccb.ttf"),
   });
+  GameState.addCardPack(require("./assets/cardpacks/testpack.json"));
 };
+

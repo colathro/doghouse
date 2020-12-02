@@ -1,11 +1,14 @@
 import { IObservableArray, makeAutoObservable } from "mobx";
 import { Players } from "../components";
+import { CardPack } from "../types";
+import { Card } from "../types";
 import { Player } from "../types";
 
 class GameStateObject {
   constructor() {
     makeAutoObservable(this);
   }
+
 
   public players: IObservableArray<Player> = [
     { name: "colton", selected: false },
@@ -15,6 +18,26 @@ class GameStateObject {
     { name: "carlos", selected: false },
     { name: "juan", selected: false },
   ] as IObservableArray<Player>;
+
+  public cardPacks: Array<CardPack> = [
+    { 
+      name: "testpack",
+      cards: [ 
+        {
+          text: "What turtle is not best?"
+        }
+      ] 
+    }
+  ] as Array<CardPack>;
+
+  drawCard(pack: string) {
+    return JSON.stringify(this.cardPacks);
+    return this.cardPacks[this.cardPacks.length-1].cards[0];
+  }
+
+  addCardPack(pack: CardPack){
+    this.cardPacks.push(pack);
+  }
 
   addPlayer(name: string) {
     if (
