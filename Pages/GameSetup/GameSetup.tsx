@@ -15,7 +15,11 @@ function GameSetup({ navigation }: any) {
           <AdjustPlayers />
           <Button 
             title="Play" 
-            onPress={() => navigation.navigate("Game")} />
+            onPress={() => 
+            {
+              GameState.startGame();
+              navigation.navigate("Game");
+            }} />
         </View>
       </View>
     </View>

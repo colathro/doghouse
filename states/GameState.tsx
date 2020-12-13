@@ -1,4 +1,4 @@
-import { IObservableArray, makeAutoObservable } from "mobx";
+import { IObservable, IObservableArray, makeAutoObservable } from "mobx";
 import { Players } from "../components";
 import { CardPack } from "../types";
 import { Card } from "../types";
@@ -19,24 +19,31 @@ class GameStateObject {
     { name: "juan", selected: false },
   ] as IObservableArray<Player>;
 
-  public cardPacks: Array<CardPack> = [
-    { 
-      name: "testpack",
-      cards: [ 
-        {
-          text: "What turtle is not best?"
-        }
-      ] 
-    }
-  ] as Array<CardPack>;
+  public cardPacks: Array<CardPack> = [] as Array<CardPack>;
 
-  drawCard(pack: string) {
-    return JSON.stringify(this.cardPacks);
-    return this.cardPacks[this.cardPacks.length-1].cards[0];
+  public activePacks: Array<CardPack> = [] as Array<CardPack>;
+
+  public activeCard: Card = {} as Card;
+
+  public activeDeck = 0;
+
+  drawCard() {
+    if (this.activePacks[this.activeDeck].cards.length == 0){
+      this.activeCard = {} as Card;
+    } else {
+      var index = Math.floor(Math.random() * (this.activePacks[this.activeDeck].cards.length - 1))
+      this.activeCard = this.activePacks[0].cards[index];
+      this.activePacks[this.activeDeck].cards.splice(index, 1);
+    }
   }
 
   addCardPack(pack: CardPack){
     this.cardPacks.push(pack);
+  }
+
+  startGame() {
+    this.activeCard = {} as Card;
+    this.activePacks = JSON.parse(JSON.stringify(this.cardPacks));
   }
 
   addPlayer(name: string) {
