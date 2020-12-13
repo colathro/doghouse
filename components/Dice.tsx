@@ -8,19 +8,19 @@ import {
   View,
 } from "react-native";
 
-export const Cards: React.FC = observer(
+export const Dice: React.FC = observer(
   (): JSX.Element => {
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          style={styles.card}
+          style={styles.dice}
           onPress={() => {
-            GameState.drawCard();
+            GameState.rollDice();
           }}
         >
           <Text
-            style={styles.cardText}>
-          {GameState.activeCard.text}</Text>
+            style={styles.diceText}>
+          {GameState.activeDeck + 1}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -33,19 +33,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  card: {
+  dice: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     margin: 10,
-    height: 222,
-    width: 320,
+    height: 60,
+    width: 60,
     borderRadius: 7,
-    borderColor: "#ff6700",
+    borderColor: "black",
     borderWidth: 3,
     position: "relative",
   },
-  cardText: {
+  diceText: {
     fontFamily: "Tw-Bold",
     fontSize: 28,
     margin: 12,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Players, Header, Cards } from "../../components";
+import { Players, Header, Cards, Dice } from "../../components";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -13,6 +13,7 @@ function Game() {
         <View style={styles.container}>
           <Players />
           <Cards />
+          <Dice />
         </View>
       </View>
     </View>

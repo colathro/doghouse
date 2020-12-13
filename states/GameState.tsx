@@ -41,6 +41,10 @@ class GameStateObject {
     this.cardPacks.push(pack);
   }
 
+  rollDice(){
+    this.activeDeck = Math.floor(Math.random() * (this.activePacks.length - 1));
+  }
+
   startGame() {
     this.activeCard = {} as Card;
     this.activePacks = JSON.parse(JSON.stringify(this.cardPacks));
