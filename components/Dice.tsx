@@ -15,7 +15,7 @@ export const Dice: React.FC = observer(
         <TouchableOpacity
           style={styles.dice}
           onPress={() => {
-            GameState.rollDice();
+            GameState.nextGamePhase();
           }}
         >
           <Text

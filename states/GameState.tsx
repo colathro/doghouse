@@ -6,17 +6,24 @@ import { Player } from "../types";
 
 class GameStateObject {
   constructor() {
+    Object.freeze(this.gamePhase);
     makeAutoObservable(this);
   }
 
+  public gamePhase = {
+    ROLL: 1,
+    DRAW: 2,
+    PLAY: 3,
+    DOGHOUSE: 4,
+  }
 
   public players: IObservableArray<Player> = [
-    { name: "colton", selected: false },
-    { name: "daniel", selected: false },
-    { name: "michael", selected: false },
-    { name: "matt", selected: false },
-    { name: "carlos", selected: false },
-    { name: "juan", selected: false },
+    { name: "colton", selected: false, score: 0 },
+    { name: "daniel", selected: false, score: 0 },
+    { name: "michael", selected: false, score: 0 },
+    { name: "matt", selected: false, score: 0 },
+    { name: "carlos", selected: false, score: 0 },
+    { name: "juan", selected: false, score: 0 },
   ] as IObservableArray<Player>;
 
   public cardPacks: Array<CardPack> = [] as Array<CardPack>;
@@ -27,7 +34,26 @@ class GameStateObject {
 
   public activeDeck = 0;
 
-  drawCard() {
+  public activePhase = this.gamePhase.ROLL;
+
+  nextGamePhase() {
+    switch(this.activePhase) {
+      case this.gamePhase.ROLL:
+        this.rollDice();
+        break;
+      case this.gamePhase.DRAW:
+        this.drawCard();
+        break;
+      case this.gamePhase.PLAY:
+        // code block
+        break;
+      case this.gamePhase.DOGHOUSE:
+        break;
+    }
+    this.activePhase = (this.activePhase + 1) % 4;
+  }
+
+  private drawCard() {
     if (this.activePacks[this.activeDeck].cards.length == 0){
       this.activeCard = {} as Card;
     } else {
@@ -41,12 +67,13 @@ class GameStateObject {
     this.cardPacks.push(pack);
   }
 
-  rollDice(){
+  private rollDice(){
     this.activeDeck = Math.floor(Math.random() * (this.activePacks.length - 1));
   }
 
   startGame() {
     this.activeCard = {} as Card;
+    this.activePhase = this.gamePhase.ROLL;
     this.activePacks = JSON.parse(JSON.stringify(this.cardPacks));
   }
 
@@ -56,7 +83,7 @@ class GameStateObject {
       name !== "" &&
       this.players.find((value) => value.name == name) === undefined
     ) {
-      var player: Player = { name: name, selected: false };
+      var player: Player = { name: name, selected: false, score: 0 };
       this.players.push(player);
     }
   }

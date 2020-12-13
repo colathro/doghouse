@@ -15,7 +15,7 @@ export const Cards: React.FC = observer(
         <TouchableOpacity
           style={styles.card}
           onPress={() => {
-            GameState.drawCard();
+            GameState.nextGamePhase();
           }}
         >
           <Text

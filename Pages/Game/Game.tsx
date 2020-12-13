@@ -1,7 +1,8 @@
 import React from "react";
 import { Players, Header, Cards, Dice } from "../../components";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { GameState } from "../../states";
 
 function Game() {
   const navigation = useNavigation();
@@ -40,6 +41,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  board: {
+    alignItems: "center",
+    justifyContent: "center",
+  }
 });
 
 export default Game;
