@@ -21,7 +21,7 @@ function Settings() {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "#FF6700",
+    backgroundColor: "rgba(0,0,0,0.0)",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -31,6 +31,15 @@ const styles = StyleSheet.create({
     width: "95%",
     height: "91%",
     borderRadius: 14,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.0,
+
+    elevation: 4,
   },
   container: {
     marginTop: 60,

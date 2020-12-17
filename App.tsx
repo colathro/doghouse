@@ -33,7 +33,11 @@ export default function App() {
         screenOptions={{
           gestureEnabled: false,
           headerShown: false,
+          cardStyle: {
+            backgroundColor: "rgba(0,0,0,0.0)",
+          },
         }}
+        mode="modal"
       >
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Settings" component={Settings} />
@@ -51,4 +55,3 @@ const loadResources = async () => {
   });
   GameState.addCardPack(require("./assets/cardpacks/testpack.json"));
 };
-
