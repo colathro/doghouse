@@ -5,3 +5,4 @@ export * from "./AdjustPlayers";
 export * from "./Cards";
 export * from "./Dice";
 export * from "./Logo";
+export * from "./views/Main";
