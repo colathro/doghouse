@@ -1,15 +1,15 @@
 import React from "react";
-import { Button, Logo, Main } from "../../components";
+import { Button, BigButton, Logo, Main } from "../../components";
 
 function HomeScreen({ navigation }: any) {
   return (
     <Main navigation={navigation}>
       <Logo />
-      <Button
-        title="Settings"
-        onPress={() => navigation.navigate("Settings")}
+      <BigButton
+        title="PLAY"
+        onPress={() => navigation.navigate("GameSetup")}
       />
-      <Button title="Play" onPress={() => navigation.navigate("GameSetup")} />
+      <Button title="PACKS" onPress={() => navigation.navigate("Settings")} />
     </Main>
   );
 }

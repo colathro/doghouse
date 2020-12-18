@@ -5,7 +5,7 @@ import { Button, AdjustPlayers, Main } from "../../components";
 
 function GameSetup({ navigation }: any) {
   return (
-    <Main navigation={navigation} title="Game Setup">
+    <Main navigation={navigation} title="Game Setup" help="setup">
       <AdjustPlayers />
       <Button
         title="Play"

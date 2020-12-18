@@ -13,7 +13,7 @@ type props = {
   onPress: (ev: NativeSyntheticEvent<NativeTouchEvent>) => void;
 };
 
-export const Button: React.FC<props> = (props: props): JSX.Element => {
+export const BigButton: React.FC<props> = (props: props): JSX.Element => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={props.onPress}>
@@ -25,7 +25,7 @@ export const Button: React.FC<props> = (props: props): JSX.Element => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 60,
+    height: 90,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#ff6700",
     margin: 10,
-    height: 60,
+    height: 90,
     width: 280,
     borderRadius: 7,
     borderColor: "black",
@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
     color: "black",
     fontFamily: "Tw-Bold",
     fontWeight: "bold",
-    fontSize: 36,
+    fontSize: 56,
   },
 });

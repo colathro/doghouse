@@ -6,3 +6,5 @@ export * from "./Cards";
 export * from "./Dice";
 export * from "./Logo";
 export * from "./views/Main";
+export * from "./BigButton";
+export * from "./Help";

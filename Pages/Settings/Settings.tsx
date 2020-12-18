@@ -6,7 +6,7 @@ function Settings() {
   const navigation = useNavigation();
 
   return (
-    <Main navigation={navigation} title="Settings">
+    <Main navigation={navigation} title="Settings" help="packs">
       <Button title="Play" onPress={() => navigation.navigate("Game")} />
     </Main>
   );

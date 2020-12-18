@@ -2,10 +2,16 @@ import React from "react";
 import { Header } from "../../components";
 import { StyleSheet, View } from "react-native";
 
-export function Main({ navigation, title, children }: any) {
+export function Main({ navigation, title, help, children }: any) {
   let header;
   if (title) {
-    header = <Header title={title} navigation={navigation}></Header>;
+    if (help) {
+      header = (
+        <Header title={title} navigation={navigation} help={help}></Header>
+      );
+    } else {
+      header = <Header title={title} navigation={navigation}></Header>;
+    }
   } else {
     header = <></>;
   }
