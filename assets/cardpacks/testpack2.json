@@ -1,0 +1,11 @@
+{
+  "name": "testpack2",
+  "cards": [
+    {
+      "text": "What turtle is best?"
+    },
+    {
+      "text": "What turtle is not best?"
+    }
+  ]
+}

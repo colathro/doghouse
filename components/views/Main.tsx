@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.4,
     shadowRadius: 5.0,
-
     elevation: 8,
   },
   container: {
-    marginTop: 60,
+    marginTop: 30,
+    maxHeight: "91%",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",

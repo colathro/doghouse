@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import HomeScreen from "./pages/home/Home";
-import Settings from "./pages/settings/Settings";
+import Settings from "./pages/packselect/PackSelect";
 import GameSetup from "./pages/gamesetup/GameSetup";
 import Game from "./pages/game/Game";
 import { LogBox, View, StyleSheet, FlexAlignType } from "react-native";
@@ -54,4 +54,9 @@ const loadResources = async () => {
     "Tw-Bold": require("./assets/fonts/tccb.ttf"),
   });
   GameState.addCardPack(require("./assets/cardpacks/testpack.json"));
+  GameState.addCardPack(require("./assets/cardpacks/testpack1.json"));
+  GameState.addCardPack(require("./assets/cardpacks/testpack2.json"));
+  GameState.addCardPack(require("./assets/cardpacks/testpack3.json"));
+  GameState.addCardPack(require("./assets/cardpacks/testpack4.json"));
+  GameState.addCardPack(require("./assets/cardpacks/testpack5.json"));
 };
