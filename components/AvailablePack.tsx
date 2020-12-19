@@ -12,7 +12,14 @@ export const AvailablePack: React.FC<props> = observer(
   (props: props): JSX.Element => {
     return (
       <View style={styles.container}>
-        <Text>{props.name}</Text>
+        <View style={titleStyles.titleContainer}>
+          <Text style={titleStyles.text}>{props.name}</Text>
+        </View>
+        <View style={selectStyles.selectContainer}>
+          <TouchableOpacity style={selectStyles.selectButton}>
+            <Text style={selectStyles.selectButtonText}>Select</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -20,7 +27,9 @@ export const AvailablePack: React.FC<props> = observer(
 
 const styles = StyleSheet.create({
   container: {
-    width: 150,
+    alignContent: "center",
+    justifyContent: "space-between",
+    width: 148,
     height: 200,
     backgroundColor: "#fff",
     shadowColor: "#000",
@@ -34,10 +43,43 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     margin: 8,
   },
-  removeIconContainer: {
-    position: "absolute",
-    right: -7,
-    top: -7,
-    zIndex: 1,
+});
+
+const titleStyles = StyleSheet.create({
+  titleContainer: {
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  text: {
+    textAlign: "center",
+    color: "black",
+    fontFamily: "Tw-Bold",
+    fontWeight: "bold",
+    fontSize: 24,
+  },
+});
+
+const selectStyles = StyleSheet.create({
+  selectContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  selectButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ff6700",
+    margin: 10,
+    height: 30,
+    width: 100,
+    borderRadius: 7,
+    borderColor: "black",
+    borderWidth: 3,
+    position: "relative",
+  },
+  selectButtonText: {
+    color: "black",
+    fontFamily: "Tw-Bold",
+    fontWeight: "bold",
+    fontSize: 24,
   },
 });
