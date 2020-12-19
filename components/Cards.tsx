@@ -1,6 +1,7 @@
 import React from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
+import CardFlip from 'react-native-card-flip';
 import {
   StyleSheet,
   Text,
@@ -12,32 +13,51 @@ export const Cards: React.FC = observer(
   (): JSX.Element => {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style={
-            GameState.activePhase == GameState.gamePhase.DRAW
-              ? { ...styles.card }
-              : { ...styles.flippedCard }
-          }
-          onPress={() => {
-            GameState.nextGamePhase();
-          }}
-        >
-          <Text
-            style={styles.prompt}
-          >
-            {GameState.activePhase == GameState.gamePhase.DRAW || GameState.activeCard.text == null
-              ? ""
-              : GameState.activePacks[GameState.activeDeck].prompt}
-          </Text>
-          <Text
-            style={styles.cardText}>
-            {GameState.activePhase == GameState.gamePhase.DRAW
-              ? GameState.activePacks[GameState.activeDeck].name
-              : (GameState.activeCard.text != null) 
-                ? GameState.activeCard.text
-                : ""}
-          </Text>
-        </TouchableOpacity>
+        <CardFlip style={styles.cardContainer} ref={(card) => this.card = card} >
+          <TouchableOpacity 
+            style={styles.card} 
+            onPress={() => 
+              { 
+                if (GameState.activePhase == GameState.gamePhase.DRAW) {
+                  GameState.nextGamePhase();
+                  this.card.flip();
+                } else {
+                  this.card.tip();
+                }
+              }}>
+            <Text
+              style={styles.cardText}>
+              { 
+                GameState.activePhase == GameState.gamePhase.ROLL 
+                  ? ""
+                  :GameState.activePacks[GameState.activeDeck].name
+              }
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.flippedCard} 
+            onPress={() => 
+              {
+                GameState.nextGamePhase();
+                GameState.activePhase == GameState.gamePhase.ROLL 
+                  ? this.card.flip()
+                  : this.card.tip()
+              }} >
+            <Text
+              style={styles.prompt}
+            >
+              {GameState.activeCard.text != null
+                  ? GameState.activePacks[GameState.activeDeck].prompt
+                  : ""}
+            </Text>
+            <Text
+              style={styles.cardText}>
+              {GameState.activeCard.text != null
+                  ? GameState.activeCard.text
+                  : ""}
+            </Text>
+          </TouchableOpacity>
+        </CardFlip>
       </View>
     );
   }
@@ -49,13 +69,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  cardContainer: {
+    margin: 20,
+    height: 208,
+    width: 300,
+  },
   card: {
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ff6700",
     margin: 10,
-    height: 222,
-    width: 320,
+    height: 208,
+    width: 300,
     borderRadius: 7,
     borderColor: "#ff6700",
     borderWidth: 3,
@@ -66,8 +91,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
     margin: 10,
-    height: 222,
-    width: 320,
+    height: 208,
+    width: 300,
     borderRadius: 7,
     borderColor: "#ff6700",
     borderWidth: 3,
