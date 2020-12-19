@@ -6,7 +6,7 @@ function Game() {
   const navigation = useNavigation();
 
   return (
-    <Main navigation={navigation} title={"Game"}>
+    <Main navigation={navigation} title={"Game"} help="ingame">
       <Players allowEdit={false} />
       <Cards />
       <Dice />
