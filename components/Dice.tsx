@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import {
@@ -10,9 +10,13 @@ import {
   Easing,
 } from "react-native";
 
-export const Dice: React.FC = observer(
-  (): JSX.Element => {
+type props = {
+  navigation: any;
+};
 
+export const Dice: React.FC<props> = observer(
+  (props: props): JSX.Element => {
+    const [rolling, setRolling] = useState(true);
     const shake = new Animated.Value(0);
 
     React.useEffect(() => {
@@ -47,7 +51,7 @@ export const Dice: React.FC = observer(
     return (
       <Animated.View
         style={
-          GameState.activePhase == GameState.gamePhase.ROLL
+          rolling
             ? {
                 ...styles.container,
                 transform: [
@@ -59,18 +63,24 @@ export const Dice: React.FC = observer(
                   },
                 ],
               }
-            : { ...styles.container }
-          }
-          >
+            : {
+                ...styles.container,
+              }
+        }
+      >
         <TouchableOpacity
           style={styles.dice}
           onPress={() => {
-            GameState.nextGamePhase();
+            setRolling(false);
+            if (rolling) {
+              GameState.rollDice();
+              setTimeout(() => {
+                props.navigation.navigate("GameCardShow");
+              }, 1000);
+            }
           }}
         >
-          <Text
-            style={styles.diceText}>
-          {GameState.activeDeck + 1}</Text>
+          <Text style={styles.diceText}>{GameState.dice + 1}</Text>
         </TouchableOpacity>
       </Animated.View>
     );

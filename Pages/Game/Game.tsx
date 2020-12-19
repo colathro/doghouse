@@ -1,17 +1,35 @@
 import React from "react";
-import { Players, Cards, Dice, Main } from "../../components";
-import { useNavigation } from "@react-navigation/native";
+import GameDiceRoll from "./GameDiceRoll";
+import GameCardShow from "./GameCardShow";
+import { createStackNavigator } from "@react-navigation/stack";
+import { View, StyleSheet } from "react-native";
+
+const Stack = createStackNavigator();
 
 function Game() {
-  const navigation = useNavigation();
-
   return (
-    <Main navigation={navigation} title={"Game"} help="ingame">
-      <Players allowEdit={false} />
-      <Cards />
-      <Dice />
-    </Main>
+    <View style={styles.container}>
+      <Stack.Navigator
+        screenOptions={{
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+        mode="modal"
+      >
+        <Stack.Screen name="GameDiceRoll" component={GameDiceRoll} />
+        <Stack.Screen name="GameCardShow" component={GameCardShow} />
+      </Stack.Navigator>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignContent: "center",
+  },
+});
 
 export default Game;

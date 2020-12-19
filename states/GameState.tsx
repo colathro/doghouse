@@ -15,7 +15,7 @@ class GameStateObject {
     DRAW: 2,
     PLAY: 3,
     DOGHOUSE: 4,
-  }
+  };
 
   public players: IObservableArray<Player> = [
     { name: "colton", selected: false, score: 0 },
@@ -32,48 +32,32 @@ class GameStateObject {
 
   public activeCard: Card = {} as Card;
 
-  public activeDeck = 0;
-
-  public activePhase = this.gamePhase.ROLL;
-
-  nextGamePhase() {
-    switch(this.activePhase) {
-      case this.gamePhase.ROLL:
-        this.rollDice();
-        break;
-      case this.gamePhase.DRAW:
-        this.drawCard();
-        break;
-      case this.gamePhase.PLAY:
-        // code block
-        break;
-      case this.gamePhase.DOGHOUSE:
-        break;
-    }
-    this.activePhase = (this.activePhase + 1) % 4;
-  }
+  public dice = 0;
 
   private drawCard() {
-    if (this.activePacks[this.activeDeck].cards.length == 0){
+    if (this.activePacks[this.dice].cards.length == 0) {
       this.activeCard = {} as Card;
     } else {
-      var index = Math.floor(Math.random() * (this.activePacks[this.activeDeck].cards.length - 1))
-      this.activeCard = this.activePacks[this.activeDeck].cards[index];
-      this.activePacks[this.activeDeck].cards.splice(index, 1);
+      var index = Math.floor(
+        Math.random() * (this.activePacks[this.dice].cards.length - 1)
+      );
+      this.activeCard = this.activePacks[this.dice].cards[index];
+      this.activePacks[this.dice].cards.splice(index, 1);
     }
   }
 
-  addCardPack(pack: CardPack){
+  addCardPack(pack: CardPack) {
     this.cardPacks.push(pack);
+    this.activePacks = this.cardPacks;
   }
 
-  private rollDice(){
-    this.activeDeck = Math.floor(Math.random() * (this.activePacks.length - 1));
+  rollDice() {
+    this.dice = Math.floor(Math.random() * this.activePacks.length);
+    this.drawCard();
   }
 
   startGame() {
     this.activeCard = {} as Card;
-    this.activePhase = this.gamePhase.ROLL;
     this.activePacks = JSON.parse(JSON.stringify(this.cardPacks));
   }
 

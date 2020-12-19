@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export const Cards: React.FC = observer(
-  (): JSX.Element => {
+type props = { navigation: any };
+
+export const Cards: React.FC<props> = observer(
+  (props: props): JSX.Element => {
+    const [flipped, setFlipped] = useState(false);
     let card;
     return (
       <View style={styles.container}>
@@ -18,8 +21,7 @@ export const Cards: React.FC = observer(
           <TouchableOpacity
             style={styles.card}
             onPress={() => {
-              if (GameState.activePhase == GameState.gamePhase.DRAW) {
-                GameState.nextGamePhase();
+              if (!flipped) {
                 card.flip();
               } else {
                 card.tip();
@@ -27,23 +29,18 @@ export const Cards: React.FC = observer(
             }}
           >
             <Text style={styles.cardText}>
-              {GameState.activePhase == GameState.gamePhase.ROLL
-                ? ""
-                : GameState.activePacks[GameState.activeDeck].name}
+              {!flipped ? "" : GameState.activePacks[GameState.dice].name}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.flippedCard}
             onPress={() => {
-              GameState.nextGamePhase();
-              GameState.activePhase == GameState.gamePhase.ROLL
-                ? card.flip()
-                : card.tip();
+              card.tip();
             }}
           >
             <Text style={styles.prompt}>
               {GameState.activeCard.text != null
-                ? GameState.activePacks[GameState.activeDeck].prompt
+                ? GameState.activePacks[GameState.dice].prompt
                 : ""}
             </Text>
             <Text style={styles.cardText}>

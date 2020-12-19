@@ -11,7 +11,10 @@ function GameSetup({ navigation }: any) {
         title="Play"
         onPress={() => {
           GameState.startGame();
-          navigation.navigate("Game");
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Game" }],
+          });
         }}
       />
     </Main>
