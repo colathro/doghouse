@@ -7,7 +7,7 @@ function Game() {
 
   return (
     <Main navigation={navigation} title={"Game"}>
-      <Players />
+      <Players allowEdit={false} />
       <Cards />
       <Dice />
     </Main>

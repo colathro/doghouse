@@ -1,12 +1,12 @@
 import React from "react";
 import { GameState } from "../../states";
 import { observer } from "mobx-react-lite";
-import { Button, AdjustPlayers, Main } from "../../components";
+import { Button, Players, Main } from "../../components";
 
 function GameSetup({ navigation }: any) {
   return (
     <Main navigation={navigation} title="Game Setup" help="setup">
-      <AdjustPlayers />
+      <Players allowEdit={true} />
       <Button
         title="Play"
         onPress={() => {

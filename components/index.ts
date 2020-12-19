@@ -8,3 +8,4 @@ export * from "./Logo";
 export * from "./views/Main";
 export * from "./BigButton";
 export * from "./Help";
+export * from "./icons/AddIcon";

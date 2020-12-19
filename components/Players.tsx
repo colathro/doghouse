@@ -1,8 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
-import { action } from "mobx";
-import { Button } from "../components";
 import {
   StyleSheet,
   Text,
@@ -12,9 +10,14 @@ import {
   Animated,
   Easing,
 } from "react-native";
+import { AddIcon } from "./icons/AddIcon";
 
-export const Players: React.FC = observer(
-  (): JSX.Element => {
+type props = {
+  allowEdit: boolean;
+};
+
+export const Players: React.FC<props> = observer(
+  (props: props): JSX.Element => {
     const shake = new Animated.Value(0); // Initial value for opacity: 0
 
     React.useEffect(() => {
@@ -52,7 +55,9 @@ export const Players: React.FC = observer(
           <TouchableOpacity
             key={ind}
             onPress={() => {
-              GameState.removePlayer(val.name);
+              if (props.allowEdit) {
+                GameState.removePlayer(val.name);
+              }
             }}
           >
             <Animated.Text
@@ -76,6 +81,7 @@ export const Players: React.FC = observer(
             </Animated.Text>
           </TouchableOpacity>
         ))}
+        {props.allowEdit ? <AddPlayer></AddPlayer> : <></>}
       </View>
     );
   }
@@ -101,4 +107,49 @@ const styles = StyleSheet.create({
     margin: 12,
     color: "red",
   },
+  addbutton: {
+    marginLeft: 12,
+    marginRight: 12,
+  },
 });
+
+const AddPlayer: React.FC = observer(
+  (): JSX.Element => {
+    const [editing, setEditing] = useState(false);
+    const [text, setText] = useState("");
+
+    const submit = (name: string) => {
+      GameState.addPlayer(name);
+    };
+
+    return (
+      <View>
+        {!editing ? (
+          <TouchableOpacity
+            onPress={() => {
+              setEditing(true);
+              setText("");
+            }}
+            style={styles.addbutton}
+          >
+            <AddIcon />
+          </TouchableOpacity>
+        ) : (
+          <TextInput
+            style={styles.player}
+            autoFocus
+            onChangeText={(curText) => {
+              setText(curText);
+            }}
+            onBlur={() => {
+              setEditing(false);
+            }}
+            onSubmitEditing={() => {
+              submit(text);
+            }}
+          />
+        )}
+      </View>
+    );
+  }
+);
