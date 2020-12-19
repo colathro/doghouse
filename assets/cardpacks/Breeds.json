@@ -1,5 +1,6 @@
 {
-  "name": "Breeds",
+  "name": "BREEDS",
+  "prompt": "List",
   "cards": [
     {
       "text": "\"where are they now\" artists."

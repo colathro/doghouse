@@ -1,5 +1,6 @@
 {
-  "name": "Doghouse or Dare",
+  "name": "doghouse or dare",
+  "prompt": "Choose someone to",
   "cards": [
     {
       "text": "ask Siri, \"Who\u0027s her daddy?\""

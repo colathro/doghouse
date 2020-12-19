@@ -1,5 +1,6 @@
 {
-  "name": "Bark or Bite",
+  "name": "BARK OR BITE",
+  "prompt": "Raise your hand if you've",
   "cards": [
     {
       "text": "ate food that was on the floor for longer than 5 seconds."

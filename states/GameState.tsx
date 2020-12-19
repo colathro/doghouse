@@ -58,7 +58,7 @@ class GameStateObject {
       this.activeCard = {} as Card;
     } else {
       var index = Math.floor(Math.random() * (this.activePacks[this.activeDeck].cards.length - 1))
-      this.activeCard = this.activePacks[0].cards[index];
+      this.activeCard = this.activePacks[this.activeDeck].cards[index];
       this.activePacks[this.activeDeck].cards.splice(index, 1);
     }
   }
