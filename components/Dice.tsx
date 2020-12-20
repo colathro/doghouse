@@ -76,7 +76,7 @@ export const Dice: React.FC<props> = observer(
               GameState.rollDice();
               setTimeout(() => {
                 props.navigation.navigate("GameCardShow");
-              }, 1000);
+              }, 500);
             }
           }}
         >

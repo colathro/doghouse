@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, StyleSheet, Text } from "react-native";
-import { Cards, Button } from "../../components";
+import { Dice, Button, Doghouse} from "../../components";
 
-function GameCardShow() {
+function GameDoghouse() {
   const navigation = useNavigation();
 
   return (
@@ -17,8 +17,8 @@ function GameCardShow() {
           });
         }}
       ></Button>
-      <Text>Draw Card</Text>
-      <Cards navigation={navigation} />
+      <Text>Doghouse</Text>
+      <Doghouse navigation={navigation} />
     </View>
   );
 }
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameCardShow;
+export default GameDoghouse;

@@ -29,24 +29,23 @@ export const Cards: React.FC<props> = observer(
             }}
           >
             <Text style={styles.cardText}>
-              {!flipped ? "" : GameState.activePacks[GameState.dice].name}
+              {GameState.activePacks[GameState.dice].name}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.flippedCard}
             onPress={() => {
               card.tip();
+              setTimeout(() => {
+                props.navigation.navigate("GameDoghouse");
+              }, 500);
             }}
           >
             <Text style={styles.prompt}>
-              {GameState.activeCard.text != null
-                ? GameState.activePacks[GameState.dice].prompt
-                : ""}
+              {GameState.activePacks[GameState.dice].prompt}
             </Text>
             <Text style={styles.cardText}>
-              {GameState.activeCard.text != null
-                ? GameState.activeCard.text
-                : ""}
+              {GameState.activeCard.text}
             </Text>
           </TouchableOpacity>
         </CardFlip>
