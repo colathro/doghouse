@@ -14,3 +14,4 @@ export * from "./SelectedPack";
 export * from "./AvailablePack";
 export * from "./icons/RemoveIcon";
 export * from "./Doghouse";
+export * from "./icons/BoneMartiniIcon";

@@ -2,7 +2,7 @@ import React from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { RemoveIcon } from "./icons/RemoveIcon";
+import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
 
 type props = {
   name: string;
@@ -14,6 +14,9 @@ export const AvailablePack: React.FC<props> = observer(
       <View style={styles.container}>
         <View style={titleStyles.titleContainer}>
           <Text style={titleStyles.text}>{props.name}</Text>
+        </View>
+        <View style={iconStyles.container}>
+          <BoneMartiniIcon style={iconStyles.icon} />
         </View>
         <View style={selectStyles.selectContainer}>
           <TouchableOpacity style={selectStyles.selectButton}>
@@ -55,7 +58,18 @@ const titleStyles = StyleSheet.create({
     color: "black",
     fontFamily: "Tw-Bold",
     fontWeight: "bold",
-    fontSize: 24,
+    fontSize: 22,
+  },
+});
+
+const iconStyles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    height: 120,
+    width: 120,
   },
 });
 
