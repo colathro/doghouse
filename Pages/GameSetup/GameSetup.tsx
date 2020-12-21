@@ -6,7 +6,7 @@ import { Button, Players, Main } from "../../components";
 function GameSetup({ navigation }: any) {
   return (
     <Main navigation={navigation} title="Game Setup" help="setup">
-      <Players allowEdit={true}/>
+      <Players allowEdit={true} showScore={false}/>
       <Button
         title="Play"
         onPress={() => {

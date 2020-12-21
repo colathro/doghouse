@@ -30,6 +30,18 @@ export const Doghouse: React.FC<props> = observer(
             </Text>
           </TouchableOpacity>
         ))}
+        {GameState.doghouseStaging.map((val1, ind1) => (
+          <TouchableOpacity
+            key={ind1}
+            onPress={() => {
+              GameState.sendPlayerToDoghouse(val1);
+            }}
+          >
+            <Text style={styles.player}>
+              {val1}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
     );
   }
@@ -52,5 +64,10 @@ const styles = StyleSheet.create({
     fontSize: 28,
     margin: 12,
     color: "red",
+  },
+  player: {
+    fontFamily: "Tw-Bold",
+    fontSize: 28,
+    margin: 12,
   },
 });

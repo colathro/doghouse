@@ -14,6 +14,7 @@ import { AddIcon } from "./icons/AddIcon";
 
 type props = {
   allowEdit: boolean;
+  showScore: boolean;
 };
 
 export const Players: React.FC<props> = observer(
@@ -77,7 +78,9 @@ export const Players: React.FC<props> = observer(
                   : { ...styles.player }
               }
             >
-              {val.name}
+              { props.showScore
+                ? val.name + ": " + val.score
+                : val.name}
             </Animated.Text>
           </TouchableOpacity>
         ))}

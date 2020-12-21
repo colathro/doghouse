@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, StyleSheet, Text } from "react-native";
-import { Dice, Button, Doghouse, DoghouseStaging } from "../../components";
+import { Dice, Button, Players } from "../../components";
 import { GameState } from "../../states";
 
 function GameDoghouse() {
@@ -18,17 +18,8 @@ function GameDoghouse() {
           });
         }}
       ></Button>
-      <Text>Doghouse</Text>
-      <Doghouse navigation={navigation} />
-      <Button
-        title="Send to the doghouse"
-        onPress={() => {
-          GameState.scoreDoghouse();
-          setTimeout(() => {
-            navigation.navigate("GameScoreboard");
-          }, 500);
-        }}>
-      </Button>
+      <Text>Scoreboard</Text>
+      <Players allowEdit={false} showScore={true}></Players>
     </View>
   );
 }

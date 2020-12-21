@@ -2,6 +2,7 @@ import React from "react";
 import GameDiceRoll from "./GameDiceRoll";
 import GameCardShow from "./GameCardShow";
 import GameDoghouse from "./GameDoghouse";
+import GameScoreboard from "./GameScoreboard";
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, StyleSheet } from "react-native";
 
@@ -20,6 +21,7 @@ function Game() {
         <Stack.Screen name="GameDiceRoll" component={GameDiceRoll} />
         <Stack.Screen name="GameCardShow" component={GameCardShow} />
         <Stack.Screen name="GameDoghouse" component={GameDoghouse} />
+        <Stack.Screen name="GameScoreboard" component={GameScoreboard} />
       </Stack.Navigator>
     </View>
   );
