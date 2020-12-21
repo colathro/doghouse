@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ViewStyle, Text, TouchableOpacity, View } from "react-native";
+import { ViewStyle } from "react-native";
 import Svg, { Defs, ClipPath, Path, G } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: style */
 

@@ -3,6 +3,8 @@ import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
+import { UnlockedIcon } from "./icons/UnlockedIcon";
+import { LockedIcon } from "./icons/LockedIcon";
 
 type props = {
   name: string;
@@ -12,11 +14,17 @@ export const AvailablePack: React.FC<props> = observer(
   (props: props): JSX.Element => {
     return (
       <View style={styles.container}>
-        <View style={titleStyles.titleContainer}>
-          <Text style={titleStyles.text}>{props.name}</Text>
+        <View style={infoStyle.container}>
+          <UnlockedIcon style={infoStyle.icon} />
+          <TouchableOpacity style={infoStyle.helpButton} onPress={() => {}}>
+            <Text style={infoStyle.helpButtonText}>!</Text>
+          </TouchableOpacity>
         </View>
         <View style={iconStyles.container}>
           <BoneMartiniIcon style={iconStyles.icon} />
+        </View>
+        <View style={titleStyles.titleContainer}>
+          <Text style={titleStyles.text}>{props.name}</Text>
         </View>
         <View style={selectStyles.selectContainer}>
           <TouchableOpacity style={selectStyles.selectButton}>
@@ -68,8 +76,35 @@ const iconStyles = StyleSheet.create({
     justifyContent: "center",
   },
   icon: {
-    height: 120,
-    width: 120,
+    height: 80,
+    width: 80,
+  },
+});
+
+const infoStyle = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    margin: 6,
+  },
+  icon: {
+    height: 18,
+    width: 18,
+  },
+  helpButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    height: 18,
+    width: 18,
+    borderRadius: 50,
+  },
+  helpButtonText: {
+    color: "#ffffff",
+    fontFamily: "Tw-Bold",
+    fontWeight: "bold",
+    fontSize: 18,
   },
 });
 
@@ -82,7 +117,9 @@ const selectStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ff6700",
-    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
     height: 30,
     width: 100,
     borderRadius: 7,
