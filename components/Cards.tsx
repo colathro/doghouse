@@ -37,6 +37,7 @@ export const Cards: React.FC<props> = observer(
             onPress={() => {
               card.tip();
               setTimeout(() => {
+                GameState.initializeDoghouseStaging();
                 props.navigation.navigate("GameDoghouse");
               }, 500);
             }}

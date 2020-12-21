@@ -26,6 +26,10 @@ class GameStateObject {
     { name: "juan", selected: false, score: 0 },
   ] as IObservableArray<Player>;
 
+  public doghouseStaging: IObservableArray<string> = [] as IObservableArray<string>;
+
+  public doghouse: IObservableArray<string> = [] as IObservableArray<string>;
+
   public cardPacks: Array<CardPack> = [] as Array<CardPack>;
 
   public activePacks: Array<CardPack> = [] as Array<CardPack>;
@@ -59,6 +63,32 @@ class GameStateObject {
   startGame() {
     this.activeCard = {} as Card;
     this.activePacks = JSON.parse(JSON.stringify(this.cardPacks));
+  }
+
+  initializeDoghouseStaging() {
+    this.doghouseStaging = [] as IObservableArray<string>;
+    this.doghouse = [] as IObservableArray<string>;
+    this.players.forEach((player)=>this.doghouseStaging.push(player.name));
+  }
+
+  sendPlayerToDoghouse(name: string) {
+    if (this.doghouseStaging.find((value) => value == name) !== undefined) {
+      var newDoghouseStaging = this.doghouseStaging.filter((value) => value != name);
+      this.doghouseStaging.replace(newDoghouseStaging);
+      this.doghouse.push(name);
+    }
+  }
+
+  scoreDoghouse() {
+    this.doghouse.forEach((playerName) => this.players.find((player) => player.name == playerName).score +=1 );
+  }
+  
+  removePlayerFromDoghouse(name: string) {
+    if (this.doghouse.find((value) => value == name) !== undefined) {
+      var newDoghouse = this.doghouse.filter((value) => value != name);
+      this.doghouse.replace(newDoghouse);
+      this.doghouseStaging.push(name);
+    }
   }
 
   addPlayer(name: string) {

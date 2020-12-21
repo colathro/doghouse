@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
-import { Players } from "../components";
+import { Players } from ".";
 import {
   StyleSheet,
   Text,
@@ -14,18 +14,19 @@ type props = {
   navigation: any;
 };
 
-export const Doghouse: React.FC<props> = observer(
+export const DoghouseStaging: React.FC<props> = observer(
   (props: props): JSX.Element => {
+
     return (
       <View style={styles.container}>
-        {GameState.doghouse.map((val1, ind1) => (
+        {GameState.doghouseStaging.map((val1, ind1) => (
           <TouchableOpacity
             key={ind1}
             onPress={() => {
-              GameState.removePlayerFromDoghouse(val1);
+              GameState.sendPlayerToDoghouse(val1);
             }}
           >
-            <Text style={styles.playerDoghouse}>
+            <Text style={styles.player}>
               {val1}
             </Text>
           </TouchableOpacity>
@@ -47,10 +48,9 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 3,
   },
-  playerDoghouse: {
+  player: {
     fontFamily: "Tw-Bold",
     fontSize: 28,
     margin: 12,
-    color: "red",
   },
 });
