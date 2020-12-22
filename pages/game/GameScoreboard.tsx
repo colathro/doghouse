@@ -19,7 +19,7 @@ function GameDoghouse() {
         }}
       ></Button>
       <Text>Scoreboard</Text>
-      <Players allowEdit={false} showScore={true}></Players>
+      <Players players={GameState.players} allowEdit={false} doghouse={false} showScore={true}></Players>
     </View>
   );
 }
