@@ -1,4 +1,5 @@
 import { IObservable, IObservableArray, makeAutoObservable } from "mobx";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Players } from "../components";
 import { CardPack } from "../types";
 import { Card } from "../types";
@@ -6,16 +7,17 @@ import { Player } from "../types";
 
 class GameStateObject {
   constructor() {
-    Object.freeze(this.gamePhase);
     makeAutoObservable(this);
   }
 
-  public gamePhase = {
-    ROLL: 1,
-    DRAW: 2,
-    PLAY: 3,
-    DOGHOUSE: 4,
-  };
+  private basePacks: Array<string> = [
+    "Bark or Bite",
+    "Breeds",
+    "Dog Fight",
+    "Doghouse or Dare",
+    "Teacher's Pet",
+    "Throw a Bone"
+  ]
 
   public players: IObservableArray<Player> = [
     { name: "colton", selected: false, score: 0 },
@@ -26,7 +28,9 @@ class GameStateObject {
     { name: "juan", selected: false, score: 0 },
   ] as IObservableArray<Player>;
 
-  public doghouseStaging: IObservableArray<string> = [] as IObservableArray<string>;
+  public doghouseStaging: IObservableArray<string> = [] as IObservableArray<
+    string
+  >;
 
   public doghouse: IObservableArray<string> = [] as IObservableArray<string>;
 
@@ -68,21 +72,26 @@ class GameStateObject {
   initializeDoghouseStaging() {
     this.doghouseStaging = [] as IObservableArray<string>;
     this.doghouse = [] as IObservableArray<string>;
-    this.players.forEach((player)=>this.doghouseStaging.push(player.name));
+    this.players.forEach((player) => this.doghouseStaging.push(player.name));
   }
 
   sendPlayerToDoghouse(name: string) {
     if (this.doghouseStaging.find((value) => value == name) !== undefined) {
-      var newDoghouseStaging = this.doghouseStaging.filter((value) => value != name);
+      var newDoghouseStaging = this.doghouseStaging.filter(
+        (value) => value != name
+      );
       this.doghouseStaging.replace(newDoghouseStaging);
       this.doghouse.push(name);
     }
   }
 
   scoreDoghouse() {
-    this.doghouse.forEach((playerName) => this.players.find((player) => player.name == playerName).score +=1 );
+    this.doghouse.forEach(
+      (playerName) =>
+        (this.players.find((player) => player.name == playerName).score += 1)
+    );
   }
-  
+
   removePlayerFromDoghouse(name: string) {
     if (this.doghouse.find((value) => value == name) !== undefined) {
       var newDoghouse = this.doghouse.filter((value) => value != name);
@@ -122,6 +131,35 @@ class GameStateObject {
       var ind = this.players.findIndex((value) => value.name == name);
       this.players[ind].selected = false;
     } catch {}
+  }
+
+  async loadActivePacks() {
+    try {
+      const jsonValue = await AsyncStorage.getItem("activePacks");
+      let output: CardPack[];
+      if (jsonValue == null) {
+      } else {
+        output = JSON.parse(jsonValue);
+      }
+      return output;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async saveActivePacks() {
+    try {
+      const jsonValue = JSON.stringify(this.activePacks);
+      await AsyncStorage.setItem("activePacks", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  loadBasePacks() {
+    this.cardPacks.filter((val, ind) => {
+      if ()
+    })
   }
 }
 

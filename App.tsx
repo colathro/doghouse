@@ -59,4 +59,5 @@ const loadResources = async () => {
   GameState.addCardPack(require("./assets/cardpacks/DoghouseOrDare.json"));
   GameState.addCardPack(require("./assets/cardpacks/TeachersPet.json"));
   GameState.addCardPack(require("./assets/cardpacks/ThrowABone.json"));
+  GameState.loadActivePacks();
 };
