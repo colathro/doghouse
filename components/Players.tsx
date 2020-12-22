@@ -14,6 +14,7 @@ import { AddIcon } from "./icons/AddIcon";
 
 type props = {
   allowEdit: boolean;
+  doghouse: boolean;
   showScore: boolean;
 };
 
@@ -58,6 +59,8 @@ export const Players: React.FC<props> = observer(
             onPress={() => {
               if (props.allowEdit) {
                 GameState.removePlayer(val.name);
+              } else if(props.doghouse) {
+                GameState.adjustScore(val.name);
               }
             }}
           >

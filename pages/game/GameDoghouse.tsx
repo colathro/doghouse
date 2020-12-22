@@ -20,15 +20,6 @@ function GameDoghouse() {
       ></Button>
       <Text>Doghouse</Text>
       <Doghouse navigation={navigation} />
-      <Button
-        title="Send to the doghouse"
-        onPress={() => {
-          GameState.scoreDoghouse();
-          setTimeout(() => {
-            navigation.navigate("GameScoreboard");
-          }, 500);
-        }}>
-      </Button>
     </View>
   );
 }
