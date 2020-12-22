@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { Players, Button } from "../components";
+import { Player } from "../types";
+import { IObservableArray, makeAutoObservable } from "mobx";
 import {
   StyleSheet,
   Text,
@@ -14,15 +16,25 @@ type props = {
   navigation: any;
 };
 
+
 export const Doghouse: React.FC<props> = observer(
   (props: props): JSX.Element => {
+    class DoghouseObject {
+      constructor() {
+        makeAutoObservable(this);
+      }
+      public players = JSON.parse(JSON.stringify(GameState.players)) as IObservableArray<Player>;
+    }
+    let doghouse = new DoghouseObject();
+
     return (
       <View style={styles.container}>
-        <Players allowEdit={false} doghouse={true} showScore={false}/>
+        <Players players={doghouse.players} allowEdit={false} doghouse={true} showScore={false}/>
         <Button
           title="Send to the doghouse"
           onPress={() => {
-            GameState.resetDoghouse();
+            doghouse.players.forEach((player) => player.selected = false);
+            GameState.players.replace(doghouse.players);
             setTimeout(() => {
               props.navigation.navigate("GameScoreboard");
             }, 500);

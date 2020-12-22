@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import { IObservableArray } from "mobx";
+import { Player } from "../types";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import {
@@ -11,11 +13,13 @@ import {
   Easing,
 } from "react-native";
 import { AddIcon } from "./icons/AddIcon";
+import { PrivateValueStore } from "@react-navigation/native";
 
 type props = {
   allowEdit: boolean;
   doghouse: boolean;
   showScore: boolean;
+  players: IObservableArray<Player>;
 };
 
 export const Players: React.FC<props> = observer(
@@ -53,14 +57,19 @@ export const Players: React.FC<props> = observer(
 
     return (
       <View style={styles.container}>
-        {GameState.players.map((val, ind) => (
+        {props.players.map((val, ind) => (
           <TouchableOpacity
             key={ind}
             onPress={() => {
               if (props.allowEdit) {
                 GameState.removePlayer(val.name);
               } else if(props.doghouse) {
-                GameState.adjustScore(val.name);
+                val.selected = !val.selected;
+                if (val.selected) {
+                  val.score += 1;
+                } else {
+                  val.score -= 1;
+                }
               }
             }}
           >
