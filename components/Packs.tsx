@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { SelectedPack } from "../components";
@@ -13,6 +13,10 @@ import { AvailablePack } from "./AvailablePack";
 
 export const Packs: React.FC = observer(
   (): JSX.Element => {
+    useEffect(() => {
+      GameState.loadActivePacks();
+    }, []);
+
     return (
       <View>
         <View style={styles.container}>
@@ -22,7 +26,7 @@ export const Packs: React.FC = observer(
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-            {GameState.cardPacks.map((val, ind) => (
+            {GameState.activePacks.map((val, ind) => (
               <SelectedPack name={val.name} key={ind}></SelectedPack>
             ))}
           </ScrollView>

@@ -1,4 +1,5 @@
 import { IObservable, IObservableArray, makeAutoObservable } from "mobx";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Players } from "../components";
 import { CardPack } from "../types";
 import { Card } from "../types";
@@ -6,16 +7,23 @@ import { Player } from "../types";
 
 class GameStateObject {
   constructor() {
-    Object.freeze(this.gamePhase);
     makeAutoObservable(this);
+    this.addCardPack(require("../assets/cardpacks/BarkOrBite.json"));
+    this.addCardPack(require("../assets/cardpacks/Breeds.json"));
+    this.addCardPack(require("../assets/cardpacks/DogFight.json"));
+    this.addCardPack(require("../assets/cardpacks/DoghouseOrDare.json"));
+    this.addCardPack(require("../assets/cardpacks/TeachersPet.json"));
+    this.addCardPack(require("../assets/cardpacks/ThrowABone.json"));
   }
 
-  public gamePhase = {
-    ROLL: 1,
-    DRAW: 2,
-    PLAY: 3,
-    DOGHOUSE: 4,
-  };
+  private basePacks: Array<string> = [
+    "Bark or Bite",
+    "Breeds",
+    "Dog Fight",
+    "Doghouse or Dare",
+    "Teacher's Pet",
+    "Throw a Bone",
+  ];
 
   public players: IObservableArray<Player> = [
     { name: "colton", selected: false, score: 0 },
@@ -48,7 +56,6 @@ class GameStateObject {
 
   addCardPack(pack: CardPack) {
     this.cardPacks.push(pack);
-    this.activePacks = this.cardPacks;
   }
 
   rollDice() {
@@ -58,7 +65,6 @@ class GameStateObject {
 
   startGame() {
     this.activeCard = {} as Card;
-    this.activePacks = JSON.parse(JSON.stringify(this.cardPacks));
   }
 
   adjustScore(name: string) {
@@ -72,7 +78,7 @@ class GameStateObject {
   }
 
   resetDoghouse() {
-    this.players.forEach((player) => player.selected = false);
+    this.players.forEach((player) => (player.selected = false));
   }
 
   addPlayer(name: string) {
@@ -106,6 +112,47 @@ class GameStateObject {
       var ind = this.players.findIndex((value) => value.name == name);
       this.players[ind].selected = false;
     } catch {}
+  }
+
+  async loadActivePacks() {
+    try {
+      const jsonValue = await AsyncStorage.getItem("activePacks");
+      let output: CardPack[];
+
+      if (jsonValue === null) {
+        this.loadBasePacks();
+      } else if (jsonValue.length == 2) {
+        this.loadBasePacks();
+      } else {
+        output = JSON.parse(jsonValue);
+        this.setActivePacks(output);
+      }
+
+      this.saveActivePacks();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async saveActivePacks() {
+    try {
+      const jsonValue = JSON.stringify(this.activePacks);
+      await AsyncStorage.setItem("activePacks", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  loadBasePacks() {
+    this.cardPacks.map((val, ind) => {
+      if (this.basePacks.includes(val.name)) {
+        this.activePacks.push(val);
+      }
+    });
+  }
+
+  setActivePacks(packs: CardPack[]) {
+    this.activePacks = packs;
   }
 }
 
