@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
-import { Players } from "../components";
+import { Players, Button } from "../components";
 import {
   StyleSheet,
   Text,
@@ -18,30 +18,16 @@ export const Doghouse: React.FC<props> = observer(
   (props: props): JSX.Element => {
     return (
       <View style={styles.container}>
-        {GameState.doghouse.map((val1, ind1) => (
-          <TouchableOpacity
-            key={ind1}
-            onPress={() => {
-              GameState.removePlayerFromDoghouse(val1);
-            }}
-          >
-            <Text style={styles.playerDoghouse}>
-              {val1}
-            </Text>
-          </TouchableOpacity>
-        ))}
-        {GameState.doghouseStaging.map((val1, ind1) => (
-          <TouchableOpacity
-            key={ind1}
-            onPress={() => {
-              GameState.sendPlayerToDoghouse(val1);
-            }}
-          >
-            <Text style={styles.player}>
-              {val1}
-            </Text>
-          </TouchableOpacity>
-        ))}
+        <Players allowEdit={false} doghouse={true} showScore={false}/>
+        <Button
+          title="Send to the doghouse"
+          onPress={() => {
+            GameState.resetDoghouse();
+            setTimeout(() => {
+              props.navigation.navigate("GameScoreboard");
+            }, 500);
+          }}>
+        </Button>
       </View>
     );
   }
@@ -55,9 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 7,
-    borderColor: "black",
-    borderWidth: 3,
   },
   playerDoghouse: {
     fontFamily: "Tw-Bold",
