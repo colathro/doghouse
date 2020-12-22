@@ -16,8 +16,8 @@ class GameStateObject {
     "Dog Fight",
     "Doghouse or Dare",
     "Teacher's Pet",
-    "Throw a Bone"
-  ]
+    "Throw a Bone",
+  ];
 
   public players: IObservableArray<Player> = [
     { name: "colton", selected: false, score: 0 },
@@ -28,15 +28,6 @@ class GameStateObject {
     { name: "juan", selected: false, score: 0 },
   ] as IObservableArray<Player>;
 
-<<<<<<< HEAD
-  public doghouseStaging: IObservableArray<string> = [] as IObservableArray<
-    string
-  >;
-
-  public doghouse: IObservableArray<string> = [] as IObservableArray<string>;
-
-=======
->>>>>>> b01aa30c4cc86b270c225757be5f7e06fe4aa25d
   public cardPacks: Array<CardPack> = [] as Array<CardPack>;
 
   public activePacks: Array<CardPack> = [] as Array<CardPack>;
@@ -72,37 +63,6 @@ class GameStateObject {
     this.activePacks = JSON.parse(JSON.stringify(this.cardPacks));
   }
 
-<<<<<<< HEAD
-  initializeDoghouseStaging() {
-    this.doghouseStaging = [] as IObservableArray<string>;
-    this.doghouse = [] as IObservableArray<string>;
-    this.players.forEach((player) => this.doghouseStaging.push(player.name));
-  }
-
-  sendPlayerToDoghouse(name: string) {
-    if (this.doghouseStaging.find((value) => value == name) !== undefined) {
-      var newDoghouseStaging = this.doghouseStaging.filter(
-        (value) => value != name
-      );
-      this.doghouseStaging.replace(newDoghouseStaging);
-      this.doghouse.push(name);
-    }
-  }
-
-  scoreDoghouse() {
-    this.doghouse.forEach(
-      (playerName) =>
-        (this.players.find((player) => player.name == playerName).score += 1)
-    );
-  }
-
-  removePlayerFromDoghouse(name: string) {
-    if (this.doghouse.find((value) => value == name) !== undefined) {
-      var newDoghouse = this.doghouse.filter((value) => value != name);
-      this.doghouse.replace(newDoghouse);
-      this.doghouseStaging.push(name);
-    }
-=======
   adjustScore(name: string) {
     var player = this.players.find((value) => value.name == name);
     player.selected = !player.selected;
@@ -114,8 +74,7 @@ class GameStateObject {
   }
 
   resetDoghouse() {
-    this.players.forEach((player) => player.selected = false);
->>>>>>> b01aa30c4cc86b270c225757be5f7e06fe4aa25d
+    this.players.forEach((player) => (player.selected = false));
   }
 
   addPlayer(name: string) {
@@ -175,9 +134,11 @@ class GameStateObject {
   }
 
   loadBasePacks() {
-    this.cardPacks.filter((val, ind) => {
-      if ()
-    })
+    this.cardPacks.map((val, ind) => {
+      if (this.basePacks.includes(val.name)) {
+        this.activePacks.push(val);
+      }
+    });
   }
 }
 
