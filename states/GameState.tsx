@@ -8,6 +8,12 @@ import { Player } from "../types";
 class GameStateObject {
   constructor() {
     makeAutoObservable(this);
+    this.addCardPack(require("../assets/cardpacks/BarkOrBite.json"));
+    this.addCardPack(require("../assets/cardpacks/Breeds.json"));
+    this.addCardPack(require("../assets/cardpacks/DogFight.json"));
+    this.addCardPack(require("../assets/cardpacks/DoghouseOrDare.json"));
+    this.addCardPack(require("../assets/cardpacks/TeachersPet.json"));
+    this.addCardPack(require("../assets/cardpacks/ThrowABone.json"));
   }
 
   private basePacks: Array<string> = [
@@ -50,7 +56,6 @@ class GameStateObject {
 
   addCardPack(pack: CardPack) {
     this.cardPacks.push(pack);
-    this.activePacks = this.cardPacks;
   }
 
   rollDice() {
@@ -60,7 +65,6 @@ class GameStateObject {
 
   startGame() {
     this.activeCard = {} as Card;
-    this.activePacks = JSON.parse(JSON.stringify(this.cardPacks));
   }
 
   adjustScore(name: string) {
@@ -114,11 +118,17 @@ class GameStateObject {
     try {
       const jsonValue = await AsyncStorage.getItem("activePacks");
       let output: CardPack[];
-      if (jsonValue == null) {
+
+      if (jsonValue === null) {
+        this.loadBasePacks();
+      } else if (jsonValue.length == 2) {
+        this.loadBasePacks();
       } else {
         output = JSON.parse(jsonValue);
+        this.setActivePacks(output);
       }
-      return output;
+
+      this.saveActivePacks();
     } catch (e) {
       console.log(e);
     }
@@ -139,6 +149,10 @@ class GameStateObject {
         this.activePacks.push(val);
       }
     });
+  }
+
+  setActivePacks(packs: CardPack[]) {
+    this.activePacks = packs;
   }
 }
 

@@ -53,11 +53,4 @@ const loadResources = async () => {
     "Tw-Reg": require("./assets/fonts/tccm.ttf"),
     "Tw-Bold": require("./assets/fonts/tccb.ttf"),
   });
-  GameState.addCardPack(require("./assets/cardpacks/BarkOrBite.json"));
-  GameState.addCardPack(require("./assets/cardpacks/Breeds.json"));
-  GameState.addCardPack(require("./assets/cardpacks/DogFight.json"));
-  GameState.addCardPack(require("./assets/cardpacks/DoghouseOrDare.json"));
-  GameState.addCardPack(require("./assets/cardpacks/TeachersPet.json"));
-  GameState.addCardPack(require("./assets/cardpacks/ThrowABone.json"));
-  GameState.loadActivePacks();
 };
