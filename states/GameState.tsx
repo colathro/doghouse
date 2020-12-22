@@ -154,6 +154,23 @@ class GameStateObject {
   setActivePacks(packs: CardPack[]) {
     this.activePacks = packs;
   }
+
+  addActivePack(pack: CardPack) {
+    if (
+      this.activePacks.find((value) => value.name == pack.name) === undefined
+    ) {
+      this.activePacks.push(pack);
+      this.saveActivePacks();
+    }
+  }
+
+  removeActivePack(pack: CardPack) {
+    var newActivePacks = this.activePacks.filter(
+      (value) => value.name != pack.name
+    );
+    this.activePacks = newActivePacks;
+    this.saveActivePacks();
+  }
 }
 
 export const GameState = new GameStateObject();

@@ -27,7 +27,7 @@ export const Packs: React.FC = observer(
             showsHorizontalScrollIndicator={false}
           >
             {GameState.activePacks.map((val, ind) => (
-              <SelectedPack name={val.name} key={ind}></SelectedPack>
+              <SelectedPack pack={val} key={ind}></SelectedPack>
             ))}
           </ScrollView>
         </View>
@@ -38,7 +38,7 @@ export const Packs: React.FC = observer(
             showsVerticalScrollIndicator={false}
           >
             {GameState.cardPacks.map((val, ind) => (
-              <AvailablePack name={val.name} key={ind}></AvailablePack>
+              <AvailablePack pack={val} key={ind}></AvailablePack>
             ))}
           </ScrollView>
         </View>

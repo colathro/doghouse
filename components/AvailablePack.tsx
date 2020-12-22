@@ -5,9 +5,10 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
 import { UnlockedIcon } from "./icons/UnlockedIcon";
 import { LockedIcon } from "./icons/LockedIcon";
+import { CardPack } from "../types";
 
 type props = {
-  name: string;
+  pack: CardPack;
 };
 
 export const AvailablePack: React.FC<props> = observer(
@@ -24,10 +25,15 @@ export const AvailablePack: React.FC<props> = observer(
           <BoneMartiniIcon style={iconStyles.icon} />
         </View>
         <View style={titleStyles.titleContainer}>
-          <Text style={titleStyles.text}>{props.name}</Text>
+          <Text style={titleStyles.text}>{props.pack.name}</Text>
         </View>
         <View style={selectStyles.selectContainer}>
-          <TouchableOpacity style={selectStyles.selectButton}>
+          <TouchableOpacity
+            style={selectStyles.selectButton}
+            onPress={() => {
+              GameState.addActivePack(props.pack);
+            }}
+          >
             <Text style={selectStyles.selectButtonText}>Select</Text>
           </TouchableOpacity>
         </View>

@@ -4,9 +4,10 @@ import { observer } from "mobx-react-lite";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RemoveIcon } from "./icons/RemoveIcon";
 import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
+import { CardPack } from "../types";
 
 type props = {
-  name: string;
+  pack: CardPack;
 };
 
 export const SelectedPack: React.FC<props> = observer(
@@ -14,14 +15,18 @@ export const SelectedPack: React.FC<props> = observer(
     return (
       <View style={styles.container}>
         <View style={styles.removeIconContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              GameState.removeActivePack(props.pack);
+            }}
+          >
             <RemoveIcon />
           </TouchableOpacity>
         </View>
         <View style={iconStyles.container}>
           <BoneMartiniIcon style={iconStyles.icon} />
         </View>
-        <Text style={titleStyles.text}>{props.name}</Text>
+        <Text style={titleStyles.text}>{props.pack.name}</Text>
       </View>
     );
   }
