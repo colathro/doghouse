@@ -53,4 +53,5 @@ const loadResources = async () => {
     "Tw-Reg": require("./assets/fonts/tccm.ttf"),
     "Tw-Bold": require("./assets/fonts/tccb.ttf"),
   });
+  GameState.loadActivePacks();
 };
