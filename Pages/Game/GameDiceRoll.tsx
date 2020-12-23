@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, StyleSheet, Text } from "react-native";
-import { Dice, Button } from "../../components";
+import { Dice, Button, Main} from "../../components";
 
 function GameDiceRoll() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <Main navigation={navigation} title="Dice" players={true} help="ingame">
       <Button
         title="Reset"
         onPress={() => {
@@ -19,7 +19,7 @@ function GameDiceRoll() {
       ></Button>
       <Text>Dice Roll</Text>
       <Dice navigation={navigation} />
-    </View>
+    </Main>
   );
 }
 
