@@ -19,31 +19,30 @@ export const PlayerDropdown: React.FC<props> = (props: props): JSX.Element => {
   return (
     <Modal
       style={styles.modalView}
-      animationType="top"
+      animationType="slide"
       transparent={true}
       visible={props.visible}
     >
-      <View style={styles.centeredView}>
+      <TouchableOpacity 
+        style={styles.topView}
+        onPress={() => {
+          props.callback(false);
+        }}>
         <View style={styles.modalView}>
           <Players players={GameState.players} allowEdit={true} doghouse={false} showScore={false}/>
-          <Button
-            title="CLOSE"
-            onPress={() => {
-              props.callback(false);
-            }}
-          ></Button>
+        
         </View>
-      </View>
+      </TouchableOpacity>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
+  topView: {
     backgroundColor: "rgba(0,0,0,0.3)",
     flex: 1,
     padding: 8,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
   },
   modalView: {
