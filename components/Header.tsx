@@ -8,11 +8,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { PlayerDropdown } from "./PlayerDropdown";
 
 type props = {
   title: string;
   navigation: any;
   help?: string;
+  players: boolean;
+  allowBack: boolean;
 };
 
 export const Header: React.FC<props> = (props: props): JSX.Element => {
@@ -37,12 +40,41 @@ export const Header: React.FC<props> = (props: props): JSX.Element => {
       </>
     );
   }
+  let players;
+  if (props.players) {
+    const [modalVisible, setModalVisible] = useState(false);
+    players = (
+      <>
+        <TouchableOpacity
+          style={styles.helpButton}
+          onPress={() => {
+            setModalVisible(true);
+          }}
+        >
+          <Text style={styles.helpButtonText}>P</Text>
+        </TouchableOpacity>
+        <PlayerDropdown
+          visible={modalVisible}
+          callback={setModalVisible}
+        />
+      </>
+    );
+  }
+  let back;
+  if (props.allowBack) {
+    back = (
+      <>
+        <TouchableOpacity style={styles.button} onPress={props.navigation.goBack}>
+          <Text style={styles.buttonText}>Back</Text>
+        </TouchableOpacity>
+      </>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={props.navigation.goBack}>
-        <Text style={styles.buttonText}>Back</Text>
-      </TouchableOpacity>
+      {back}
+      {players}
       {help}
     </View>
   );
