@@ -14,6 +14,7 @@ class GameStateObject {
     this.addCardPack(require("../assets/cardpacks/DoghouseOrDare.json"));
     this.addCardPack(require("../assets/cardpacks/TeachersPet.json"));
     this.addCardPack(require("../assets/cardpacks/ThrowABone.json"));
+    this.addCardPack(require("../assets/cardpacks/AssCheeks.json"));
   }
 
   private basePacks: Array<string> = [

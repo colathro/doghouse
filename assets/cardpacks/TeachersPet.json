@@ -1,5 +1,7 @@
 {
   "name": "Teacher's Pet",
+  "purchased": true,
+  "mature": false,
   "prompt": "Guess",
   "maxDoghouse": 1,
   "cards": [

@@ -1,5 +1,7 @@
 {
   "name": "Throw a Bone",
+  "purchased": true,
+  "mature": false,
   "prompt": "Who's most likely to",
   "maxDoghouse": 1,
   "cards": [
