@@ -13,6 +13,12 @@ type props = {
 
 export const AvailablePack: React.FC<props> = observer(
   (props: props): JSX.Element => {
+    const checkIfPackActive = () => {
+      return GameState.activePacks.includes(props.pack);
+    };
+
+    const active = checkIfPackActive();
+
     return (
       <View style={styles.container}>
         <View style={infoStyle.container}>
@@ -29,12 +35,18 @@ export const AvailablePack: React.FC<props> = observer(
         </View>
         <View style={selectStyles.selectContainer}>
           <TouchableOpacity
-            style={selectStyles.selectButton}
+            style={
+              active
+                ? selectStyles.selectButtonInactive
+                : selectStyles.selectButton
+            }
             onPress={() => {
               GameState.addActivePack(props.pack);
             }}
           >
-            <Text style={selectStyles.selectButtonText}>Select</Text>
+            <Text style={selectStyles.selectButtonText}>
+              {active ? "Selected" : "Select"}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -123,6 +135,20 @@ const selectStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ff6700",
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+    height: 30,
+    width: 100,
+    borderRadius: 7,
+    borderColor: "black",
+    borderWidth: 3,
+    position: "relative",
+  },
+  selectButtonInactive: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "grey",
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 10,
