@@ -11,67 +11,60 @@ export const Cards: React.FC<props> = observer(
     const [flipped, setFlipped] = useState(false);
     let card;
     return (
-      <View style={styles.container}>
-        <CardFlip
-          style={styles.cardContainer}
-          ref={(cardObj) => {
-            card = cardObj;
+      <CardFlip
+        style={styles.cardContainer}
+        ref={(cardObj) => {
+          card = cardObj;
+        }}
+      >
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => {
+            if (!flipped) {
+              card.flip();
+            } else {
+              card.tip();
+            }
           }}
         >
-          <TouchableOpacity
-            style={styles.card}
-            onPress={() => {
-              if (!flipped) {
-                card.flip();
-              } else {
-                card.tip();
-              }
-            }}
-          >
-            <Text style={styles.cardText}>
-              {GameState.activePacks[GameState.dice].name}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.flippedCard}
-            onPress={() => {
-              card.tip();
-              setTimeout(() => {
-                props.navigation.navigate("GameDoghouse");
-              }, 500);
-            }}
-          >
-            <Text style={styles.prompt}>
-              {GameState.activePacks[GameState.dice].prompt}
-            </Text>
-            <Text style={styles.cardText}>
-              {GameState.activeCard.text}
-            </Text>
-          </TouchableOpacity>
-        </CardFlip>
-      </View>
+          <Text style={styles.cardText}>
+            {GameState.activePacks[GameState.dice].name}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.flippedCard}
+          onPress={() => {
+            card.tip();
+            setTimeout(() => {
+              props.navigation.navigate("GameDoghouse");
+            }, 500);
+          }}
+        >
+          <Text style={styles.prompt}>
+            {GameState.activePacks[GameState.dice].prompt}
+          </Text>
+          <Text style={styles.cardText}>
+            {GameState.activeCard.text}
+          </Text>
+        </TouchableOpacity>
+      </CardFlip>
     );
   }
 );
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
+  cardContainer: {
+    height: "95%",
+    width: "95%",
     alignItems: "center",
     justifyContent: "center",
-  },
-  cardContainer: {
-    margin: 20,
-    height: 208,
-    width: 300,
   },
   card: {
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ff6700",
-    margin: 10,
-    height: 208,
-    width: 300,
+    height: "100%",
+    width: "100%",
     borderRadius: 7,
     borderColor: "#ff6700",
     borderWidth: 3,
@@ -81,9 +74,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
-    margin: 10,
-    height: 208,
-    width: 300,
+    height: "100%",
+    width: "100%",
     borderRadius: 7,
     borderColor: "#ff6700",
     borderWidth: 3,

@@ -1,6 +1,7 @@
 {
   "name": "Throw a Bone",
   "prompt": "Who's most likely to",
+  "maxDoghouse": 1,
   "cards": [
     {
       "text": "accidentally join a cult"

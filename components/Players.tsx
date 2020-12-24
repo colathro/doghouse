@@ -24,7 +24,8 @@ type props = {
 
 export const Players: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    const shake = new Animated.Value(0); // Initial value for opacity: 0
+    const shake = new Animated.Value(0); // Initial value for opacity: 0    
+    const [currentDoghouseCount, setCount] = useState(0);
 
     React.useEffect(() => {
       Animated.loop(
@@ -64,11 +65,17 @@ export const Players: React.FC<props> = observer(
               if (props.allowEdit) {
                 GameState.removePlayer(val.name);
               } else if(props.doghouse) {
-                val.selected = !val.selected;
                 if (val.selected) {
-                  val.score += 1;
-                } else {
+                  setCount(currentDoghouseCount-1);
                   val.score -= 1;
+                  val.selected = false;
+                } else {
+                  let maxDoghouse = GameState.activePacks[GameState.dice].maxDoghouse;
+                  if (currentDoghouseCount < maxDoghouse || maxDoghouse == -1) {
+                    setCount(currentDoghouseCount+1);
+                    val.score += 1;
+                    val.selected = true;
+                  }
                 }
               }
             }}

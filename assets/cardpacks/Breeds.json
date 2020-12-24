@@ -1,6 +1,7 @@
 {
   "name": "Breeds",
   "prompt": "List",
+  "maxDoghouse": 1,
   "cards": [
     {
       "text": "\"where are they now\" artists."

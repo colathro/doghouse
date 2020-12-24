@@ -1,28 +1,15 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, StyleSheet, Text } from "react-native";
-import { Cards, Button, PlayerDropdown } from "../../components";
-import { GameState } from "../../states";
-import SlidingView from "rn-sliding-view";
-import { lessThan } from "react-native-reanimated";
+import { Cards, Button, Main } from "../../components";
 
 function GameCardShow() {
   const navigation = useNavigation();
   
   return (
-    <View style={styles.container}>
-        <Button
-          title="Reset"
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "Game" }],
-            });
-          }}
-        ></Button>
-        <Text>Draw Card</Text>
-        <Cards navigation={navigation} />  
-    </View>
+    <Main navigation={navigation} title="Card" players={true} help="ingame">
+      <Cards navigation={navigation} />  
+    </Main>
   );
 }
 

@@ -17,7 +17,6 @@ function GameDiceRoll() {
           });
         }}
       ></Button>
-      <Text>Dice Roll</Text>
       <Dice navigation={navigation} />
     </Main>
   );

@@ -1,14 +1,14 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, StyleSheet, Text } from "react-native";
-import { Dice, Button, Players } from "../../components";
+import { Dice, Button, Players, Main } from "../../components";
 import { GameState } from "../../states";
 
 function GameDoghouse() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <Main navigation={navigation} title="Card" players={true} help="ingame">
       <Button
         title="Reset"
         onPress={() => {
@@ -20,7 +20,7 @@ function GameDoghouse() {
       ></Button>
       <Text>Scoreboard</Text>
       <Players players={GameState.players} allowEdit={false} doghouse={false} showScore={true}></Players>
-    </View>
+    </Main>
   );
 }
 

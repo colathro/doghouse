@@ -1,6 +1,7 @@
 {
   "name": "Doghouse or Dare",
   "prompt": "Choose someone to",
+  "maxDoghouse": 1,
   "cards": [
     {
       "text": "ask Siri, \"Who\u0027s her daddy?\""

@@ -1,6 +1,7 @@
 {
   "name": "Teacher's Pet",
   "prompt": "Guess",
+  "maxDoghouse": 1,
   "cards": [
     {
       "text": "as a kid what did I want to be when I grew up?"

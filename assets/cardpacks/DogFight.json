@@ -1,6 +1,7 @@
 {
   "name": "Dog Fight",
   "prompt": "Debate.",
+  "maxDoghouse": -1,
   "cards": [
     {
       "text": "Apple� or Samung�"

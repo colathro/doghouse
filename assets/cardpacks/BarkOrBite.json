@@ -1,6 +1,7 @@
 {
   "name": "Bark or Bite",
   "prompt": "Raise your hand if you've",
+  "maxDoghouse": -1,
   "cards": [
     {
       "text": "ate food that was on the floor for longer than 5 seconds."
