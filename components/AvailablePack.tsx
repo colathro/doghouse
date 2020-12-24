@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -6,6 +6,7 @@ import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
 import { UnlockedIcon } from "./icons/UnlockedIcon";
 import { LockedIcon } from "./icons/LockedIcon";
 import { CardPack } from "../types";
+import { PackPreview } from "./PackPreview";
 
 type props = {
   pack: CardPack;
@@ -13,17 +14,34 @@ type props = {
 
 export const AvailablePack: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    const checkIfPackActive = () => {
-      return GameState.activePacks.includes(props.pack);
-    };
+    const [modalVisible, setModalVisible] = useState(false);
 
-    const active = checkIfPackActive();
+    const active =
+      GameState.activePacks.filter((val) => {
+        return val.name === props.pack.name;
+      }).length > 0;
 
     return (
       <View style={styles.container}>
+        <PackPreview
+          visible={modalVisible}
+          callback={() => {
+            setModalVisible(false);
+          }}
+          pack={props.pack}
+        ></PackPreview>
         <View style={infoStyle.container}>
-          <UnlockedIcon style={infoStyle.icon} />
-          <TouchableOpacity style={infoStyle.helpButton} onPress={() => {}}>
+          {props.pack.purchased ? (
+            <UnlockedIcon style={infoStyle.icon} />
+          ) : (
+            <LockedIcon style={infoStyle.icon} />
+          )}
+          <TouchableOpacity
+            style={infoStyle.helpButton}
+            onPress={() => {
+              setModalVisible(true);
+            }}
+          >
             <Text style={infoStyle.helpButtonText}>!</Text>
           </TouchableOpacity>
         </View>

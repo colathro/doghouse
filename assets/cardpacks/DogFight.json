@@ -1,5 +1,7 @@
 {
   "name": "Dog Fight",
+  "purchased": true,
+  "mature": false,
   "prompt": "Debate.",
   "cards": [
     {

@@ -1,5 +1,7 @@
 {
   "name": "Breeds",
+  "purchased": true,
+  "mature": false,
   "prompt": "List",
   "cards": [
     {

@@ -1,5 +1,7 @@
 {
   "name": "Bark or Bite",
+  "purchased": true,
+  "mature": false,
   "prompt": "Raise your hand if you've",
   "cards": [
     {
