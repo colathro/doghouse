@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, BigButton, Logo, Main } from "../../components";
+import { Button, BigButton, Logo, Main, Spike } from "../../components";
 
 function HomeScreen({ navigation }: any) {
   return (
     <Main navigation={navigation}>
+      <Spike />
       <Logo />
       <BigButton
         title="PLAY"
