@@ -21,6 +21,41 @@ export const AvailablePack: React.FC<props> = observer(
         return val.name === props.pack.name;
       }).length > 0;
 
+    let button;
+
+    if (active) {
+      button = (
+        <TouchableOpacity
+          disabled={true}
+          style={selectStyles.selectButtonInactive}
+        >
+          <Text style={selectStyles.selectButtonText}>{"Selected"}</Text>
+        </TouchableOpacity>
+      );
+    } else if (!props.pack.purchased) {
+      button = (
+        <TouchableOpacity
+          style={selectStyles.selectButtonBuy}
+          onPress={() => {
+            GameState.addActivePack(props.pack);
+          }}
+        >
+          <Text style={selectStyles.selectButtonText}>{"$0.99"}</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      button = (
+        <TouchableOpacity
+          style={selectStyles.selectButton}
+          onPress={() => {
+            GameState.addActivePack(props.pack);
+          }}
+        >
+          <Text style={selectStyles.selectButtonText}>{"Select"}</Text>
+        </TouchableOpacity>
+      );
+    }
+
     return (
       <View style={styles.container}>
         <PackPreview
@@ -51,22 +86,7 @@ export const AvailablePack: React.FC<props> = observer(
         <View style={titleStyles.titleContainer}>
           <Text style={titleStyles.text}>{props.pack.name}</Text>
         </View>
-        <View style={selectStyles.selectContainer}>
-          <TouchableOpacity
-            style={
-              active
-                ? selectStyles.selectButtonInactive
-                : selectStyles.selectButton
-            }
-            onPress={() => {
-              GameState.addActivePack(props.pack);
-            }}
-          >
-            <Text style={selectStyles.selectButtonText}>
-              {active ? "Selected" : "Select"}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <View style={selectStyles.selectContainer}>{button}</View>
       </View>
     );
   }
@@ -167,6 +187,20 @@ const selectStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "grey",
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+    height: 30,
+    width: 100,
+    borderRadius: 7,
+    borderColor: "black",
+    borderWidth: 3,
+    position: "relative",
+  },
+  selectButtonBuy: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#00ff00",
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 10,

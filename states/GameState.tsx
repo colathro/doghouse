@@ -172,6 +172,8 @@ class GameStateObject {
     this.activePacks = newActivePacks;
     this.saveActivePacks();
   }
+
+  sortPacks(sort) {}
 }
 
 export const GameState = new GameStateObject();
