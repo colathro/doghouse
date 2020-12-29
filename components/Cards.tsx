@@ -28,7 +28,7 @@ export const Cards: React.FC<props> = observer(
           }}
         >
           <Text style={styles.cardText}>
-            {GameState.activePacks[GameState.dice].name}
+            {GameState.decks[GameState.dice].name}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -41,7 +41,7 @@ export const Cards: React.FC<props> = observer(
           }}
         >
           <Text style={styles.prompt}>
-            {GameState.activePacks[GameState.dice].prompt}
+            {GameState.decks[GameState.dice].prompt}
           </Text>
           <Text style={styles.cardText}>
             {GameState.activeCard.text}

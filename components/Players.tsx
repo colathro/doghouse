@@ -70,7 +70,7 @@ export const Players: React.FC<props> = observer(
                   val.score -= 1;
                   val.selected = false;
                 } else {
-                  let maxDoghouse = GameState.activePacks[GameState.dice].maxDoghouse;
+                  let maxDoghouse = GameState.decks[GameState.dice].maxDoghouse;
                   if (currentDoghouseCount < maxDoghouse || maxDoghouse == -1) {
                     setCount(currentDoghouseCount+1);
                     val.score += 1;

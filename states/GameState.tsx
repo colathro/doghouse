@@ -1,30 +1,13 @@
 import { IObservable, IObservableArray, makeAutoObservable } from "mobx";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Players } from "../components";
-import { CardPack } from "../types";
-import { Card } from "../types";
-import { Player } from "../types";
+import { CardPack, Deck, Card, Player } from "../types";
 
 class GameStateObject {
   constructor() {
     makeAutoObservable(this);
-    this.addCardPack(require("../assets/cardpacks/BarkOrBite.json"));
-    this.addCardPack(require("../assets/cardpacks/Breeds.json"));
-    this.addCardPack(require("../assets/cardpacks/DogFight.json"));
-    this.addCardPack(require("../assets/cardpacks/DoghouseOrDare.json"));
-    this.addCardPack(require("../assets/cardpacks/TeachersPet.json"));
-    this.addCardPack(require("../assets/cardpacks/ThrowABone.json"));
-    this.addCardPack(require("../assets/cardpacks/AssCheeks.json"));
+    this.addCardPack(require("../assets/cardpacks/Standard.json"));
   }
-
-  private basePacks: Array<string> = [
-    "Bark or Bite",
-    "Breeds",
-    "Dog Fight",
-    "Doghouse or Dare",
-    "Teacher's Pet",
-    "Throw a Bone",
-  ];
 
   public players: IObservableArray<Player> = [
     { name: "colton", selected: false, score: 0 },
@@ -39,19 +22,58 @@ class GameStateObject {
 
   public activePacks: Array<CardPack> = [] as Array<CardPack>;
 
+  public decks: Array<Deck> = [
+    {
+      name: "Throw a Bone",
+      prompt: "Who's most likely to",
+      maxDoghouse: 1,
+      cards: [] as Array<Card>
+    },
+    {
+      name: "dog fight",
+      prompt: "Debate.",
+      maxDoghouse: -1,
+      cards: [] as Array<Card>
+    },
+    {
+      name: "doghouse or dare",
+      prompt: "Choose someone to",
+      maxDoghouse: 1,
+      cards: [] as Array<Card>
+    },
+    {
+      name: "BARK OR BITE",
+      prompt: "Raise your hand if you've",
+      maxDoghouse: -1,
+      cards: [] as Array<Card>
+    },
+    {
+      name: "BREEDS",
+      prompt: "List",
+      maxDoghouse: 1,
+      cards: [] as Array<Card>
+    },
+    {
+      name: "Teacher's Pet",
+      prompt: "Guess",
+      maxDoghouse: 1,
+      cards: [] as Array<Card>
+    },
+  ] as Array<Deck>;
+
   public activeCard: Card = {} as Card;
 
   public dice = 0;
 
   private drawCard() {
-    if (this.activePacks[this.dice].cards.length == 0) {
-      this.activeCard = {} as Card;
-    } else {
+    if (this.decks[this.dice].cards.length == 0) {
+      this.activeCard = { text: "null" } as Card;
+    } else { 
       var index = Math.floor(
-        Math.random() * (this.activePacks[this.dice].cards.length - 1)
+        Math.random() * (this.decks[this.dice].cards.length - 1)
       );
-      this.activeCard = this.activePacks[this.dice].cards[index];
-      this.activePacks[this.dice].cards.splice(index, 1);
+      this.activeCard = this.decks[this.dice].cards[index];
+      this.decks[this.dice].cards.splice(index, 1);
     }
   }
 
@@ -60,12 +82,23 @@ class GameStateObject {
   }
 
   rollDice() {
-    this.dice = Math.floor(Math.random() * this.activePacks.length);
+    this.dice = Math.floor(Math.random() * this.decks.length);
     this.drawCard();
   }
 
   startGame() {
     this.activeCard = {} as Card;
+    this.decks.forEach((deck) => deck.cards = [] as Array<Card>);
+
+    // add all decks in active packs to the current deck.
+    for (var i = 0; i < this.activePacks.length;i ++) {
+      this.decks[0].cards = this.activePacks[i].throwABone;
+      this.decks[1].cards = this.activePacks[i].dogFight;
+      this.decks[2].cards = this.activePacks[i].doghouseOrDare;
+      this.decks[3].cards = this.activePacks[i].barkOrBite;
+      this.decks[4].cards = this.activePacks[i].breeds;
+      this.decks[5].cards = this.activePacks[i].teachersPet;
+    }
   }
 
   adjustScore(name: string) {
@@ -145,11 +178,7 @@ class GameStateObject {
   }
 
   loadBasePacks() {
-    this.cardPacks.map((val, ind) => {
-      if (this.basePacks.includes(val.name)) {
-        this.activePacks.push(val);
-      }
-    });
+    this.activePacks.push(this.cardPacks.find((cardPack) => cardPack.name == "Standard"));
   }
 
   setActivePacks(packs: CardPack[]) {
