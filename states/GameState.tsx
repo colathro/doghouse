@@ -7,6 +7,7 @@ class GameStateObject {
   constructor() {
     makeAutoObservable(this);
     this.addCardPack(require("../assets/cardpacks/Standard.json"));
+    this.addCardPack(require("../assets/cardpacks/StandardPlus.json"));
   }
 
   public players: IObservableArray<Player> = [
