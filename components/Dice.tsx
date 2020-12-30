@@ -10,8 +10,12 @@ import {
   Easing,
 } from "react-native";
 
-export const Dice: React.FC = observer(
-  (): JSX.Element => {
+type props = {
+  callback: any;
+};
+
+export const Dice: React.FC<props> = observer(
+  (props: props): JSX.Element => {
     return (
       <Animated.View
         style={{
@@ -22,6 +26,7 @@ export const Dice: React.FC = observer(
           style={styles.dice}
           onPress={() => {
             GameState.rollDice();
+            props.callback();
           }}
         >
           <Text style={styles.diceText}>{GameState.dice + 1}</Text>

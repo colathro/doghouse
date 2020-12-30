@@ -1,12 +1,22 @@
-import React from "react";
-import { Dice } from "../../components";
-import { createStackNavigator } from "@react-navigation/stack";
+import React, { useState } from "react";
+import { Dice, Card } from "../../components";
 import { View, StyleSheet } from "react-native";
 
 function Game() {
+  const [cardShow, setCardShow] = useState(false);
+
+  const rollDice = () => {
+    setCardShow(true);
+  };
+
+  const cardFinish = () => {
+    setCardShow(false);
+  };
+
   return (
     <View style={styles.container}>
-      <Dice />
+      <Card visible={cardShow} callback={cardFinish} />
+      <Dice callback={rollDice} />
     </View>
   );
 }
