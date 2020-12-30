@@ -4,10 +4,8 @@ import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-type props = { navigation: any };
-
-export const Cards: React.FC<props> = observer(
-  (props: props): JSX.Element => {
+export const Cards: React.FC = observer(
+  (props): JSX.Element => {
     const [flipped, setFlipped] = useState(false);
     let card;
     return (
@@ -35,17 +33,12 @@ export const Cards: React.FC<props> = observer(
           style={styles.flippedCard}
           onPress={() => {
             card.tip();
-            setTimeout(() => {
-              props.navigation.navigate("GameDoghouse");
-            }, 500);
           }}
         >
           <Text style={styles.prompt}>
             {GameState.decks[GameState.dice].prompt}
           </Text>
-          <Text style={styles.cardText}>
-            {GameState.activeCard.text}
-          </Text>
+          <Text style={styles.cardText}>{GameState.activeCard.text}</Text>
         </TouchableOpacity>
       </CardFlip>
     );
