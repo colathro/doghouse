@@ -19,16 +19,9 @@ type props = {
 };
 
 
-export const Doghouse: React.FC<props> = observer(
+export const ScoreBoard: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    class DoghouseObject {
-      constructor() {
-        makeAutoObservable(this);
-      }
-      public players = JSON.parse(JSON.stringify(GameState.players)) as IObservableArray<Player>;
-    }
-    let doghouse = new DoghouseObject();
-
+    
     return (
       <Modal
         style={styles.modalView}
@@ -36,21 +29,16 @@ export const Doghouse: React.FC<props> = observer(
         transparent={true}
         visible={props.visible}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.container}>
-            <Players players={doghouse.players} allowEdit={false} doghouse={true} showScore={false}/>
-            <Button
-              title="Send to the doghouse"
-              onPress={() => {
-                doghouse.players.forEach((player) => player.selected = false);
-                GameState.players.replace(doghouse.players);
-                setTimeout(() => {
-                  props.callback();
-                }, 500);
-              }}>
-            </Button>
-          </View>
-        </View>
+        <TouchableOpacity
+          style={styles.centeredView}
+          onPress={() => {
+            props.callback();
+          }}
+          >
+            <View style={styles.container}>
+              <Players players={GameState.players} allowEdit={false} doghouse={false} showScore={true} />
+            </View>
+          </TouchableOpacity>
       </Modal>
     );
   }

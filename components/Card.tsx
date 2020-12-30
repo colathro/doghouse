@@ -69,8 +69,8 @@ export const Card: React.FC<props> = observer(
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: "rgba(0,0,0,0.0)",
-    height: "95%",
-    width: "95%",
+    height: "100%",
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -119,7 +119,8 @@ const styles = StyleSheet.create({
   modalView: {
     backgroundColor: "white",
     borderRadius: 14,
-    width: "95%",
+    width: "90%",
+    height: "90%",
     alignItems: "center",
   },
 });

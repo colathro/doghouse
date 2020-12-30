@@ -26,7 +26,9 @@ export const Dice: React.FC<props> = observer(
           style={styles.dice}
           onPress={() => {
             GameState.rollDice();
-            props.callback();
+            setTimeout(() => {
+              props.callback();
+            }, 500);
           }}
         >
           <Text style={styles.diceText}>{GameState.dice + 1}</Text>
