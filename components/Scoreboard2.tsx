@@ -14,21 +14,14 @@ import {
 } from "react-native";
 
 type props = {
-  visible: boolean;
   callback: any;
 };
 
 
-export const Scoreboard: React.FC<props> = observer(
+export const Scoreboard2: React.FC<props> = observer(
   (props: props): JSX.Element => {
     
     return (
-      <Modal
-        style={styles.modalView}
-        animationType="slide"
-        transparent={true}
-        visible={props.visible}
-      >
         <TouchableOpacity
           style={styles.centeredView}
           onPress={() => {
@@ -39,7 +32,6 @@ export const Scoreboard: React.FC<props> = observer(
               <Players players={GameState.players} allowEdit={false} doghouse={false} showScore={true} />
             </View>
           </TouchableOpacity>
-      </Modal>
     );
   }
 );

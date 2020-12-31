@@ -1,26 +1,19 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, StyleSheet, Text } from "react-native";
-import { Dice, Button, Players, Main } from "../../components";
+import { Dice, Button, Scoreboard2, Main } from "../../components";
 import { GameState } from "../../states";
 
 function GameDoghouse() {
   const navigation = useNavigation();
 
+  const navigateDice = () => {
+    navigation.navigate("GameDiceRoll");
+  };
   return (
-    <Main navigation={navigation} title="Card" players={true} help="ingame">
-      <Button
-        title="Reset"
-        onPress={() => {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "Game" }],
-          });
-        }}
-      ></Button>
-      <Text>Scoreboard</Text>
-      <Players players={GameState.players} allowEdit={false} doghouse={false} showScore={true}></Players>
-    </Main>
+    <View style={styles.container}>
+      <Scoreboard2 callback={navigateDice} />
+    </View>
   );
 }
 

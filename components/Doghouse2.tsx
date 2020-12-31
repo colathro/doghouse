@@ -14,32 +14,36 @@ import {
 } from "react-native";
 
 type props = {
-  visible: boolean;
   callback: any;
 };
 
 
-export const Scoreboard: React.FC<props> = observer(
+export const Doghouse2: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    
+    class DoghouseObject {
+      constructor() {
+        makeAutoObservable(this);
+      }
+      public players = JSON.parse(JSON.stringify(GameState.players)) as IObservableArray<Player>;
+    }
+    let doghouse = new DoghouseObject();
+
     return (
-      <Modal
-        style={styles.modalView}
-        animationType="slide"
-        transparent={true}
-        visible={props.visible}
-      >
-        <TouchableOpacity
-          style={styles.centeredView}
-          onPress={() => {
-            props.callback();
-          }}
-          >
-            <View style={styles.container}>
-              <Players players={GameState.players} allowEdit={false} doghouse={false} showScore={true} />
-            </View>
-          </TouchableOpacity>
-      </Modal>
+        <View style={styles.centeredView}>
+          <View style={styles.container}>
+            <Players players={doghouse.players} allowEdit={false} doghouse={true} showScore={false}/>
+            <Button
+              title="Send to the doghouse"
+              onPress={() => {
+                doghouse.players.forEach((player) => player.selected = false);
+                GameState.players.replace(doghouse.players);
+                setTimeout(() => {
+                  props.callback();
+                }, 500);
+              }}>
+            </Button>
+          </View>
+        </View>
     );
   }
 );

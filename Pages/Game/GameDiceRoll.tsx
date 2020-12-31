@@ -1,24 +1,19 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, StyleSheet, Text } from "react-native";
-import { Dice, Button, Main} from "../../components";
+import { Dice, Button, Game} from "../../components";
 
 function GameDiceRoll() {
   const navigation = useNavigation();
 
+  const navigateCard = () => {
+    navigation.navigate("GameCardShow");
+  };
+
   return (
-    <Main navigation={navigation} title="Dice" players={true} help="ingame">
-      <Button
-        title="Reset"
-        onPress={() => {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "Home" }],
-          });
-        }}
-      ></Button>
-      <Dice navigation={navigation} />
-    </Main>
+    <View style={styles.container}>
+      <Dice callback={navigateCard}/>
+    </View>
   );
 }
 

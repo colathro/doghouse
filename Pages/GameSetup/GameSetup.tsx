@@ -23,6 +23,16 @@ function GameSetup({ navigation }: any) {
           });
         }}
       />
+      <Button
+        title="Play2"
+        onPress={() => {
+          GameState.startGame();
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Game2" }],
+          });
+        }}
+      />
     </Main>
   );
 }

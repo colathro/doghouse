@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, StyleSheet, Text } from "react-native";
-import { Cards, Button, Main } from "../../components";
+import { Card2, Button, Game } from "../../components";
 
 function GameCardShow() {
   const navigation = useNavigation();
+
+  const navigateDoghouse = () => {
+    navigation.navigate("GameDoghouse");
+  };
   
   return (
-    <Main navigation={navigation} title="Card" players={true} help="ingame">
-      <Cards navigation={navigation} />  
-    </Main>
+    <View style={styles.container}>
+      <Card2 callback={navigateDoghouse} />  
+    </View>
   );
 }
 
