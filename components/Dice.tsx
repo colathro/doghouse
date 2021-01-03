@@ -11,22 +11,52 @@ import {
 } from "react-native";
 
 type props = {
+  rolled: boolean;
   callback: any;
 };
 
 export const Dice: React.FC<props> = observer(
   (props: props): JSX.Element => {
+
+    const [moveY, setMoveY] = useState(new Animated.Value(0));
+    const [moveX, setMoveX] = useState(new Animated.Value(0));
+    
+    const startAnimation=()=>{
+      Animated.timing(moveY,{
+        toValue : 270,
+        duration : 1000,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(moveX,{
+        toValue : -100,
+        duration : 1000,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+      }).start();
+    }
+
+    const animatedStyle = {
+      transform: [
+        { 
+          translateY : moveY
+        },
+        {
+          translateX: moveX
+        }
+      ],
+     }
+
     return (
       <Animated.View
-        style={{
-          ...styles.container,
-        }}
+      style={[styles.container, animatedStyle]}
       >
         <TouchableOpacity
           style={styles.dice}
           onPress={() => {
             GameState.rollDice();
             setTimeout(() => {
+              startAnimation();
               props.callback();
             }, 500);
           }}

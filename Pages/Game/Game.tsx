@@ -6,31 +6,38 @@ function Game() {
   const [cardShow, setCardShow] = useState(false);
   const [doghouseShow, setDoghouseShow] = useState(false);
   const [scoreShow, setScoreShow] = useState(false);
+  const [diceRolled, setdiceRolled] = useState(false);
 
   const rollDice = () => {
+    setdiceRolled(true);
     setCardShow(true);
   };
 
   const cardFinish = () => {
     setCardShow(false);
-    setDoghouseShow(true);
+    setTimeout(() => {
+      setDoghouseShow(true);
+    }, 500);
   };
 
   const doghouseFinish = () => {
     setDoghouseShow(false);
-    setScoreShow(true);
+    setTimeout(() => {
+      setScoreShow(true);
+    }, 500);
   };
 
   const scoreFinish = () => {
     setScoreShow(false);
+    setdiceRolled(false);
   };
 
   return (
     <View style={styles.container}>
-      <Card visible={cardShow} callback={cardFinish} />
       <Doghouse visible={doghouseShow} callback={doghouseFinish} />
+      <Card visible={cardShow} callback={cardFinish} />
       <Scoreboard visible={scoreShow} callback={scoreFinish} />
-      <Dice callback={rollDice} />
+      <Dice rolled={diceRolled} callback={rollDice} />
     </View>
   );
 }

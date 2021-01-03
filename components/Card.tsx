@@ -37,12 +37,8 @@ export const Card: React.FC<props> = observer(
             >
               <TouchableOpacity
                 onPress={() => {
-                  if (!flipped) {
-                    card.flip();
-                    setFlipped(true);
-                  } else {
-                    card.jiggle();
-                  }
+                  card.flip();
+                  setFlipped(true);
                 }}
                 style={styles.card}
                 activeOpacity={1}
@@ -51,7 +47,13 @@ export const Card: React.FC<props> = observer(
                   {GameState.decks[GameState.dice].name}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.card} activeOpacity={1}>
+              <TouchableOpacity 
+                style={styles.card} 
+                activeOpacity={1}
+                onPress={() => {
+                  card.tip();
+                }}
+              >
                 <View style={styles.cardInner}>
                   <Text style={styles.prompt}>
                     {GameState.decks[GameState.dice].prompt}
@@ -91,6 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff6700",
     height: "100%",
     width: "100%",
+    borderRadius: 9,
     position: "relative",
   },
   prompt: {
