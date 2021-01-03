@@ -18,7 +18,7 @@ export * from "./icons/BoneMartiniIcon";
 export * from "./PlayerDropdown";
 export * from "./icons/Spike";
 export * from "./icons/Joker";
-export * from "./Scoreboard";
+export * from "./ScoreBoard";
 export * from "./Card2";
 export * from "./Doghouse2";
 export * from "./Scoreboard2";

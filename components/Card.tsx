@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
-import { StyleSheet, Text, TouchableOpacity, View, Modal } from "react-native";
-import { call } from "react-native-reanimated";
+import Modal from "react-native-modal";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type props = {
   visible: boolean;
@@ -18,10 +18,14 @@ export const Card: React.FC<props> = observer(
 
     return (
       <Modal
-        style={styles.modalView}
-        animationType="fade"
-        transparent={true}
-        visible={props.visible}
+        backdropOpacity={0.0}
+        isVisible={props.visible}
+        swipeDirection={["left", "right", "up", "down"]}
+        useNativeDriverForBackdrop
+        onSwipeComplete={() => {
+          props.callback();
+          setFlipped(false);
+        }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -37,26 +41,25 @@ export const Card: React.FC<props> = observer(
                     card.flip();
                     setFlipped(true);
                   } else {
-                    card.tip();
+                    card.jiggle();
                   }
                 }}
                 style={styles.card}
+                activeOpacity={1}
               >
                 <Text style={styles.cardText}>
                   {GameState.decks[GameState.dice].name}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.flippedCard}
-                onPress={() => {
-                  setFlipped(false);
-                  props.callback(false);
-                }}
-              >
-                <Text style={styles.prompt}>
-                  {GameState.decks[GameState.dice].prompt}
-                </Text>
-                <Text style={styles.cardText}>{GameState.activeCard.text}</Text>
+              <TouchableOpacity style={styles.card} activeOpacity={1}>
+                <View style={styles.cardInner}>
+                  <Text style={styles.prompt}>
+                    {GameState.decks[GameState.dice].prompt}
+                  </Text>
+                  <Text style={styles.cardText}>
+                    {GameState.activeCard.text}
+                  </Text>
+                </View>
               </TouchableOpacity>
             </CardFlip>
           </View>
@@ -69,9 +72,17 @@ export const Card: React.FC<props> = observer(
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: "rgba(0,0,0,0.0)",
-    height: "100%",
+    height: "70%",
     width: "100%",
     alignItems: "center",
+    justifyContent: "center",
+  },
+  cardInner: {
+    backgroundColor: "#fff",
+    height: "85%",
+    width: "85%",
+    borderRadius: 9,
+    alignContent: "center",
     justifyContent: "center",
   },
   card: {
@@ -80,20 +91,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff6700",
     height: "100%",
     width: "100%",
-    borderRadius: 7,
-    borderColor: "#ff6700",
-    borderWidth: 3,
-    position: "relative",
-  },
-  flippedCard: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
-    height: "100%",
-    width: "100%",
-    borderRadius: 7,
-    borderColor: "#ff6700",
-    borderWidth: 3,
     position: "relative",
   },
   prompt: {
@@ -110,17 +107,25 @@ const styles = StyleSheet.create({
     margin: 12,
   },
   centeredView: {
-    backgroundColor: "rgba(0,0,0,0.3)",
     flex: 1,
     padding: 8,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   modalView: {
-    backgroundColor: "white",
+    backgroundColor: "rgba(0,0,0,0.0)",
     borderRadius: 14,
     width: "90%",
     height: "90%",
+    justifyContent: "center",
     alignItems: "center",
   },
 });

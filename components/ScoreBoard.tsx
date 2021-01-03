@@ -1,44 +1,38 @@
 import React, { useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
-import { Players, Button } from ".";
-import { Player } from "../types";
-import { IObservableArray, makeAutoObservable } from "mobx";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Animated,
-  Modal,
-} from "react-native";
+import { Players } from ".";
+import Modal from "react-native-modal";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 type props = {
   visible: boolean;
   callback: any;
 };
 
-
 export const Scoreboard: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    
     return (
       <Modal
         style={styles.modalView}
-        animationType="slide"
-        transparent={true}
-        visible={props.visible}
+        backdropOpacity={0.0}
+        isVisible={props.visible}
       >
         <TouchableOpacity
           style={styles.centeredView}
           onPress={() => {
             props.callback();
           }}
-          >
-            <View style={styles.container}>
-              <Players players={GameState.players} allowEdit={false} doghouse={false} showScore={true} />
-            </View>
-          </TouchableOpacity>
+        >
+          <View style={styles.container}>
+            <Players
+              players={GameState.players}
+              allowEdit={false}
+              doghouse={false}
+              showScore={true}
+            />
+          </View>
+        </TouchableOpacity>
       </Modal>
     );
   }
