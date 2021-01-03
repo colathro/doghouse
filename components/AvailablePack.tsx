@@ -26,8 +26,10 @@ export const AvailablePack: React.FC<props> = observer(
     if (active) {
       button = (
         <TouchableOpacity
-          disabled={true}
           style={selectStyles.selectButtonInactive}
+          onPress={() => {
+            GameState.removeActivePack(props.pack);
+          }}
         >
           <Text style={selectStyles.selectButtonText}>{"Selected"}</Text>
         </TouchableOpacity>

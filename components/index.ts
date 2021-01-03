@@ -22,3 +22,4 @@ export * from "./ScoreBoard";
 export * from "./Card2";
 export * from "./Doghouse2";
 export * from "./Scoreboard2";
+export * from "./SelectedPacks";

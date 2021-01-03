@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
-import { SelectedPack } from "../components";
+import { SelectedPacks } from "../components";
 import {
   StyleSheet,
   Text,
@@ -19,18 +19,6 @@ export const Packs: React.FC = observer(
 
     return (
       <View>
-        <View style={styles.container}>
-          <Text style={styles.text}>Selected Packs:</Text>
-          <ScrollView
-            style={styles.selectedPackContainer}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            {GameState.activePacks.map((val, ind) => (
-              <SelectedPack pack={val} key={ind}></SelectedPack>
-            ))}
-          </ScrollView>
-        </View>
         <View style={styles.container2}>
           <Text style={styles.text2}>Packs:</Text>
           <ScrollView
@@ -48,8 +36,7 @@ export const Packs: React.FC = observer(
 );
 
 const styles = StyleSheet.create({
-  container: { flex: 24 },
-  container2: { flex: 76 },
+  container2: { flex: 100 },
   text: {
     fontFamily: "Tw-Bold",
     fontSize: 24,
@@ -57,7 +44,6 @@ const styles = StyleSheet.create({
   text2: {
     fontFamily: "Tw-Bold",
     fontSize: 24,
-    marginTop: 14,
   },
   selectedPackContainer: { flexDirection: "row" },
   packSelectionContainer: {
