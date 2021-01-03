@@ -2,12 +2,12 @@ import React from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { RemoveIcon } from "./icons/RemoveIcon";
+
 import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
 import { CardPack, Deck } from "../types";
 
 type props = {
-  deck: Deck;
+  pack: CardPack;
 };
 
 export const SelectedPack: React.FC<props> = observer(
@@ -17,7 +17,7 @@ export const SelectedPack: React.FC<props> = observer(
         <View style={iconStyles.container}>
           <BoneMartiniIcon style={iconStyles.icon} />
         </View>
-        <Text style={titleStyles.text}>{props.deck.name}</Text>
+        <Text style={titleStyles.text}>{props.pack.name}</Text>
       </View>
     );
   }
@@ -45,8 +45,8 @@ const iconStyles = StyleSheet.create({
     justifyContent: "center",
   },
   icon: {
-    height: 45,
-    width: 45,
+    height: 60,
+    width: 60,
   },
 });
 

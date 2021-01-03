@@ -1,12 +1,13 @@
 import React from "react";
 import { GameState } from "../../states";
 import { observer } from "mobx-react-lite";
-import { Button, Players, Main, Spike } from "../../components";
+import { Button, Players, Main, Spike, SelectedPacks } from "../../components";
 
 function GameSetup({ navigation }: any) {
   return (
     <Main navigation={navigation} title="Game Setup" help="setup">
       <Spike />
+      <SelectedPacks linkToPurchase={true} />
       <Players
         players={GameState.players}
         allowEdit={true}
@@ -20,16 +21,6 @@ function GameSetup({ navigation }: any) {
           navigation.reset({
             index: 0,
             routes: [{ name: "Game" }],
-          });
-        }}
-      />
-      <Button
-        title="Play2"
-        onPress={() => {
-          GameState.startGame();
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "Game2" }],
           });
         }}
       />

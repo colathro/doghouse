@@ -3,6 +3,7 @@ import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { StyleSheet, View, Text } from "react-native";
 import { SelectedPack } from "./SelectedPack";
+import { ScrollView } from "react-native";
 
 type props = {
   linkToPurchase: boolean;
@@ -11,10 +12,19 @@ type props = {
 export const SelectedPacks: React.FC<props> = observer(
   (props: props): JSX.Element => {
     return (
-      <View style={styles.container}>
-        {GameState.decks.map((val, ind) => (
-          <SelectedPack deck={val} key={ind}></SelectedPack>
-        ))}
+      <View>
+        <Text style={styles.text}>Selected Packs:</Text>
+        <View style={styles.container}>
+          <ScrollView
+            style={styles.selectedPackContainer}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
+            {GameState.activePacks.map((val, ind) => (
+              <SelectedPack pack={val} key={ind}></SelectedPack>
+            ))}
+          </ScrollView>
+        </View>
       </View>
     );
   }
@@ -27,5 +37,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
   },
+  text: {
+    fontFamily: "Tw-Bold",
+    fontSize: 24,
+  },
+  selectedPackContainer: { flexDirection: "row" },
 });

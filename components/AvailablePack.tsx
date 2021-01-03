@@ -31,7 +31,7 @@ export const AvailablePack: React.FC<props> = observer(
             GameState.removeActivePack(props.pack);
           }}
         >
-          <Text style={selectStyles.selectButtonText}>{"Selected"}</Text>
+          <Text style={selectStyles.selectButtonText}>{"Remove"}</Text>
         </TouchableOpacity>
       );
     } else if (!props.pack.purchased) {
