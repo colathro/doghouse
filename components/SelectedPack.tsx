@@ -2,24 +2,41 @@ import React from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
 import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
 import { CardPack, Deck } from "../types";
+import { Joker } from "./icons/Joker";
 
 type props = {
-  pack: CardPack;
+  pack?: CardPack;
+  addMore: boolean;
+  navigation?: any;
 };
 
 export const SelectedPack: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    return (
-      <View style={styles.container}>
-        <View style={iconStyles.container}>
-          <BoneMartiniIcon style={iconStyles.icon} />
+    if (props.addMore) {
+      return (
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={getMoreStyles.container}
+          onPress={() => props.navigation.navigate("Settings")}
+        >
+          <View style={iconStyles.container}>
+            <Joker style={iconStyles.icon} />
+          </View>
+          <Text style={titleStyles.text}>Get More Packs</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <View style={iconStyles.container}>
+            <BoneMartiniIcon style={iconStyles.icon} />
+          </View>
+          <Text style={titleStyles.text}>{props.pack.name}</Text>
         </View>
-        <Text style={titleStyles.text}>{props.pack.name}</Text>
-      </View>
-    );
+      );
+    }
   }
 );
 
@@ -66,12 +83,41 @@ const styles = StyleSheet.create({
     shadowRadius: 3.0,
     elevation: 8,
     borderRadius: 6,
-    margin: 10,
+    margin: 6,
   },
   removeIconContainer: {
     position: "absolute",
     right: -7,
     top: -7,
     zIndex: 1,
+  },
+});
+
+const getMoreStyles = StyleSheet.create({
+  container: {
+    height: 108,
+    width: 78,
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.0,
+    elevation: 8,
+    borderRadius: 6,
+    margin: 6,
+    borderColor: "#ff6700",
+    borderWidth: 3,
+  },
+  text: {
+    textAlign: "center",
+    color: "black",
+    fontFamily: "Tw-Bold",
+    fontWeight: "bold",
+    fontSize: 48,
   },
 });

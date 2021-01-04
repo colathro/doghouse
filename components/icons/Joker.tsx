@@ -2,9 +2,13 @@ import * as React from "react";
 import Svg, { Defs, ClipPath, Path, G, Circle } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: style */
 
-export const Joker: React.FC = () => {
+type props = {
+  style: any;
+};
+
+export const Joker: React.FC<props> = (props: props) => {
   return (
-    <Svg viewBox="0 0 517 745" width={250} height={250}>
+    <Svg style={props.style} viewBox="0 0 517 745">
       <Path
         d="M349 380.62c-.07.8 4 46.79 13.87 56.4l8-1.38s18.65-38.62 16.47-49.36-38.34-5.66-38.34-5.66z"
         fill="#f0ea4e"

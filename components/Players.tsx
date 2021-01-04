@@ -24,7 +24,7 @@ type props = {
 
 export const Players: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    const shake = new Animated.Value(0); // Initial value for opacity: 0    
+    const shake = new Animated.Value(0); // Initial value for opacity: 0
     const [currentDoghouseCount, setCount] = useState(0);
 
     React.useEffect(() => {
@@ -64,15 +64,15 @@ export const Players: React.FC<props> = observer(
             onPress={() => {
               if (props.allowEdit) {
                 GameState.removePlayer(val.name);
-              } else if(props.doghouse) {
+              } else if (props.doghouse) {
                 if (val.selected) {
-                  setCount(currentDoghouseCount-1);
+                  setCount(currentDoghouseCount - 1);
                   val.score -= 1;
                   val.selected = false;
                 } else {
                   let maxDoghouse = GameState.decks[GameState.dice].maxDoghouse;
                   if (currentDoghouseCount < maxDoghouse || maxDoghouse == -1) {
-                    setCount(currentDoghouseCount+1);
+                    setCount(currentDoghouseCount + 1);
                     val.score += 1;
                     val.selected = true;
                   }
@@ -97,9 +97,7 @@ export const Players: React.FC<props> = observer(
                   : { ...styles.player }
               }
             >
-              { props.showScore
-                ? val.name + ": " + val.score
-                : val.name}
+              {props.showScore ? val.name + ": " + val.score : val.name}
             </Animated.Text>
           </TouchableOpacity>
         ))}
@@ -113,7 +111,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     flexWrap: "wrap",
-    height: 160,
+    height: 120,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",

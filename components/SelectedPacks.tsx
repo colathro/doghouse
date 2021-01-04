@@ -7,6 +7,7 @@ import { ScrollView } from "react-native";
 
 type props = {
   linkToPurchase: boolean;
+  navigation: any;
 };
 
 export const SelectedPacks: React.FC<props> = observer(
@@ -16,12 +17,13 @@ export const SelectedPacks: React.FC<props> = observer(
         <Text style={styles.text}>Selected Packs:</Text>
         <View style={styles.container}>
           <ScrollView
-            style={styles.selectedPackContainer}
+            contentContainerStyle={styles.selectedPackContainer}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
+            <SelectedPack addMore={true} navigation={props.navigation} />
             {GameState.activePacks.map((val, ind) => (
-              <SelectedPack pack={val} key={ind}></SelectedPack>
+              <SelectedPack addMore={false} pack={val} key={ind}></SelectedPack>
             ))}
           </ScrollView>
         </View>
@@ -37,11 +39,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    width: "100%",
+    width: "90%",
   },
   text: {
     fontFamily: "Tw-Bold",
     fontSize: 24,
   },
-  selectedPackContainer: { flexDirection: "row" },
+  selectedPackContainer: {
+    flexDirection: "row",
+  },
 });
