@@ -3,7 +3,14 @@ import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import Modal from "react-native-modal";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  View,
+  Animated,
+  Easing, 
+} from "react-native";
 
 type props = {
   visible: boolean;
@@ -12,61 +19,96 @@ type props = {
 
 export const Card: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    const [flipped, setFlipped] = useState(false);
+    const [moveY, setMoveY] = useState(new Animated.Value(0));
+    const [moveX, setMoveX] = useState(new Animated.Value(0));
+    const [scale, setScale] = useState(new Animated.Value(1));
 
+    const startAnimation=()=>{
+      Animated.timing(moveY,{
+        toValue : 175,
+        duration : 1000,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(moveX,{
+        toValue : 75,
+        duration : 1000,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(scale,{
+        toValue : 0.75,
+        duration : 1000,
+        easing: Easing.bezier(0.25,0.1,0.25,1),
+        useNativeDriver: true,
+      }).start();
+    }
     let card;
 
+    const animatedStyle = {
+      transform: [
+        { 
+          translateY : moveY
+        },
+        {
+          translateX: moveX
+        },
+        {
+          scale: scale
+        },
+      ],
+     }
+
     return (
-      <Modal
-        backdropOpacity={0.0}
-        isVisible={props.visible}
-        swipeDirection={["left", "right", "up", "down"]}
-        useNativeDriverForBackdrop
-        onSwipeComplete={() => {
-          props.callback();
-          setFlipped(false);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <CardFlip
-              ref={(cardObj) => {
-                card = cardObj;
-              }}
-              style={styles.cardContainer}
-            >
-              <TouchableOpacity
-                onPress={() => {
-                  card.flip();
-                  setFlipped(true);
+        <Modal
+          backdropOpacity={0.0}
+          isVisible={props.visible}
+          swipeDirection={["left", "right", "down", "up"]}
+          useNativeDriverForBackdrop
+          onSwipeComplete={() => {
+            props.callback();
+          }}
+        >
+          <Animated.View style={[styles.centeredView, animatedStyle]}>
+            <View style={styles.modalView}>
+              <CardFlip
+                ref={(cardObj) => {
+                  card = cardObj;
                 }}
-                style={styles.card}
-                activeOpacity={1}
+                style={styles.cardContainer}
               >
-                <Text style={styles.cardText}>
-                  {GameState.decks[GameState.dice].name}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity 
-                style={styles.card} 
-                activeOpacity={1}
-                onPress={() => {
-                  card.tip();
-                }}
-              >
-                <View style={styles.cardInner}>
-                  <Text style={styles.prompt}>
-                    {GameState.decks[GameState.dice].prompt}
-                  </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    card.flip();
+                  }}
+                  style={styles.card}
+                  activeOpacity={1}
+                >
                   <Text style={styles.cardText}>
-                    {GameState.activeCard.text}
+                    {GameState.decks[GameState.dice].name}
                   </Text>
-                </View>
-              </TouchableOpacity>
-            </CardFlip>
-          </View>
-        </View>
-      </Modal>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={styles.card} 
+                  activeOpacity={1}
+                  onPress={() => {
+                    card.tip();
+                    startAnimation();
+                  }}
+                >
+                  <View style={styles.cardInner}>
+                    <Text style={styles.prompt}>
+                      {GameState.decks[GameState.dice].prompt}
+                    </Text>
+                    <Text style={styles.cardText}>
+                      {GameState.activeCard.text}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </CardFlip>
+            </View>
+          </Animated.View>
+        </Modal>
     );
   }
 );

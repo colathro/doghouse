@@ -6,11 +6,12 @@ function Game() {
   const [cardShow, setCardShow] = useState(false);
   const [doghouseShow, setDoghouseShow] = useState(false);
   const [scoreShow, setScoreShow] = useState(false);
-  const [diceRolled, setdiceRolled] = useState(false);
+  const [reset, setReset] = useState(false);
 
   const rollDice = () => {
-    setdiceRolled(true);
-    setCardShow(true);
+    setTimeout(() => {
+      setCardShow(true);
+    }, 700);
   };
 
   const cardFinish = () => {
@@ -29,15 +30,19 @@ function Game() {
 
   const scoreFinish = () => {
     setScoreShow(false);
-    setdiceRolled(false);
+    setReset(true);
   };
+
+  const newRound = () => {
+    setReset(false);
+  }
 
   return (
     <View style={styles.container}>
-      <Doghouse visible={doghouseShow} callback={doghouseFinish} />
       <Card visible={cardShow} callback={cardFinish} />
+      <Doghouse visible={doghouseShow} callback={doghouseFinish} />
       <Scoreboard visible={scoreShow} callback={scoreFinish} />
-      <Dice rolled={diceRolled} callback={rollDice} />
+      <Dice resetAnimation={reset} callback={rollDice} animationCallback={newRound}/>
     </View>
   );
 }

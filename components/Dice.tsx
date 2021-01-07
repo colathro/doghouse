@@ -11,8 +11,9 @@ import {
 } from "react-native";
 
 type props = {
-  rolled: boolean;
   callback: any;
+  resetAnimation: boolean;
+  animationCallback: any;
 };
 
 export const Dice: React.FC<props> = observer(
@@ -20,7 +21,7 @@ export const Dice: React.FC<props> = observer(
 
     const [moveY, setMoveY] = useState(new Animated.Value(0));
     const [moveX, setMoveX] = useState(new Animated.Value(0));
-    
+
     const startAnimation=()=>{
       Animated.timing(moveY,{
         toValue : 270,
@@ -29,11 +30,31 @@ export const Dice: React.FC<props> = observer(
         useNativeDriver: true,
       }).start();
       Animated.timing(moveX,{
-        toValue : -100,
+        toValue : -125,
         duration : 1000,
         easing: Easing.bounce,
         useNativeDriver: true,
       }).start();
+    }
+
+    const resetAnimation=()=>{
+      Animated.timing(moveY,{
+        toValue : 0,
+        duration : 1000,
+        easing: Easing.bezier(0.25,0.1,0.25,1),
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(moveX,{
+        toValue : 0,
+        duration : 1000,
+        easing: Easing.bezier(0.25,0.1,0.25,1),
+        useNativeDriver: true,
+      }).start();
+      props.animationCallback();
+    }
+
+    if (props.resetAnimation) {
+      resetAnimation();
     }
 
     const animatedStyle = {
@@ -55,10 +76,8 @@ export const Dice: React.FC<props> = observer(
           style={styles.dice}
           onPress={() => {
             GameState.rollDice();
-            setTimeout(() => {
-              startAnimation();
-              props.callback();
-            }, 500);
+            startAnimation();
+            props.callback();
           }}
         >
           <Text style={styles.diceText}>{GameState.dice + 1}</Text>
