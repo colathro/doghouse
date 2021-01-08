@@ -8,6 +8,7 @@ class GameStateObject {
     makeAutoObservable(this);
     this.addCardPack(require("../assets/cardpacks/Standard.json"));
     this.addCardPack(require("../assets/cardpacks/StandardPlus.json"));
+    this.loadPlayers();
   }
 
   public players: IObservableArray<Player> = [
@@ -28,37 +29,37 @@ class GameStateObject {
       name: "Throw a Bone",
       prompt: "Who's most likely to",
       maxDoghouse: 1,
-      cards: [] as Array<Card>
+      cards: [] as Array<Card>,
     },
     {
       name: "dog fight",
       prompt: "Debate.",
       maxDoghouse: -1,
-      cards: [] as Array<Card>
+      cards: [] as Array<Card>,
     },
     {
       name: "doghouse or dare",
       prompt: "Choose someone to",
       maxDoghouse: 1,
-      cards: [] as Array<Card>
+      cards: [] as Array<Card>,
     },
     {
       name: "BARK OR BITE",
       prompt: "Raise your hand if you've",
       maxDoghouse: -1,
-      cards: [] as Array<Card>
+      cards: [] as Array<Card>,
     },
     {
       name: "BREEDS",
       prompt: "List",
       maxDoghouse: 1,
-      cards: [] as Array<Card>
+      cards: [] as Array<Card>,
     },
     {
       name: "Teacher's Pet",
       prompt: "Guess",
       maxDoghouse: 1,
-      cards: [] as Array<Card>
+      cards: [] as Array<Card>,
     },
   ] as Array<Deck>;
 
@@ -69,7 +70,7 @@ class GameStateObject {
   private drawCard() {
     if (this.decks[this.dice].cards.length == 0) {
       this.activeCard = { text: "null" } as Card;
-    } else { 
+    } else {
       var index = Math.floor(
         Math.random() * (this.decks[this.dice].cards.length - 1)
       );
@@ -89,10 +90,10 @@ class GameStateObject {
 
   startGame() {
     this.activeCard = {} as Card;
-    this.decks.forEach((deck) => deck.cards = [] as Array<Card>);
+    this.decks.forEach((deck) => (deck.cards = [] as Array<Card>));
 
     // add all decks in active packs to the current deck.
-    for (var i = 0; i < this.activePacks.length;i ++) {
+    for (var i = 0; i < this.activePacks.length; i++) {
       this.decks[0].cards = this.activePacks[i].throwABone;
       this.decks[1].cards = this.activePacks[i].dogFight;
       this.decks[2].cards = this.activePacks[i].doghouseOrDare;
@@ -124,6 +125,7 @@ class GameStateObject {
     ) {
       var player: Player = { name: name, selected: false, score: 0 };
       this.players.push(player);
+      this.savePlayers();
     }
   }
 
@@ -134,6 +136,7 @@ class GameStateObject {
     if (player!.selected) {
       var newPlayers = this.players.filter((value) => value.name != name);
       this.players.replace(newPlayers);
+      this.savePlayers();
     } else {
       player!.selected = true;
       setTimeout(() => {
@@ -179,7 +182,32 @@ class GameStateObject {
   }
 
   loadBasePacks() {
-    this.activePacks.push(this.cardPacks.find((cardPack) => cardPack.name == "Standard"));
+    this.activePacks.push(
+      this.cardPacks.find((cardPack) => cardPack.name == "Standard")
+    );
+  }
+
+  async savePlayers() {
+    try {
+      const jsonValue = JSON.stringify(this.players);
+      await AsyncStorage.setItem("players", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async loadPlayers() {
+    let basePlayers: Player[] = [{ name: "kyle", selected: false, score: 0 }];
+    let players: Player[];
+    const saved = await AsyncStorage.getItem("players");
+    if (saved === null) {
+      this.players.replace(basePlayers);
+    } else if (saved.length == 2) {
+      this.players.replace(basePlayers);
+    } else {
+      players = JSON.parse(saved);
+      this.players.replace(players);
+    }
   }
 
   setActivePacks(packs: CardPack[]) {
