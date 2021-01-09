@@ -3,15 +3,25 @@ import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { Players } from ".";
 import Modal from "react-native-modal";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View, SafeAreaView, FlatList, Text, StatusBar} from "react-native";
 
 type props = {
   visible: boolean;
   callback: any;
 };
 
+const Item = ({ name }) => (
+  <View style={styles.item}>
+    <Text style={styles.text}>{name}</Text>
+  </View>
+);
+
 export const Scoreboard: React.FC<props> = observer(
   (props: props): JSX.Element => {
+    const renderItem = ({ item }) => (
+      <Item name={item.name} />
+    );
+
     return (
       <Modal
         style={styles.modalView}
@@ -22,15 +32,22 @@ export const Scoreboard: React.FC<props> = observer(
           style={styles.centeredView}
           onPress={() => {
             props.callback();
+            GameState.players.forEach((player) => player.selected = false);
           }}
         >
           <View style={styles.container}>
-            <Players
-              players={GameState.players}
-              allowEdit={false}
-              doghouse={false}
-              showScore={true}
-            />
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>
+                Take a Drink!
+              </Text>
+            </View>
+            <SafeAreaView style={styles.scoreContainer}>
+              <FlatList
+                data={GameState.players}
+                renderItem={renderItem}
+                keyExtractor={item => item.name}
+              />
+            </SafeAreaView>
           </View>
         </TouchableOpacity>
       </Modal>
@@ -40,18 +57,18 @@ export const Scoreboard: React.FC<props> = observer(
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    height: 160,
-    backgroundColor: "#fff",
+    backgroundColor: "yellow",
+    width: "100%",
+    height: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
-  playerDoghouse: {
-    fontFamily: "Tw-Bold",
-    fontSize: 28,
-    margin: 12,
-    color: "red",
+  textContainer: {
+    height: 160,
+    width: "100%",
+    backgroundColor: "#ff6700",
+    alignItems: "center",
+    justifyContent: "center",
   },
   player: {
     fontFamily: "Tw-Bold",
@@ -59,20 +76,33 @@ const styles = StyleSheet.create({
     margin: 12,
   },
   modalView: {
-    backgroundColor: "rgba(0,0,0,0)",
-    borderRadius: 14,
-    flex: 1,
-    padding: 8,
-    width: "90%",
-    height: "90%",
+    backgroundColor: "yellow",
+    width: "100%",
+    height: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
   },
   centeredView: {
-    backgroundColor: "rgba(0,0,0,0.3)",
+    backgroundColor: "rgba(0,0,0,0)",
     flex: 1,
     padding: 8,
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
+  },
+  scoreContainer: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    width: "100%",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  text: {
+    fontFamily: "Tw-Bold",
+    fontSize: 28,
+    margin: 12,
   },
 });

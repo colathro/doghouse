@@ -5,4 +5,5 @@ export interface Deck {
   prompt: string;
   maxDoghouse: number;
   cards: Array<Card>;
+  useTimer: boolean;
 }
