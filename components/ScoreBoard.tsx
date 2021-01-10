@@ -3,23 +3,27 @@ import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import { Players } from ".";
 import Modal from "react-native-modal";
-import { StyleSheet, TouchableOpacity, View, SafeAreaView, FlatList, Text, StatusBar} from "react-native";
+import { StyleSheet, TouchableOpacity, View, SafeAreaView, ScrollView, Text, StatusBar, Dimensions } from "react-native";
+
+var width = Dimensions.get('window').width; //full width
+var height = Dimensions.get('window').height; //full height
 
 type props = {
   visible: boolean;
   callback: any;
 };
 
-const Item = ({ name }) => (
+const Item = ({ name, score}) => (
   <View style={styles.item}>
     <Text style={styles.text}>{name}</Text>
+    <Text style={styles.text}>{score}</Text>
   </View>
 );
 
 export const Scoreboard: React.FC<props> = observer(
   (props: props): JSX.Element => {
     const renderItem = ({ item }) => (
-      <Item name={item.name} />
+      <Item name={item.name} score={item.score} />
     );
 
     return (
@@ -28,28 +32,29 @@ export const Scoreboard: React.FC<props> = observer(
         backdropOpacity={0.0}
         isVisible={props.visible}
       >
-        <TouchableOpacity
-          style={styles.centeredView}
-          onPress={() => {
-            props.callback();
-            GameState.players.forEach((player) => player.selected = false);
-          }}
-        >
+        <View style={styles.centeredView} >
           <View style={styles.container}>
-            <View style={styles.textContainer}>
+            <TouchableOpacity
+              style={styles.textContainer}
+              onPress={() => {
+                props.callback();
+                GameState.players.forEach((player) => player.selected = false);
+              }}
+            >
               <Text style={styles.text}>
                 Take a Drink!
               </Text>
-            </View>
-            <SafeAreaView style={styles.scoreContainer}>
-              <FlatList
-                data={GameState.players}
-                renderItem={renderItem}
-                keyExtractor={item => item.name}
-              />
-            </SafeAreaView>
+            </TouchableOpacity>
+              <ScrollView style={styles.scoreContainer}>
+                {GameState.players.map((val, ind) => (
+                  <View style={styles.item} key={ind}>
+                    <Text style={styles.text}>{val.name}</Text>
+                    <Text style={styles.text}>{val.score}</Text>
+                  </View>
+                ))}
+              </ScrollView>
           </View>
-        </TouchableOpacity>
+        </View>
       </Modal>
     );
   }
@@ -58,8 +63,8 @@ export const Scoreboard: React.FC<props> = observer(
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "yellow",
-    width: "100%",
-    height: "100%",
+    width: width,
+    height: height,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -94,11 +99,11 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
+    flexDirection: "row",
+    flexWrap: "wrap",
     backgroundColor: '#f9c2ff',
-    width: "100%",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    width: width,
+    marginVertical: 2
   },
   text: {
     fontFamily: "Tw-Bold",
