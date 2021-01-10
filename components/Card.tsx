@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { GameState } from "../states";
+import { Players, Button } from "../components";
+import { Player } from "../types";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import Modal from "react-native-modal";
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { IObservableArray, makeAutoObservable } from "mobx";
 import { 
   StyleSheet, 
   Text, 
   TouchableOpacity, 
   View,
   Animated,
-  Easing, 
+  Easing,
 } from "react-native";
+import { Doghouse } from "./Doghouse";
 
 type props = {
   visible: boolean;
@@ -19,57 +24,81 @@ type props = {
 
 export const Card: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    const [moveY, setMoveY] = useState(new Animated.Value(0));
-    const [moveX, setMoveX] = useState(new Animated.Value(0));
-    const [scale, setScale] = useState(new Animated.Value(1));
-
-    const startAnimation=()=>{
-      Animated.timing(moveY,{
-        toValue : 175,
-        duration : 1000,
-        easing: Easing.bounce,
-        useNativeDriver: true,
-      }).start();
-      Animated.timing(moveX,{
-        toValue : 75,
-        duration : 1000,
-        easing: Easing.bounce,
-        useNativeDriver: true,
-      }).start();
-      Animated.timing(scale,{
-        toValue : 0.75,
-        duration : 1000,
-        easing: Easing.bezier(0.25,0.1,0.25,1),
-        useNativeDriver: true,
-      }).start();
+    class DoghouseObject {
+      constructor() {
+        makeAutoObservable(this);
+      }
+      public players = JSON.parse(
+        JSON.stringify(GameState.players)
+      ) as IObservableArray<Player>;
     }
-    let card;
+    let doghouse = new DoghouseObject();
 
-    const animatedStyle = {
-      transform: [
-        { 
-          translateY : moveY
-        },
-        {
-          translateX: moveX
-        },
-        {
-          scale: scale
-        },
-      ],
-     }
+    const [flipped, setFlipped] = useState(false);
+    const [playing, setPlaying] = useState(false);
+    const [timerFinished, setTimerFinished] = useState(false);
+    const [key, setKey] = useState(0);
+
+    let card;
+    let card2;
+    let timer;
+    const card2Ref = useRef(card2);
+    
+    if (GameState.decks[GameState.dice].useTimer) {
+      timer = (
+        <View style={styles.timerView}>
+          <TouchableOpacity
+            onPress={() => {
+              if (!playing) setPlaying(true);
+              if (playing && !timerFinished) {
+                setKey(prevKey => prevKey + 1)
+              }
+            }}
+            style={styles.timerView}
+            activeOpacity={.75}>
+            <CountdownCircleTimer
+              key={key}
+              isPlaying={playing}
+              duration={10}
+              size={150}
+              strokeWidth={12}
+              initialRemainingTime={10}
+              colors={[
+                ['#004777', 0.4],
+                ['#F7B801', 0.4],
+                ['#A30000', 0.2],
+              ]}
+              onComplete={() => {
+                setTimerFinished(true);
+              }}
+            >
+              {({ remainingTime }) => (
+                <Text style={styles.cardText}>
+                  {playing ? (remainingTime == 0 ? "Times Up!" : remainingTime ): "Start Timer"}
+                </Text>
+              )}
+            </CountdownCircleTimer>
+          </TouchableOpacity>
+        </View>
+      );
+    }
 
     return (
         <Modal
           backdropOpacity={0.0}
           isVisible={props.visible}
-          swipeDirection={["left", "right", "down", "up"]}
+          swipeDirection={flipped ? ["left", "right", "down", "up"] : []}
           useNativeDriverForBackdrop
           onSwipeComplete={() => {
+            setFlipped(false);
+            setPlaying(false);
+            setTimerFinished(false);
+            //doghouse.players.forEach((player) => (player.selected = false));
+            GameState.players.replace(doghouse.players);
             props.callback();
           }}
         >
-          <Animated.View style={[styles.centeredView, animatedStyle]}>
+          <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <CardFlip
                 ref={(cardObj) => {
@@ -80,6 +109,7 @@ export const Card: React.FC<props> = observer(
                 <TouchableOpacity
                   onPress={() => {
                     card.flip();
+                    setFlipped(true);
                   }}
                   style={styles.card}
                   activeOpacity={1}
@@ -93,7 +123,6 @@ export const Card: React.FC<props> = observer(
                   activeOpacity={1}
                   onPress={() => {
                     card.tip();
-                    startAnimation();
                   }}
                 >
                   <View style={styles.cardInner}>
@@ -103,11 +132,34 @@ export const Card: React.FC<props> = observer(
                     <Text style={styles.cardText}>
                       {GameState.activeCard.text}
                     </Text>
+                    <CardFlip
+                      ref={(cardObj) => {
+                        card2 = cardObj;
+                      }}
+                      style={styles.playAreaContainer}
+                    >
+                      <TouchableOpacity
+                        activeOpacity={1}
+                        style={styles.playAreaContainer}
+                        onPress={() => timerFinished ? card2.flip() : null}>
+                        {timer}
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        activeOpacity={1}
+                        style={styles.playAreaContainer}>
+                          <Players
+                            players={doghouse.players}
+                            allowEdit={false}
+                            doghouse={true}
+                            showScore={false}
+                          />
+                      </TouchableOpacity>
+                    </CardFlip>
                   </View>
                 </TouchableOpacity>
               </CardFlip>
             </View>
-          </Animated.View>
+          </View>
         </Modal>
     );
   }
@@ -116,15 +168,20 @@ export const Card: React.FC<props> = observer(
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: "rgba(0,0,0,0.0)",
-    height: "70%",
+    height: "80%",
     width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  playAreaContainer: {
+    height: 150,
     alignItems: "center",
     justifyContent: "center",
   },
   cardInner: {
     backgroundColor: "#fff",
-    height: "85%",
-    width: "85%",
+    height: "90%",
+    width: "90%",
     borderRadius: 9,
     alignContent: "center",
     justifyContent: "center",
@@ -138,23 +195,10 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     position: "relative",
   },
-  prompt: {
-    textAlign: "center",
-    fontFamily: "Tw-Reg",
-    color: "#808080",
-    fontSize: 22,
-    margin: 0,
-  },
-  cardText: {
-    textAlign: "center",
-    fontFamily: "Tw-Bold",
-    fontSize: 28,
-    margin: 12,
-  },
   centeredView: {
     flex: 1,
     padding: 8,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -172,5 +216,23 @@ const styles = StyleSheet.create({
     height: "90%",
     justifyContent: "center",
     alignItems: "center",
+  },
+  timerView: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30,
+  },
+  prompt: {
+    textAlign: "center",
+    fontFamily: "Tw-Reg",
+    color: "#808080",
+    fontSize: 22,
+    margin: 0,
+  },
+  cardText: {
+    textAlign: "center",
+    fontFamily: "Tw-Bold",
+    fontSize: 28,
+    margin: 12,
   },
 });

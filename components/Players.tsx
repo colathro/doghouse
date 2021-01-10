@@ -58,60 +58,71 @@ export const Players: React.FC<props> = observer(
 
     return (
       <View style={styles.container}>
-        {props.players.map((val, ind) => (
-          <TouchableOpacity
-            key={ind}
-            onPress={() => {
-              if (props.allowEdit) {
-                GameState.removePlayer(val.name);
-              } else if (props.doghouse) {
-                if (val.selected) {
-                  setCount(currentDoghouseCount - 1);
-                  val.score -= 1;
-                  val.selected = false;
-                } else {
-                  let maxDoghouse = GameState.decks[GameState.dice].maxDoghouse;
-                  if (currentDoghouseCount < maxDoghouse || maxDoghouse == -1) {
-                    setCount(currentDoghouseCount + 1);
-                    val.score += 1;
-                    val.selected = true;
+        <View style={styles.playerContainer}>
+          {props.players.map((val, ind) => (
+            <TouchableOpacity
+              key={ind}
+              onPress={() => {
+                if (props.allowEdit) {
+                  GameState.removePlayer(val.name);
+                } else if (props.doghouse) {
+                  if (val.selected) {
+                    setCount(currentDoghouseCount - 1);
+                    val.score -= 1;
+                    val.selected = false;
+                  } else {
+                    let maxDoghouse = GameState.decks[GameState.dice].maxDoghouse;
+                    if (currentDoghouseCount < maxDoghouse || maxDoghouse == -1) {
+                      setCount(currentDoghouseCount + 1);
+                      val.score += 1;
+                      val.selected = true;
+                    }
                   }
                 }
-              }
-            }}
-          >
-            <Animated.Text
-              style={
-                val.selected
-                  ? {
-                      ...styles.playerSelected,
-                      transform: [
-                        {
-                          rotate: shake.interpolate({
-                            inputRange: [-1, 1],
-                            outputRange: ["-0.1rad", "0.1rad"],
-                          }),
-                        },
-                      ],
-                    }
-                  : { ...styles.player }
-              }
+              }}
             >
-              {props.showScore ? val.name + ": " + val.score : val.name}
-            </Animated.Text>
-          </TouchableOpacity>
-        ))}
-        {props.allowEdit ? <AddPlayer></AddPlayer> : <></>}
+              <Animated.Text
+                style={
+                  val.selected
+                    ? {
+                        ...styles.playerSelected,
+                        transform: [
+                          {
+                            rotate: shake.interpolate({
+                              inputRange: [-1, 1],
+                              outputRange: ["-0.1rad", "0.1rad"],
+                            }),
+                          },
+                        ],
+                      }
+                    : { ...styles.player }
+                }
+              >
+                {props.showScore ? val.name + ": " + val.score : val.name}
+              </Animated.Text>
+            </TouchableOpacity>
+          ))}
+          {props.allowEdit ? <AddPlayer></AddPlayer> : <></>}
+        </View>
+        { !props.doghouse ? null : 
+          <Text> 
+            {currentDoghouseCount + "/" + (GameState.decks[GameState.dice].maxDoghouse == -1 ? "-" : GameState.decks[GameState.dice].maxDoghouse)}
+          </Text>}
       </View>
     );
   }
 );
 
 const styles = StyleSheet.create({
-  container: {
+  playerContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     height: 120,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  container: {
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",

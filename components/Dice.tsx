@@ -70,7 +70,7 @@ export const Dice: React.FC<props> = observer(
 
     return (
       <Animated.View
-      style={[styles.container, animatedStyle]}
+        style={[styles.container, animatedStyle]}
       >
         <TouchableOpacity
           style={styles.dice}

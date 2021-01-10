@@ -4,7 +4,6 @@ import { View, StyleSheet } from "react-native";
 
 function Game() {
   const [cardShow, setCardShow] = useState(false);
-  const [doghouseShow, setDoghouseShow] = useState(false);
   const [scoreShow, setScoreShow] = useState(false);
   const [reset, setReset] = useState(false);
 
@@ -16,13 +15,6 @@ function Game() {
 
   const cardFinish = () => {
     setCardShow(false);
-    setTimeout(() => {
-      setDoghouseShow(true);
-    }, 500);
-  };
-
-  const doghouseFinish = () => {
-    setDoghouseShow(false);
     setTimeout(() => {
       setScoreShow(true);
     }, 500);
@@ -40,7 +32,6 @@ function Game() {
   return (
     <View style={styles.container}>
       <Card visible={cardShow} callback={cardFinish} />
-      <Doghouse visible={doghouseShow} callback={doghouseFinish} />
       <Scoreboard visible={scoreShow} callback={scoreFinish} />
       <Dice resetAnimation={reset} callback={rollDice} animationCallback={newRound}/>
     </View>
