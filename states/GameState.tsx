@@ -11,14 +11,7 @@ class GameStateObject {
     this.loadPlayers();
   }
 
-  public players: IObservableArray<Player> = [
-    { name: "colton", selected: false, score: 0 },
-    { name: "daniel", selected: false, score: 0 },
-    { name: "michael", selected: false, score: 0 },
-    { name: "matt", selected: false, score: 0 },
-    { name: "carlos", selected: false, score: 0 },
-    { name: "juan", selected: false, score: 0 },
-  ] as IObservableArray<Player>;
+  public players: IObservableArray<Player> = [] as IObservableArray<Player>;
 
   public cardPacks: Array<CardPack> = [] as Array<CardPack>;
 
