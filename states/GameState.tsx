@@ -8,6 +8,7 @@ class GameStateObject {
     makeAutoObservable(this);
     this.addCardPack(require("../assets/cardpacks/Standard.json"));
     this.addCardPack(require("../assets/cardpacks/StandardPlus.json"));
+    this.addCardPack(require("../assets/cardpacks/ButtStuff.json"));
     this.loadPlayers();
   }
 

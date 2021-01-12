@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Dice, Card, Doghouse, Scoreboard } from "../../components";
+import { Dice, Card, Doghouse, Scoreboard, GameView } from "../../components";
 import { View, StyleSheet } from "react-native";
+import { GameHeader } from "../../components/GameHeader";
 
-function Game() {
+function Game({ navigation }: any) {
   const [cardShow, setCardShow] = useState(false);
   const [scoreShow, setScoreShow] = useState(false);
   const [reset, setReset] = useState(false);
@@ -27,14 +28,18 @@ function Game() {
 
   const newRound = () => {
     setReset(false);
-  }
+  };
 
   return (
-    <View style={styles.container}>
+    <GameView style={styles.container} title={"t"} navigation={navigation}>
       <Card visible={cardShow} callback={cardFinish} />
       <Scoreboard visible={scoreShow} callback={scoreFinish} />
-      <Dice resetAnimation={reset} callback={rollDice} animationCallback={newRound}/>
-    </View>
+      <Dice
+        resetAnimation={reset}
+        callback={rollDice}
+        animationCallback={newRound}
+      />
+    </GameView>
   );
 }
 

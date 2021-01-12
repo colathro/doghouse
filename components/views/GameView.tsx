@@ -1,11 +1,12 @@
 import React from "react";
 import { Header } from "../../components";
 import { StyleSheet, View } from "react-native";
+import { GameHeader } from "../GameHeader";
 
-export function Game({ navigation, title, help, players, children }: any) {
+export function GameView({ navigation, title, help, players, children }: any) {
   let header;
   if (title) {
-    header = <Header title={title} navigation={navigation} players={players} help={help} allowBack={players ? false : true}></Header>;
+    header = <GameHeader navigation={navigation} />;
   } else {
     header = <></>;
   }
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
   },
   container: {
     marginTop: 30,
-    maxHeight: "91%",
+    height: "91%",
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
