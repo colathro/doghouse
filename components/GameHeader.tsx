@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "black",
     height: 28,
+    width: 65,
     borderRadius: 10,
   },
   helpButtonText: {
