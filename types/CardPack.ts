@@ -3,6 +3,7 @@ import { Card } from "../types";
 export interface CardPack {
   name: string;
   purchased: boolean;
+  ratePack: boolean;
   breeds: Array<Card>;
   barkOrBite: Array<Card>;
   dogFight: Array<Card>;

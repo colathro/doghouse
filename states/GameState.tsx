@@ -1,4 +1,9 @@
-import { IObservable, IObservableArray, makeAutoObservable } from "mobx";
+import {
+  IObservable,
+  IObservableArray,
+  makeAutoObservable,
+  runInAction,
+} from "mobx";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Players } from "../components";
 import { CardPack, Deck, Card, Player } from "../types";
@@ -13,10 +18,10 @@ class GameStateObject {
   }
 
   public players: IObservableArray<Player> = [] as IObservableArray<Player>;
-
   public cardPacks: Array<CardPack> = [] as Array<CardPack>;
-
   public activePacks: Array<CardPack> = [] as Array<CardPack>;
+
+  public devMode = true;
 
   public decks: Array<Deck> = [
     {
@@ -165,8 +170,32 @@ class GameStateObject {
         output = JSON.parse(jsonValue);
         this.setActivePacks(output);
       }
-
       this.saveActivePacks();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async syncPurchasedPacks() {
+    const rateJson = await AsyncStorage.getItem("rateComplete");
+    let rateComplete: boolean;
+
+    if (rateJson === null) {
+      rateComplete = false;
+    } else {
+      rateComplete = JSON.parse(rateJson);
+    }
+
+    const rateIndex = this.cardPacks.findIndex((obj) => obj.ratePack == true);
+    runInAction(() => {
+      this.cardPacks[rateIndex].purchased = rateComplete;
+    });
+  }
+
+  async giveRatePack() {
+    try {
+      const jsonValue = JSON.stringify(true);
+      await AsyncStorage.setItem("rateComplete", jsonValue);
     } catch (e) {
       console.log(e);
     }
@@ -227,11 +256,25 @@ class GameStateObject {
     var newActivePacks = this.activePacks.filter(
       (value) => value.name != pack.name
     );
-    this.activePacks = newActivePacks;
+    runInAction(() => {
+      this.activePacks = newActivePacks;
+    });
     this.saveActivePacks();
   }
 
-  sortPacks(sort) {}
+  async _resetRate() {
+    try {
+      const jsonValue = JSON.stringify(false);
+      await AsyncStorage.setItem("rateComplete", jsonValue);
+      this.removeActivePack(
+        this.activePacks.find((obj) => {
+          return obj.ratePack == true;
+        })
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 export const GameState = new GameStateObject();

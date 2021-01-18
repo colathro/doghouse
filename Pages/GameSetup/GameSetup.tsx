@@ -24,7 +24,7 @@ function GameSetup({ navigation }: any) {
           <SelectedPacks linkToPurchase={true} navigation={navigation} />
         </View>
         <BigButton
-          title="Play"
+          title="Start"
           onPress={() => {
             GameState.startGame();
             navigation.reset({

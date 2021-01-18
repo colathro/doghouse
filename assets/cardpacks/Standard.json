@@ -1,6 +1,7 @@
 {
   "name": "Standard",
   "purchased": true,
+  "ratePack": false,
   "breeds": [
     {
       "text": "\"where are they now\" artists."

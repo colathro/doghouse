@@ -1,6 +1,7 @@
 {
   "name": "Standard Plus",
   "purchased": false,
+  "ratePack": true,
   "breeds": [
     {
       "text": "Ivy League institutions."

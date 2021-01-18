@@ -21,3 +21,4 @@ export * from "./icons/Joker";
 export * from "./ScoreBoard";
 export * from "./SelectedPacks";
 export * from "./GameHeader";
+export * from "./icons/RefreshIcon";

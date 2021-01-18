@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
-import { SelectedPacks } from "../components";
 import {
   StyleSheet,
   Text,
@@ -9,18 +8,40 @@ import {
   View,
   ScrollView,
 } from "react-native";
+import { RefreshIcon } from "../components";
 import { AvailablePack } from "./AvailablePack";
 
 export const Packs: React.FC = observer(
   (): JSX.Element => {
     useEffect(() => {
       GameState.loadActivePacks();
+      GameState.syncPurchasedPacks();
     }, []);
+
+    const refresh = () => {
+      GameState.syncPurchasedPacks();
+    };
 
     return (
       <View>
         <View style={styles.container2}>
-          <Text style={styles.text2}>Packs:</Text>
+          <View style={styles.optionsContainer}>
+            <TouchableOpacity style={styles.refresh} onPress={refresh}>
+              <RefreshIcon />
+            </TouchableOpacity>
+            {GameState.devMode ? (
+              <>
+                <TouchableOpacity
+                  style={styles.devButton}
+                  onPress={GameState._resetRate}
+                >
+                  <Text style={styles.text}>Reset Rate</Text>
+                </TouchableOpacity>
+              </>
+            ) : (
+              <></>
+            )}
+          </View>
           <ScrollView
             contentContainerStyle={styles.packSelectionContainer}
             showsVerticalScrollIndicator={false}
@@ -40,15 +61,53 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Tw-Bold",
     fontSize: 24,
+    marginLeft: 10,
+    marginRight: 10,
   },
   text2: {
     fontFamily: "Tw-Bold",
     fontSize: 24,
+  },
+  refresh: {
+    alignItems: "center",
+    marginRight: 10,
   },
   selectedPackContainer: { flexDirection: "row" },
   packSelectionContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     flexWrap: "wrap",
+  },
+  optionsContainer: {
+    flexDirection: "row-reverse",
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  devButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "lightblue",
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+    height: 30,
+    borderRadius: 7,
+    borderColor: "black",
+    borderWidth: 3,
+    position: "relative",
+  },
+  button: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ff6700",
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+    height: 30,
+    borderRadius: 7,
+    borderColor: "black",
+    borderWidth: 3,
+    position: "relative",
   },
 });

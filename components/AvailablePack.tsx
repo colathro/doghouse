@@ -7,6 +7,7 @@ import { UnlockedIcon } from "./icons/UnlockedIcon";
 import { LockedIcon } from "./icons/LockedIcon";
 import { CardPack } from "../types";
 import { PackPreview } from "./PackPreview";
+import * as StoreReview from "expo-store-review";
 
 type props = {
   pack: CardPack;
@@ -21,6 +22,14 @@ export const AvailablePack: React.FC<props> = observer(
         return val.name === props.pack.name;
       }).length > 0;
 
+    const ratePack = () => {
+      StoreReview.requestReview();
+      setTimeout(() => {
+        GameState.giveRatePack();
+        GameState.syncPurchasedPacks();
+      }, 2000);
+    };
+
     let button;
 
     if (active) {
@@ -31,10 +40,30 @@ export const AvailablePack: React.FC<props> = observer(
             GameState.removeActivePack(props.pack);
           }}
         >
-          <Text style={selectStyles.selectButtonText}>{"Remove"}</Text>
+          <Text style={selectStyles.selectButtonText}>{"Disable"}</Text>
         </TouchableOpacity>
       );
-    } else if (!props.pack.purchased) {
+    } else if (props.pack.purchased) {
+      button = (
+        <TouchableOpacity
+          style={selectStyles.selectButton}
+          onPress={() => {
+            GameState.addActivePack(props.pack);
+          }}
+        >
+          <Text style={selectStyles.selectButtonText}>{"Enable"}</Text>
+        </TouchableOpacity>
+      );
+    } else if (props.pack.ratePack && !props.pack.purchased) {
+      button = (
+        <TouchableOpacity
+          style={selectStyles.selectButtonRate}
+          onPress={ratePack}
+        >
+          <Text style={selectStyles.selectButtonText}>{"Rate"}</Text>
+        </TouchableOpacity>
+      );
+    } else {
       button = (
         <TouchableOpacity
           style={selectStyles.selectButtonBuy}
@@ -43,17 +72,6 @@ export const AvailablePack: React.FC<props> = observer(
           }}
         >
           <Text style={selectStyles.selectButtonText}>{"$0.99"}</Text>
-        </TouchableOpacity>
-      );
-    } else {
-      button = (
-        <TouchableOpacity
-          style={selectStyles.selectButton}
-          onPress={() => {
-            GameState.addActivePack(props.pack);
-          }}
-        >
-          <Text style={selectStyles.selectButtonText}>{"Select"}</Text>
         </TouchableOpacity>
       );
     }
@@ -203,6 +221,20 @@ const selectStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#00ff00",
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+    height: 30,
+    width: 100,
+    borderRadius: 7,
+    borderColor: "black",
+    borderWidth: 3,
+    position: "relative",
+  },
+  selectButtonRate: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ff6700",
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 10,
