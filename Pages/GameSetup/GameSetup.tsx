@@ -14,7 +14,6 @@ function GameSetup({ navigation }: any) {
   return (
     <Main navigation={navigation} title="Game Setup" help="setup">
       <View style={styles.container}>
-        <Spike />
         <Players
           players={GameState.players}
           allowEdit={true}
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
   },
 });
 
