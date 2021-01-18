@@ -5,7 +5,15 @@ import { StyleSheet, View } from "react-native";
 export function Main({ navigation, title, help, players, children }: any) {
   let header;
   if (title) {
-    header = <Header title={title} navigation={navigation} players={players} help={help} allowBack={players ? false : true}></Header>;
+    header = (
+      <Header
+        title={title}
+        navigation={navigation}
+        players={players}
+        help={help}
+        allowBack={players ? false : true}
+      ></Header>
+    );
   } else {
     header = <></>;
   }
@@ -32,6 +40,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: "95%",
     height: "91%",
+    maxWidth: 450,
+    maxHeight: 900,
     borderRadius: 14,
     shadowColor: "#000",
     shadowOffset: {

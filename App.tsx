@@ -44,7 +44,6 @@ export default function App() {
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="GameSetup" component={GameSetup} />
         <Stack.Screen name="Game" component={Game} />
-        <Stack.Screen name="Game2" component={Game2} />
       </Stack.Navigator>
     </NavigationContainer>
   );

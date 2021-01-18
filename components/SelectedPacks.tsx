@@ -13,7 +13,7 @@ type props = {
 export const SelectedPacks: React.FC<props> = observer(
   (props: props): JSX.Element => {
     return (
-      <View>
+      <View style={styles.spacing}>
         <Text style={styles.text}>Selected Packs:</Text>
         <View style={styles.container}>
           <ScrollView
@@ -40,6 +40,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "90%",
+  },
+  spacing: {
+    marginTop: 10,
+    marginBottom: 10,
   },
   text: {
     fontFamily: "Tw-Bold",

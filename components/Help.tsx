@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 14,
     width: "95%",
+    maxWidth: 500,
     alignItems: "center",
   },
 });

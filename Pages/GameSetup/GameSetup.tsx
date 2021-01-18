@@ -1,7 +1,7 @@
 import React from "react";
 import { GameState } from "../../states";
 import { observer } from "mobx-react-lite";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import {
   BigButton,
   Players,
@@ -14,13 +14,15 @@ function GameSetup({ navigation }: any) {
   return (
     <Main navigation={navigation} title="Game Setup" help="setup">
       <View style={styles.container}>
-        <Players
-          players={GameState.players}
-          allowEdit={true}
-          doghouse={false}
-          showScore={false}
-        />
-        <SelectedPacks linkToPurchase={true} navigation={navigation} />
+        <View>
+          <Players
+            players={GameState.players}
+            allowEdit={true}
+            doghouse={false}
+            showScore={false}
+          />
+          <SelectedPacks linkToPurchase={true} navigation={navigation} />
+        </View>
         <BigButton
           title="Play"
           onPress={() => {
@@ -38,9 +40,9 @@ function GameSetup({ navigation }: any) {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    height: "98%",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
 });
 
