@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import {
@@ -13,14 +13,19 @@ import { AvailablePack } from "./AvailablePack";
 
 export const Packs: React.FC = observer(
   (): JSX.Element => {
+    const refresh = () => {
+      setLoading(true);
+      GameState.syncPurchasedPacks().then(() => {
+        setLoading(false);
+      });
+    };
+
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
       GameState.loadActivePacks();
-      GameState.syncPurchasedPacks();
+      refresh();
     }, []);
-
-    const refresh = () => {
-      GameState.syncPurchasedPacks();
-    };
 
     return (
       <View>

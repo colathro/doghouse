@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
   spacing: {
     marginTop: 10,
     marginBottom: 10,
+    minHeight: 150,
   },
   text: {
     fontFamily: "Tw-Bold",

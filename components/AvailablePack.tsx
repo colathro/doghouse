@@ -27,7 +27,7 @@ export const AvailablePack: React.FC<props> = observer(
       setTimeout(() => {
         GameState.giveRatePack();
         GameState.syncPurchasedPacks();
-      }, 2000);
+      }, 5000);
     };
 
     let button;
