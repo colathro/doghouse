@@ -111,11 +111,7 @@ class GameStateObject {
   adjustScore(name: string) {
     var player = this.players.find((value) => value.name == name);
     player.selected = !player.selected;
-    if (player.selected) {
       player.score += 1;
-    } else {
-      player.score -= 1;
-    }
   }
 
   resetDoghouse() {

@@ -11,11 +11,12 @@ import {
   StyleSheet, 
   Text, 
   TouchableOpacity, 
+  TouchableWithoutFeedback,
   View,
   Animated,
   Easing,
 } from "react-native";
-import { Doghouse } from "./Doghouse";
+import DropDownPicker from 'react-native-dropdown-picker';
 
 type props = {
   visible: boolean;
@@ -24,25 +25,19 @@ type props = {
 
 export const Card: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    class DoghouseObject {
-      constructor() {
-        makeAutoObservable(this);
-      }
-      public players = JSON.parse(
-        JSON.stringify(GameState.players)
-      ) as IObservableArray<Player>;
-    }
-    let doghouse = new DoghouseObject();
+    const players = []; // list of players for doghouse dropdown
+    GameState.players.forEach(player => players.push({label: player.name, value: player.name}))
 
     const [flipped, setFlipped] = useState(false);
     const [playing, setPlaying] = useState(false);
     const [timerFinished, setTimerFinished] = useState(false);
     const [key, setKey] = useState(0);
+    const [list, setDoghouse] = useState({
+      players: []
+  })
 
     let card;
-    let card2;
     let timer;
-    const card2Ref = useRef(card2);
     
     if (GameState.decks[GameState.dice].useTimer) {
       timer = (
@@ -89,12 +84,12 @@ export const Card: React.FC<props> = observer(
           isVisible={props.visible}
           swipeDirection={flipped ? ["left", "right", "down", "up"] : []}
           useNativeDriverForBackdrop
+          propagateSwipe = {true}
           onSwipeComplete={() => {
             setFlipped(false);
             setPlaying(false);
             setTimerFinished(false);
-            //doghouse.players.forEach((player) => (player.selected = false));
-            GameState.players.replace(doghouse.players);
+            list.players.forEach(player => GameState.adjustScore(player));
             props.callback();
           }}
         >
@@ -132,29 +127,25 @@ export const Card: React.FC<props> = observer(
                     <Text style={styles.cardText}>
                       {GameState.activeCard.text}
                     </Text>
-                    <CardFlip
-                      ref={(cardObj) => {
-                        card2 = cardObj;
-                      }}
-                      style={styles.playAreaContainer}
-                    >
-                      <TouchableOpacity
-                        activeOpacity={1}
-                        style={styles.playAreaContainer}
-                        onPress={() => timerFinished ? card2.flip() : null}>
-                        {timer}
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        activeOpacity={1}
-                        style={styles.playAreaContainer}>
-                          <Players
-                            players={doghouse.players}
-                            allowEdit={false}
-                            doghouse={true}
-                            showScore={false}
-                          />
-                      </TouchableOpacity>
-                    </CardFlip>
+                    {timer}
+                      <DropDownPicker
+                        items={players}
+
+                        multiple={true}
+                        multipleText="%d items have been selected."
+                        min={0}
+                        max={10}
+                        disabled={!timerFinished}
+
+                        defaultValue='uk'
+                        containerStyle={styles.doghouseDropDown}
+                        itemStyle={{
+                          justifyContent: 'flex-start'
+                        }}
+                        onChangeItem={item => setDoghouse({
+                          players: item // an array of the selected items
+                        })}
+                      />
                   </View>
                 </TouchableOpacity>
               </CardFlip>
@@ -220,7 +211,8 @@ const styles = StyleSheet.create({
   timerView: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
+    marginTop: 5,
+    marginBottom: 5,
   },
   prompt: {
     textAlign: "center",
@@ -235,4 +227,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     margin: 12,
   },
+  doghouseDropDown: {
+    height: 40,
+  }
 });
