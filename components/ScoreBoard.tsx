@@ -1,58 +1,73 @@
 import React, { useState } from "react";
+import { Button, Boner } from "../components";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
-import { Players } from ".";
-import Modal from "react-native-modal";
-import { StyleSheet, TouchableOpacity, View, SafeAreaView, ScrollView, Text, StatusBar, Dimensions } from "react-native";
-
-var width = Dimensions.get('window').width; //full width
-var height = Dimensions.get('window').height; //full height
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  Text,
+  Modal,
+} from "react-native";
 
 type props = {
   visible: boolean;
   callback: any;
 };
 
-const Item = ({ name, score}) => (
-  <View style={styles.item}>
-    <Text style={styles.text}>{name}</Text>
-    <Text style={styles.text}>{score}</Text>
-  </View>
-);
+const Score = (name: string, val: number) => {
+  return (
+    <View style={styles.scoreContainer}>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>{name}</Text>
+      </View>
+      <View style={styles.bonerContainer}>
+        {Array.from({ length: val }, (x, i) => i).map((v) => {
+          const specStyle = StyleSheet.create({
+            boner: {
+              width: 48,
+              height: 48,
+              position: "absolute",
+              left: v * 10,
+            },
+          });
+          return <Boner style={specStyle.boner}></Boner>;
+        })}
+      </View>
+    </View>
+  );
+};
 
 export const Scoreboard: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    const renderItem = ({ item }) => (
-      <Item name={item.name} score={item.score} />
-    );
-
     return (
       <Modal
         style={styles.modalView}
-        backdropOpacity={0.0}
-        isVisible={props.visible}
+        transparent={true}
+        animationType="fade"
+        visible={props.visible}
       >
-        <View style={styles.centeredView} >
-          <View style={styles.container}>
-            <TouchableOpacity
-              style={styles.textContainer}
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <ScrollView
+              style={styles.scrollableView}
+              contentContainerStyle={styles.scrollableContainer}
+              showsVerticalScrollIndicator={false}
+            >
+              {GameState.players.map((val, ind) => {
+                return Score(val.name, val.score);
+              })}
+            </ScrollView>
+            <Button
+              title="Next Turn"
               onPress={() => {
                 props.callback();
-                GameState.players.forEach((player) => player.selected = false);
+                GameState.players.forEach(
+                  (player) => (player.selected = false)
+                );
               }}
-            >
-              <Text style={styles.text}>
-                Take a Drink!
-              </Text>
-            </TouchableOpacity>
-              <ScrollView style={styles.scoreContainer}>
-                {GameState.players.map((val, ind) => (
-                  <View style={styles.item} key={ind}>
-                    <Text style={styles.text}>{val.name}</Text>
-                    <Text style={styles.text}>{val.score}</Text>
-                  </View>
-                ))}
-              </ScrollView>
+            ></Button>
           </View>
         </View>
       </Modal>
@@ -61,53 +76,40 @@ export const Scoreboard: React.FC<props> = observer(
 );
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "yellow",
-    width: width,
-    height: height,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  textContainer: {
-    height: 160,
-    width: "100%",
-    backgroundColor: "#ff6700",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  player: {
-    fontFamily: "Tw-Bold",
-    fontSize: 28,
-    margin: 12,
-  },
   modalView: {
-    backgroundColor: "yellow",
-    width: "100%",
-    height: "100%",
-    justifyContent: "flex-end",
+    backgroundColor: "white",
+    borderRadius: 14,
+    width: "95%",
+    maxWidth: 500,
+    maxHeight: "50%",
     alignItems: "center",
   },
   centeredView: {
-    backgroundColor: "rgba(0,0,0,0)",
+    backgroundColor: "rgba(0,0,0,0.3)",
     flex: 1,
     padding: 8,
     justifyContent: "center",
     alignItems: "center",
   },
+  scrollableView: {
+    margin: 30,
+    marginLeft: 45,
+  },
+  scrollableContainer: {
+    width: "100%",
+  },
   scoreContainer: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    backgroundColor: '#f9c2ff',
-    width: width,
-    marginVertical: 2
+    marginBottom: 20,
+    width: "100%",
   },
+  bonerContainer: {
+    flexDirection: "row",
+    flex: 60,
+  },
+  textContainer: { flex: 35 },
   text: {
     fontFamily: "Tw-Bold",
     fontSize: 28,
-    margin: 12,
   },
 });
