@@ -32,7 +32,7 @@ export const Card: React.FC<props> = observer(
     const [playing, setPlaying] = useState(false);
     const [timerFinished, setTimerFinished] = useState(false);
     const [key, setKey] = useState(0);
-    const [list, setDoghouse] = useState({
+    const [doghouse, setDoghouse] = useState({
       players: []
   })
 
@@ -82,14 +82,15 @@ export const Card: React.FC<props> = observer(
         <Modal
           backdropOpacity={0.0}
           isVisible={props.visible}
-          swipeDirection={flipped ? ["left", "right", "down", "up"] : []}
+          swipeDirection={flipped && doghouse.players.length > 0 ? ["left", "right", "down", "up"] : []}
           useNativeDriverForBackdrop
           propagateSwipe = {true}
           onSwipeComplete={() => {
             setFlipped(false);
             setPlaying(false);
             setTimerFinished(false);
-            list.players.forEach(player => GameState.adjustScore(player));
+            doghouse.players.forEach(player => GameState.adjustScore(player));
+            setDoghouse({ players: [] });
             props.callback();
           }}
         >
@@ -132,15 +133,23 @@ export const Card: React.FC<props> = observer(
                         items={players}
 
                         multiple={true}
-                        multipleText="%d items have been selected."
+                        multipleText={"%d player" + (doghouse.players.length == 1 ? "" : "s") + " in the doghouse"}
                         min={0}
-                        max={10}
-                        disabled={!timerFinished}
-
-                        defaultValue='uk'
+                        max={GameState.decks[GameState.dice].maxDoghouse == -1 ? players.length : GameState.decks[GameState.dice].maxDoghouse}
+                        disabled={!timerFinished && GameState.decks[GameState.dice].useTimer}
+                        placeholder='Send someone to the doghouse'
+                        defaultValue=''
                         containerStyle={styles.doghouseDropDown}
                         itemStyle={{
                           justifyContent: 'flex-start'
+                        }}
+                        placeholderStyle={{
+                          fontFamily: "Tw-Bold",
+                          fontSize: 20,
+                        }}
+                        labelStyle={{
+                          fontFamily: "Tw-Bold",
+                          fontSize: 20,
                         }}
                         onChangeItem={item => setDoghouse({
                           players: item // an array of the selected items
