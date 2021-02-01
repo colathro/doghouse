@@ -82,17 +82,8 @@ export const Card: React.FC<props> = observer(
         <Modal
           backdropOpacity={0.0}
           isVisible={props.visible}
-          swipeDirection={flipped && doghouse.players.length > 0 ? ["left", "right", "down", "up"] : []}
           useNativeDriverForBackdrop
           propagateSwipe = {true}
-          onSwipeComplete={() => {
-            setFlipped(false);
-            setPlaying(false);
-            setTimerFinished(false);
-            doghouse.players.forEach(player => GameState.adjustScore(player));
-            setDoghouse({ players: [] });
-            props.callback();
-          }}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
@@ -159,6 +150,20 @@ export const Card: React.FC<props> = observer(
                 </TouchableOpacity>
               </CardFlip>
             </View>
+            <TouchableOpacity
+              style={styles.arrowContainer} 
+              disabled={!flipped || doghouse.players.length == 0}
+              onPress={() => {
+                setFlipped(false);
+                setPlaying(false);
+                setTimerFinished(false);
+                doghouse.players.forEach(player => GameState.adjustScore(player));
+                setDoghouse({ players: [] });
+                props.callback();
+              }}
+            >
+              <Text style={!flipped || doghouse.players.length == 0 ? styles.arrowDisabled : styles.arrow}>&#10140;</Text>
+            </TouchableOpacity>
           </View>
         </Modal>
     );
@@ -238,5 +243,17 @@ const styles = StyleSheet.create({
   },
   doghouseDropDown: {
     height: 40,
-  }
+  },
+  arrowContainer: {
+    alignItems: "flex-end",
+  },
+  arrow: {
+    fontFamily: "Tw-Bold",
+    fontSize: 46,
+  },
+  arrowDisabled: {
+    fontFamily: "Tw-Bold",
+    color: "gray",
+    fontSize: 46,
+  },
 });
