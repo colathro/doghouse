@@ -69,7 +69,10 @@ export const Card: React.FC<props> = observer(
             >
               {({ remainingTime }) => (
                 <Text style={styles.cardText}>
-                  {playing ? (remainingTime == 0 ? "Times Up!" : remainingTime ): "Start Timer"}
+                  <Text style={styles.prompt}>
+                    {playing ? (remainingTime == 0 ? "" : "Tap + Pass\n") : ""}
+                  </Text>
+                  {playing ? (remainingTime == 0 ? "Times up!" : remainingTime ): "Tap to start"}
                 </Text>
               )}
             </CountdownCircleTimer>
