@@ -1,0 +1,197 @@
+{
+  "name": "Girl's Night",
+  "purchased": false,
+  "ratePack": false,
+  "breeds": [
+    {
+      "text": "sex toys."
+    },
+    {
+      "text": "makeup brands."
+    },
+    {
+      "text": "tampon brands."
+    },
+    {
+      "text": "female anthems."
+    },
+    {
+      "text": "turn offs."
+    },
+    {
+      "text": "lingerie brands."
+    },
+    {
+      "text": "women in seats of political power."
+    },
+    {
+      "text": "types of fitness classes."
+    },
+    {
+      "text": "fits of jeans."
+    },
+    {
+      "text": "children of famous people."
+    }
+  ],
+  "barkOrBite": [
+    {
+      "text": "been with someone twice my age."
+    },
+    {
+      "text": "kissed more than three people in one night."
+    },
+    {
+      "text": "sucked on someone's toe/gotten my toes sucked."
+    },
+    {
+      "text": "taken Plan B."
+    },
+    {
+      "text": "gone on a date with no intention of paying for anything."
+    },
+    {
+      "text": "gone on a date just to make someone jealous."
+    },
+    {
+      "text": "used handcuffs."
+    },
+    {
+      "text": "faked an orgasm."
+    },
+    {
+      "text": "been mansplained."
+    },
+    {
+      "text": "faked drowning to get mouth-to-mouth by the cute lifeguard."
+    }
+  ],
+  "dogFight": [
+    {
+      "text": "tampon or diva cup?"
+    },
+    {
+      "text": "choke or get choked?"
+    },
+    {
+      "text": "leggings are pants. true or false?"
+    },
+    {
+      "text": "WAP is a feminist anthem. true or false?"
+    },
+    {
+      "text": "red or white wine?"
+    },
+    {
+      "text": "69ing is enjoyable. true or false?"
+    },
+    {
+      "text": "bottom or top?"
+    },
+    {
+      "text": "the bill should be split on a first date. true or false?"
+    },
+    {
+      "text": "shaved or hairy?"
+    },
+    {
+      "text": "all of our problems would be solved if women ruled the world. true or false?"
+    }
+  ],
+  "doghouseOrDare": [
+    {
+      "text": "share your most embarassing period story."
+    },
+    {
+      "text": "share your most recent wet dream."
+    },
+    {
+      "text": "post a thirst trap."
+    },
+    {
+      "text": "text your most recent hookup."
+    },
+    {
+      "text": "twerk for the group."
+    },
+    {
+      "text": "slide into your crush's DMs."
+    },
+    {
+      "text": "lead the group in one minute of yoga."
+    },
+    {
+      "text": "create an OnlyfansTM page."
+    },
+    {
+      "text": "ask your most recent dating app match how many kids they want."
+    },
+    {
+      "text": "go for a practice round of giving \"the talk\" to your kids."
+    }
+  ],
+  "throwABone": [
+    {
+      "text": "go commando on a night out."
+    },
+    {
+      "text": "take the longest getting ready."
+    },
+    {
+      "text": "be on the Bachelor�."
+    },
+    {
+      "text": "marry rich."
+    },
+    {
+      "text": "have a sugar daddy."
+    },
+    {
+      "text": "be a cougar."
+    },
+    {
+      "text": "become the first female Pope."
+    },
+    {
+      "text": "send a nude to the wrong person."
+    },
+    {
+      "text": "get plastic surgery."
+    },
+    {
+      "text": "never wash their hair again."
+    }
+  ],
+  "teachersPet": [
+    {
+      "text": "what's my signature scent?"
+    },
+    {
+      "text": "what's the kinkiest thing I've ever done?"
+    },
+    {
+      "text": "how many people have I kissed?"
+    },
+    {
+      "text": "what's my sexual fantasy?"
+    },
+    {
+      "text": "how many piercings do I have?"
+    },
+    {
+      "text": "who is my style icon?"
+    },
+    {
+      "text": "what's the longest I've gone without washing my hair?"
+    },
+    {
+      "text": "what's the most expensive piece of clothing I own?"
+    },
+    {
+      "text": "what would my first executive order as President be?"
+    },
+    {
+      "text": "if I could be in any movie, what would it be?"
+    }
+  ]
+}

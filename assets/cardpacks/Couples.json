@@ -1,0 +1,197 @@
+{
+  "name": "Kiss & Tell",
+  "purchased": false,
+  "ratePack": false,
+  "breeds": [
+    {
+      "text": "red flags in a relationship."
+    },
+    {
+      "text": "date locations."
+    },
+    {
+      "text": "aphrodisiac foods."
+    },
+    {
+      "text": "brands of condoms."
+    },
+    {
+      "text": "romantic gestures."
+    },
+    {
+      "text": "sex playlist songs."
+    },
+    {
+      "text": "STDs."
+    },
+    {
+      "text": "pick-up lines."
+    },
+    {
+      "text": "dating apps."
+    },
+    {
+      "text": "couple pet names."
+    }
+  ],
+  "barkOrBite": [
+    {
+      "text": "had a threesome."
+    },
+    {
+      "text": "had a horrible first kiss."
+    },
+    {
+      "text": "done bondage."
+    },
+    {
+      "text": "watched a pornographic film with a significant other."
+    },
+    {
+      "text": "left a date half-way through."
+    },
+    {
+      "text": "posted on social media about relationship issues."
+    },
+    {
+      "text": "made love to Marvin Gaye music."
+    },
+    {
+      "text": "started dating someone I met online."
+    },
+    {
+      "text": "been catfished."
+    },
+    {
+      "text": "tattooed their partner's name on them."
+    }
+  ],
+  "dogFight": [
+    {
+      "text": "height doesn't matter. true or false?"
+    },
+    {
+      "text": "nudes are encouraged. true or false?"
+    },
+    {
+      "text": "astrology is a meaningful way to determine a significant other. true or false?"
+    },
+    {
+      "text": "nice guys finish last. true or false?"
+    },
+    {
+      "text": "family needs to approve a significant other. true or false?"
+    },
+    {
+      "text": "flirting is cheating. true or false?"
+    },
+    {
+      "text": "double dates are the worst. true or false?"
+    },
+    {
+      "text": "match outfits or hell no?"
+    },
+    {
+      "text": "\"breaks\" are perfectly healthy and work wonders for a relationship. true or false?"
+    },
+    {
+      "text": "you should date someone with the mindset of marrying them in the future. true or false?"
+    }
+  ],
+  "doghouseOrDare": [
+    {
+      "text": "tell an embarassing story about your current or a past significant other."
+    },
+    {
+      "text": "text your ex."
+    },
+    {
+      "text": "text your parents and tell them you're having a baby."
+    },
+    {
+      "text": "show the group your most recent text messages with your partner."
+    },
+    {
+      "text": "rank your past significant others."
+    },
+    {
+      "text": "order an Edible Arrangement for an ex you had a bad break with."
+    },
+    {
+      "text": "like an old social media post from an ex."
+    },
+    {
+      "text": "find your ex on LinkedIn and endorse one of their skills."
+    },
+    {
+      "text": "describe a current or past partner's scent."
+    },
+    {
+      "text": "search \"sex\" in your text messages and read the most recent message to the group."
+    }
+  ],
+  "throwABone": [
+    {
+      "text": "make out in public."
+    },
+    {
+      "text": "argue in public."
+    },
+    {
+      "text": "have sex in a strange place."
+    },
+    {
+      "text": "share every detail of their relationship with their friends."
+    },
+    {
+      "text": "propose too soon."
+    },
+    {
+      "text": "ruin their relationship during their bachelor(ette) party."
+    },
+    {
+      "text": "fall in love at first sight."
+    },
+    {
+      "text": "go through their partner's phone."
+    },
+    {
+      "text": "get too drunk at their own wedding."
+    },
+    {
+      "text": "never have kids and travel the world."
+    }
+  ],
+  "teachersPet": [
+    {
+      "text": "why am I still single?"
+    },
+    {
+      "text": "what's my type?"
+    },
+    {
+      "text": "what characteristic will I avoid completely?"
+    },
+    {
+      "text": "what's my biggest complaint about a current or past significant other?"
+    },
+    {
+      "text": "where would I go to find a significant other?"
+    },
+    {
+      "text": "what's my top sexual fantasy?"
+    },
+    {
+      "text": "what's my go-to pick-up line?"
+    },
+    {
+      "text": "who's my hall pass celebrity?"
+    },
+    {
+      "text": "what's my worst habit?"
+    },
+    {
+      "text": "what's the dumbest fight I have ever had with a significant other?"
+    }
+  ]
+}
