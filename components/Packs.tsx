@@ -48,18 +48,18 @@ export const Packs: React.FC = observer(
               <></>
             )}
           </View>
-          <ScrollView
-            contentContainerStyle={styles.packSelectionContainer}
-            showsVerticalScrollIndicator={false}
-          >
-            {loading ? (
-              <Loader></Loader>
-            ) : (
-              GameState.cardPacks.map((val, ind) => (
+          {loading ? (
+            <Loader></Loader>
+          ) : (
+            <ScrollView
+              contentContainerStyle={styles.packSelectionContainer}
+              showsVerticalScrollIndicator={false}
+            >
+              {GameState.cardPacks.map((val, ind) => (
                 <AvailablePack pack={val} key={ind}></AvailablePack>
-              ))
-            )}
-          </ScrollView>
+              ))}
+            </ScrollView>
+          )}
         </View>
       </View>
     );
