@@ -9,6 +9,7 @@ import {
   Animated,
   Easing,
 } from "react-native";
+import DropDownPicker from 'react-native-dropdown-picker';
 
 type props = {
   callback: any;
@@ -69,20 +70,48 @@ export const Dice: React.FC<props> = observer(
      }
 
     return (
-      <Animated.View
-        style={[styles.container, animatedStyle]}
-      >
-        <TouchableOpacity
-          style={styles.dice}
-          onPress={() => {
-            GameState.rollDice();
-            startAnimation();
-            props.callback();
+      <View>
+        <DropDownPicker
+          items={[
+              {label: '1', value: 0},
+              {label: '2', value: 1},
+              {label: '3', value: 2},
+              {label: '4', value: 3},
+              {label: '5', value: 4},
+              {label: '6', value: 5},
+          ]}
+          defaultValue={0}
+
+          isVisible={GameState.devMode}
+          containerStyle={{height: 40, position: "absolute", top: -100 , left: 20}}
+          style={{backgroundColor: '#fafafa'}}
+          itemStyle={{
+              justifyContent: 'flex-start'
           }}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          onChangeItem={item => {
+            GameState.dice = item.value
+          }}
+        />
+        <Animated.View
+          style={[styles.container, animatedStyle]}
         >
-          <Text style={styles.diceText}>{GameState.dice + 1}</Text>
-        </TouchableOpacity>
-      </Animated.View>
+          <TouchableOpacity
+            style={styles.dice}
+            onPress={() => {
+              if (!GameState.devMode) {
+                GameState.rollDice();
+              } else {
+                GameState.drawCard();
+              }
+              startAnimation();
+              props.callback();
+            }}
+          >
+            <Text style={styles.diceText}>{GameState.dice + 1}</Text>
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
     );
   }
 );

@@ -75,7 +75,7 @@ class GameStateObject {
 
   public dice = 0;
 
-  private drawCard() {
+  drawCard() {
     if (this.decks[this.dice].cards.length == 0) {
       this.activeCard = { text: "null" } as Card;
     } else {
