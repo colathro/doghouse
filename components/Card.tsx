@@ -5,18 +5,19 @@ import { Player } from "../types";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import Modal from "react-native-modal";
-import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import { IObservableArray, makeAutoObservable } from "mobx";
-import { 
-  StyleSheet, 
-  Text, 
-  TouchableOpacity, 
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
   Animated,
   Easing,
+  Vibration,
 } from "react-native";
-import DropDownPicker from 'react-native-dropdown-picker';
+import DropDownPicker from "react-native-dropdown-picker";
 
 type props = {
   visible: boolean;
@@ -26,19 +27,21 @@ type props = {
 export const Card: React.FC<props> = observer(
   (props: props): JSX.Element => {
     const players = []; // list of players for doghouse dropdown
-    GameState.players.forEach(player => players.push({label: player.name, value: player.name}))
+    GameState.players.forEach((player) =>
+      players.push({ label: player.name, value: player.name })
+    );
 
     const [flipped, setFlipped] = useState(false);
     const [playing, setPlaying] = useState(false);
     const [timerFinished, setTimerFinished] = useState(false);
     const [key, setKey] = useState(0);
     const [doghouse, setDoghouse] = useState({
-      players: []
-  })
+      players: [],
+    });
 
     let card;
     let timer;
-    
+
     if (GameState.decks[GameState.dice].useTimer) {
       timer = (
         <View style={styles.timerView}>
@@ -46,11 +49,12 @@ export const Card: React.FC<props> = observer(
             onPress={() => {
               if (!playing) setPlaying(true);
               if (playing && !timerFinished) {
-                setKey(prevKey => prevKey + 1)
+                setKey((prevKey) => prevKey + 1);
               }
             }}
             style={styles.timerView}
-            activeOpacity={.75}>
+            activeOpacity={0.75}
+          >
             <CountdownCircleTimer
               key={key}
               isPlaying={playing}
@@ -59,9 +63,9 @@ export const Card: React.FC<props> = observer(
               strokeWidth={12}
               initialRemainingTime={10}
               colors={[
-                ['#004777', 0.4],
-                ['#F7B801', 0.4],
-                ['#A30000', 0.2],
+                ["#004777", 0.4],
+                ["#F7B801", 0.4],
+                ["#A30000", 0.2],
               ]}
               onComplete={() => {
                 setTimerFinished(true);
@@ -72,7 +76,11 @@ export const Card: React.FC<props> = observer(
                   <Text style={styles.prompt}>
                     {playing ? (remainingTime == 0 ? "" : "Tap + Pass\n") : ""}
                   </Text>
-                  {playing ? (remainingTime == 0 ? "Times up!" : remainingTime ): "Tap to start"}
+                  {playing
+                    ? remainingTime == 0
+                      ? "Times up!"
+                      : remainingTime
+                    : "Tap to start"}
                 </Text>
               )}
             </CountdownCircleTimer>
@@ -82,102 +90,120 @@ export const Card: React.FC<props> = observer(
     }
 
     return (
-        <Modal
-          backdropOpacity={0.0}
-          isVisible={props.visible}
-          useNativeDriverForBackdrop
-          propagateSwipe = {true}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <CardFlip
-                ref={(cardObj) => {
-                  card = cardObj;
+      <Modal
+        backdropOpacity={0.0}
+        isVisible={props.visible}
+        useNativeDriverForBackdrop
+        propagateSwipe={true}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <CardFlip
+              ref={(cardObj) => {
+                card = cardObj;
+              }}
+              style={styles.cardContainer}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  card.flip();
+                  setFlipped(true);
                 }}
-                style={styles.cardContainer}
+                style={styles.card}
+                activeOpacity={1}
               >
-                <TouchableOpacity
-                  onPress={() => {
-                    card.flip();
-                    setFlipped(true);
-                  }}
-                  style={styles.card}
-                  activeOpacity={1}
-                >
-                  <Text style={styles.cardText}>
-                    {GameState.decks[GameState.dice].name}
+                <Text style={styles.cardText}>
+                  {GameState.decks[GameState.dice].name}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.card} activeOpacity={1}>
+                <View style={styles.cardInner}>
+                  <TouchableOpacity
+                    style={styles.xContainer}
+                    onPress={() => {
+                      setFlipped(false);
+                      setPlaying(false);
+                      setTimerFinished(false);
+                      setDoghouse({ players: [] });
+                      props.callback();
+                    }}
+                  >
+                    <Text style={styles.x}>&#10006;</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.prompt}>
+                    {GameState.decks[GameState.dice].prompt}
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                  style={styles.card} 
-                  activeOpacity={1}
-                >
-                  <View style={styles.cardInner}>
-                    <TouchableOpacity
-                      style={styles.xContainer} 
-                      onPress={() => {
-                        setFlipped(false);
-                        setPlaying(false);
-                        setTimerFinished(false);
-                        setDoghouse({ players: [] });
-                        props.callback();
-                      }}
+                  <Text style={styles.cardText}>
+                    {GameState.activeCard.text}
+                  </Text>
+                  {timer}
+                  <DropDownPicker
+                    items={players}
+                    multiple={true}
+                    multipleText={
+                      "%d player" +
+                      (doghouse.players.length == 1 ? "" : "s") +
+                      " in the doghouse"
+                    }
+                    min={0}
+                    max={
+                      GameState.decks[GameState.dice].maxDoghouse == -1
+                        ? players.length
+                        : GameState.decks[GameState.dice].maxDoghouse
+                    }
+                    disabled={
+                      !timerFinished && GameState.decks[GameState.dice].useTimer
+                    }
+                    placeholder="Send someone to the doghouse"
+                    defaultValue=""
+                    containerStyle={styles.doghouseDropDown}
+                    itemStyle={{
+                      justifyContent: "flex-start",
+                    }}
+                    placeholderStyle={{
+                      fontFamily: "Tw-Bold",
+                      fontSize: 20,
+                    }}
+                    labelStyle={{
+                      fontFamily: "Tw-Bold",
+                      fontSize: 20,
+                    }}
+                    onChangeItem={(item) =>
+                      setDoghouse({
+                        players: item, // an array of the selected items
+                      })
+                    }
+                  />
+                  <TouchableOpacity
+                    style={styles.arrowContainer}
+                    disabled={!flipped || doghouse.players.length == 0}
+                    onPress={() => {
+                      setFlipped(false);
+                      setPlaying(false);
+                      setTimerFinished(false);
+                      doghouse.players.forEach((player) =>
+                        GameState.adjustScore(player)
+                      );
+                      setDoghouse({ players: [] });
+                      props.callback();
+                    }}
+                  >
+                    <Text
+                      style={
+                        !flipped || doghouse.players.length == 0
+                          ? styles.arrowDisabled
+                          : styles.arrow
+                      }
                     >
-                      <Text style={styles.x}>&#10006;</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.prompt}>
-                      {GameState.decks[GameState.dice].prompt}
+                      &#10140;
                     </Text>
-                    <Text style={styles.cardText}>
-                      {GameState.activeCard.text}
-                    </Text>
-                    {timer}
-                    <DropDownPicker
-                      items={players}
-
-                      multiple={true}
-                      multipleText={"%d player" + (doghouse.players.length == 1 ? "" : "s") + " in the doghouse"}
-                      min={0}
-                      max={GameState.decks[GameState.dice].maxDoghouse == -1 ? players.length : GameState.decks[GameState.dice].maxDoghouse}
-                      disabled={!timerFinished && GameState.decks[GameState.dice].useTimer}
-                      placeholder='Send someone to the doghouse'
-                      defaultValue=''
-                      containerStyle={styles.doghouseDropDown}
-                      itemStyle={{
-                        justifyContent: 'flex-start'
-                      }}
-                      placeholderStyle={{
-                        fontFamily: "Tw-Bold",
-                        fontSize: 20,
-                      }}
-                      labelStyle={{
-                        fontFamily: "Tw-Bold",
-                        fontSize: 20,
-                      }}
-                      onChangeItem={item => setDoghouse({
-                        players: item // an array of the selected items
-                      })}
-                    />
-                    <TouchableOpacity
-                      style={styles.arrowContainer} 
-                      disabled={!flipped || doghouse.players.length == 0}
-                      onPress={() => {
-                        setFlipped(false);
-                        setPlaying(false);
-                        setTimerFinished(false);
-                        doghouse.players.forEach(player => GameState.adjustScore(player));
-                        setDoghouse({ players: [] });
-                        props.callback();
-                      }}
-                    >
-                      <Text style={!flipped || doghouse.players.length == 0 ? styles.arrowDisabled : styles.arrow}>&#10140;</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
-              </CardFlip>
-            </View>
+                  </TouchableOpacity>
+                </View>
+              </TouchableOpacity>
+            </CardFlip>
           </View>
-        </Modal>
+        </View>
+      </Modal>
     );
   }
 );

@@ -24,3 +24,4 @@ export * from "./GameHeader";
 export * from "./icons/RefreshIcon";
 export * from "./Loader";
 export * from "./icons/Boner";
+export * from "./Timer";
