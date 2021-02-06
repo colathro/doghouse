@@ -7,6 +7,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Players } from "../components";
 import { CardPack, Deck, Card, Player } from "../types";
+import { DeckPrompts, DeckNames } from "../constants";
 
 class GameStateObject {
   constructor() {
@@ -28,43 +29,43 @@ class GameStateObject {
 
   public decks: Array<Deck> = [
     {
-      name: "Throw a Bone",
-      prompt: "Who's most likely to",
+      name: DeckNames.throwABone,
+      prompt: DeckPrompts.throwABone,
       maxDoghouse: 1,
       useTimer: false,
       cards: [] as Array<Card>,
     },
     {
-      name: "dog fight",
-      prompt: "Debate.",
+      name: DeckNames.dogFight,
+      prompt: DeckPrompts.dogFight,
       maxDoghouse: -1,
       useTimer: false,
       cards: [] as Array<Card>,
     },
     {
-      name: "doghouse or dare",
-      prompt: "Choose someone to",
+      name: DeckNames.doghouseOrDare,
+      prompt: DeckPrompts.doghouseOrDare,
       maxDoghouse: 1,
       useTimer: false,
       cards: [] as Array<Card>,
     },
     {
-      name: "BARK OR BITE",
-      prompt: "Raise your hand if you've",
+      name: DeckNames.barkOrBite,
+      prompt: DeckPrompts.barkOrBite,
       maxDoghouse: -1,
       useTimer: false,
       cards: [] as Array<Card>,
     },
     {
-      name: "BREEDS",
-      prompt: "List",
+      name: DeckNames.breeds,
+      prompt: DeckPrompts.breeds,
       maxDoghouse: 1,
       useTimer: true,
       cards: [] as Array<Card>,
     },
     {
-      name: "Teacher's Pet",
-      prompt: "Guess",
+      name: DeckNames.teachersPet,
+      prompt: DeckPrompts.teachersPet,
       maxDoghouse: 1,
       useTimer: false,
       cards: [] as Array<Card>,
@@ -114,7 +115,7 @@ class GameStateObject {
   adjustScore(name: string) {
     var player = this.players.find((value) => value.name == name);
     player.selected = !player.selected;
-      player.score += 1;
+    player.score += 1;
   }
 
   resetDoghouse() {
