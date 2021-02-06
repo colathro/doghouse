@@ -8,15 +8,16 @@ import {
   View,
   ScrollView,
 } from "react-native";
-import { RefreshIcon } from "../components";
-import { AvailablePack } from "./AvailablePack";
+import { RefreshIcon, Loader, AvailablePack } from "../components";
 
 export const Packs: React.FC = observer(
   (): JSX.Element => {
     const refresh = () => {
       setLoading(true);
       GameState.syncPurchasedPacks().then(() => {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       });
     };
 
@@ -51,9 +52,13 @@ export const Packs: React.FC = observer(
             contentContainerStyle={styles.packSelectionContainer}
             showsVerticalScrollIndicator={false}
           >
-            {GameState.cardPacks.map((val, ind) => (
-              <AvailablePack pack={val} key={ind}></AvailablePack>
-            ))}
+            {loading ? (
+              <Loader></Loader>
+            ) : (
+              GameState.cardPacks.map((val, ind) => (
+                <AvailablePack pack={val} key={ind}></AvailablePack>
+              ))
+            )}
           </ScrollView>
         </View>
       </View>
