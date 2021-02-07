@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, BigButton, Logo, Main, Spike, Timer } from "../../components";
+import { Button, BigButton, Logo, Main, Spike, Timer, Doghouse } from "../../components";
 
 function HomeScreen({ navigation }: any) {
   const [show, setShow] = useState(false);

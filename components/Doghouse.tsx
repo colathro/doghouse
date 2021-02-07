@@ -1,91 +1,344 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { GameState } from "../states";
+import { Arrow, Button} from "../components";
 import { observer } from "mobx-react-lite";
-import { Players, Button } from "../components";
-import { Player } from "../types";
-import { IObservableArray, makeAutoObservable } from "mobx";
-import Modal from "react-native-modal";
-import { StyleSheet, View } from "react-native";
+import CheckBox from "react-native-checkbox-animated";
+import { StyleSheet, View, Animated, Text, TouchableOpacity, ScrollView, Easing, NativeSyntheticEvent, NativeTouchEvent } from "react-native";
 
 type props = {
-  visible: boolean;
-  callback: any;
+  limitDoghouse: boolean
+  onPressDone: (players: any[]) => void
 };
 
 export const Doghouse: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    class DoghouseObject {
-      constructor() {
-        makeAutoObservable(this);
-      }
-      public players = JSON.parse(
-        JSON.stringify(GameState.players)
-      ) as IObservableArray<Player>;
-    }
-    let doghouse = new DoghouseObject();
 
-    return (
-      <Modal backdropOpacity={0.0} isVisible={props.visible}>
-        <View style={styles.centeredView}>
-          <View style={styles.container}>
-            <Players
-              players={doghouse.players}
-              allowEdit={false}
-              doghouse={true}
-              showScore={false}
-            />
-            <Button
-              title="Send to the doghouse"
-              onPress={() => {
-                doghouse.players.forEach((player) => (player.selected = false));
-                GameState.players.replace(doghouse.players);
-                setTimeout(() => {
-                  props.callback();
-                }, 500);
-              }}
-            ></Button>
-          </View>
+    const [selectedName, setSelect] = useState("");
+    const [multiSelectedNames, setMultiSelect] = useState([]);
+
+    const Player = (name: string, handleChecked: (n: string, checked: boolean) => boolean) => {
+      return (
+        <View style={styles.playerContainer}>
+         <CheckBox
+            label={name}
+            onValueChange={val => handleChecked(name, val)}
+            checked={props.limitDoghouse ? selectedName === name : multiSelectedNames.includes(name)}
+            size={30}
+            touchableLabel={true}
+            checkedBackgroundColor={"#ff6700"}
+            unCheckedBackgroundColor={"white"}
+            checkedBorderColor={"black"}
+            unCheckedBorderColor={"grey"}
+            borderWidth={true}
+            rippleEffect={true}
+            rippleColor={"black"}
+            checkPosition={"left"}
+            checkBoxRadius={4}
+            rounded={false}
+            checkMarkSize={15}
+            checkMarkColor={"transparent"}
+            animationType={"scale"}
+            checkStyle={styles.text}
+            labelStyle={styles.text}
+            customMarker={<Text/>}
+          />
         </View>
-      </Modal>
+      );
+    };
+
+    const handleCheck = (name: string, checked: boolean) => {
+      if (props.limitDoghouse) {
+        if (checked) {
+          setSelect(name);
+        } else {
+          setSelect("");
+        }
+      } else {
+        if (checked) {
+          setMultiSelect(multiSelectedNames => [...multiSelectedNames, name])
+        } else {
+          var array = [...multiSelectedNames]; // make a separate copy of the array
+          var index = array.indexOf(name)
+          if (index !== -1) {
+            array.splice(index, 1);
+            setMultiSelect(array);
+          }
+        }
+      }
+      return checked;
+    };    
+
+    const [animatedValue, setAnimatedValue] = useState(new Animated.Value(1));
+    const [dropdownOpen, setDropdownOpen] = useState(true);
+
+    const openAnimation=()=>{
+      Animated.timing(animatedValue, {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+      }).start()
+    };
+
+    const closeAnimation=()=>{
+      Animated.timing(animatedValue, {
+        toValue: 0,
+        duration: 1000,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+      }).start()
+    }
+
+    const dropdownAnimatedStyle = {
+      transform: [
+        {
+          translateY: animatedValue.interpolate({
+              inputRange: [0, 1],
+              outputRange: [75, 0]
+          })
+        },
+        {
+            scaleY: animatedValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0]
+            })
+        }
+      ],
+    };
+
+    const doghouseAnimatedStyle = {
+      transform: [
+        {
+          translateY: animatedValue.interpolate({
+              inputRange: [0, 1],
+              outputRange: [150, 0]
+          })
+        },
+      ],
+    };
+
+    const arrowAnimatedStyle = {
+      transform: [
+        { 
+          rotate: animatedValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['180deg', '0deg'],
+          })
+        }
+      ],
+    };
+
+    const shake = new Animated.Value(0); // Initial value for opacity: 0
+
+    const shakeAnimation=()=>{
+        Animated.sequence([
+          // start rotation in one direction (only half the time is needed)
+          Animated.timing(shake, {
+            toValue: 0.5,
+            duration: 100,
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }),
+          // rotate in other direction, to minimum value (= twice the duration of above)
+          Animated.timing(shake, {
+            toValue: -0.5,
+            duration: 100,
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }),
+          // return to begin position
+          Animated.timing(shake, {
+            toValue: 0.0,
+            duration: 100,
+            easing: Easing.linear,
+            useNativeDriver: true,
+          }),
+        ]).start();
+    };
+
+    const shakeAnimatedStyle = {
+      transform: [
+        {
+          rotate: shake.interpolate({
+            inputRange: [-1, 1],
+            outputRange: ["-0.1rad", "0.1rad"],
+          }),
+        },
+      ],
+    };
+    
+    return (
+      <View style={styles.container}>
+        <View style={styles.menuContainer}>
+          <View 
+            style={styles.textContainer}>
+            <Animated.Text style={[
+              (selectedName == "" && multiSelectedNames.length == 0) ?
+               styles.doghouseTextGrey
+               : styles.selectedText, shakeAnimatedStyle]}>
+                 {props.limitDoghouse ? (selectedName == "" ? "Select a Player": selectedName): (multiSelectedNames.toString().length >= 16 ? multiSelectedNames.toString().substring(0,13) + "..." : ( multiSelectedNames.length == 0 ? "Select Players": multiSelectedNames.toString()))}
+            </Animated.Text>
+          </View>
+          <TouchableOpacity 
+            style={styles.dropButton}
+            onPress={() => {
+              if (!dropdownOpen) {
+                openAnimation();
+              } else {
+                closeAnimation();
+              }
+              setDropdownOpen(!dropdownOpen);
+            }}>
+            <Animated.View style={[styles.arrowContainer, arrowAnimatedStyle]}>
+              <Arrow/>
+            </Animated.View>
+          </TouchableOpacity>
+        </View>
+        <Animated.View style={[styles.openMenuContainer, dropdownAnimatedStyle]}>
+          <ScrollView
+            style={styles.scrollableView}
+            contentContainerStyle={styles.scrollableContainer}
+            showsVerticalScrollIndicator={false}
+          >
+            {GameState.players.map((val, ind) => {
+              return Player(val.name, handleCheck);
+            })}
+          </ScrollView>
+        </Animated.View>
+        <Animated.View style={[styles.doneButtonContainer, doghouseAnimatedStyle]}>
+        <TouchableOpacity 
+            style={styles.doneButton}
+            onPress={() => {
+              if (selectedName == "" && multiSelectedNames.length == 0) {
+                shakeAnimation();
+                closeAnimation();
+                setDropdownOpen(false);
+              } else {
+                if (props.limitDoghouse){
+                  props.onPressDone([selectedName]);
+                } else {
+                  props.onPressDone(multiSelectedNames);
+                }
+              }
+            }}>
+            <Text style={styles.doghouseText}>
+              Send to Doghouse   &#8594;
+            </Text>
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
     );
   }
 );
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    height: 160,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    width: "100%",
+    backgroundColor: "white",
     justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 9,
+    marginBottom: 50,
   },
-  playerDoghouse: {
-    fontFamily: "Tw-Bold",
-    fontSize: 28,
-    margin: 12,
-    color: "red",
+  menuContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
-  player: {
-    fontFamily: "Tw-Bold",
-    fontSize: 28,
-    margin: 12,
+  openMenuContainer: {
+    position: "absolute",
+    top: -8,
+    height: 150,
+    width: "100%",
+    backgroundColor: "white",
   },
-  modalView: {
-    backgroundColor: "rgba(0,0,0,0)",
-    borderRadius: 14,
+  dropButton: {
+    borderRadius: 7,
+    borderColor: "transparent",
+    borderWidth: 3,
+    width: 50,
+    height: 50,
+    backgroundColor: "#ff6700",
+    margin: 10,
+    justifyContent: "center"
+  },
+  textContainer: {
     flex: 1,
-    padding: 8,
+    margin: 10,
+    backgroundColor: "#ffe0cc",
+    borderRadius: 7,
+    borderColor: "transparent",
+    borderWidth: 3,
+    justifyContent: "center"
+  },
+  selectedText: {
+    marginLeft: 10,
+    marginRight: 10,
+    color: "black",
+    fontFamily: "Tw-Bold",
+    fontSize: 24,
+  },
+  doghouseText: {
+    marginLeft: 10,
+    marginRight: 10,
+    color: "black",
+    fontFamily: "Tw-Bold",
+    fontSize: 24,
+    textAlign: "center",
+  },
+  doghouseTextGrey: {
+    marginLeft: 10,
+    marginRight: 10,
+    color: "grey",
+    fontFamily: "Tw-Bold",
+    fontSize: 24,
+    textAlign: "center",
+  },
+  scrollableView: {
     width: "100%",
     height: "100%",
-    justifyContent: "flex-end",
-    alignItems: "center",
   },
-  centeredView: {
-    backgroundColor: "white",
-    flex: 1,
-    padding: 8,
+  scrollableContainer: {
+    width: "100%",
+  },
+  text: {
+    color: "black",
+    fontFamily: "Tw-Bold",
+    fontSize: 28,
+  },
+  playerContainer: {
+    flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
+    marginBottom: 10,
+    width: "100%",
   },
+  checkboxContainerStyle: {
+    width: 250,
+  },
+  checkbox: {
+    padding: 10
+  },
+  arrowContainer: {
+    justifyContent: "center",
+  },
+  arrowImageStyle: {
+    width: 20,
+    height: 20,
+  },
+  doneButtonContainer: {
+    position: "absolute",
+    top: 60,
+    padding: 10,
+    width: "100%",
+    backgroundColor: "white",
+    borderRadius: 9,
+  },
+  doneButton: {
+    borderRadius: 7,
+    borderColor: "black",
+    borderWidth: 3,
+    height: 50,
+    backgroundColor: "#ff6700",
+    justifyContent: "center",
+  }
 });

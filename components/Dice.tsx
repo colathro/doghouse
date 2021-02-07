@@ -83,7 +83,7 @@ export const Dice: React.FC<props> = observer(
           defaultValue={0}
 
           isVisible={GameState.devMode}
-          containerStyle={{height: 40, position: "absolute", top: -100 , left: 20}}
+          containerStyle={{height: 40, position: "absolute", top: 100 , left: 20}}
           style={{backgroundColor: '#fafafa'}}
           itemStyle={{
               justifyContent: 'flex-start'

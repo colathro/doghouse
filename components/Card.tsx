@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { GameState } from "../states";
-import { Players, Button } from "../components";
+import { Doghouse } from "../components";
 import { Player } from "../types";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
@@ -137,67 +137,19 @@ export const Card: React.FC<props> = observer(
                     {GameState.activeCard.text}
                   </Text>
                   {timer}
-                  <DropDownPicker
-                    items={players}
-                    multiple={true}
-                    multipleText={
-                      "%d player" +
-                      (doghouse.players.length == 1 ? "" : "s") +
-                      " in the doghouse"
-                    }
-                    min={0}
-                    max={
-                      GameState.decks[GameState.dice].maxDoghouse == -1
-                        ? players.length
-                        : GameState.decks[GameState.dice].maxDoghouse
-                    }
-                    disabled={
-                      !timerFinished && GameState.decks[GameState.dice].useTimer
-                    }
-                    placeholder="Send someone to the doghouse"
-                    defaultValue=""
-                    containerStyle={styles.doghouseDropDown}
-                    itemStyle={{
-                      justifyContent: "flex-start",
-                    }}
-                    placeholderStyle={{
-                      fontFamily: "Tw-Bold",
-                      fontSize: 20,
-                    }}
-                    labelStyle={{
-                      fontFamily: "Tw-Bold",
-                      fontSize: 20,
-                    }}
-                    onChangeItem={(item) =>
-                      setDoghouse({
-                        players: item, // an array of the selected items
-                      })
-                    }
-                  />
-                  <TouchableOpacity
-                    style={styles.arrowContainer}
-                    disabled={!flipped || doghouse.players.length == 0}
-                    onPress={() => {
-                      setFlipped(false);
-                      setPlaying(false);
-                      setTimerFinished(false);
-                      doghouse.players.forEach((player) =>
-                        GameState.adjustScore(player)
-                      );
-                      setDoghouse({ players: [] });
-                      props.callback();
-                    }}
-                  >
-                    <Text
-                      style={
-                        !flipped || doghouse.players.length == 0
-                          ? styles.arrowDisabled
-                          : styles.arrow
-                      }
-                    >
-                      &#10140;
-                    </Text>
-                  </TouchableOpacity>
+                  <View style={styles.arrowContainer}>
+                    <Doghouse 
+                      limitDoghouse={GameState.decks[GameState.dice].maxDoghouse != -1} 
+                      onPressDone={(players: []) => {
+                        setFlipped(false);
+                        setPlaying(false);
+                        setTimerFinished(false);
+                        players.forEach((player) =>
+                          GameState.adjustScore(player)
+                        );
+                        props.callback();
+                      }}/>
+                  </View>
                 </View>
               </TouchableOpacity>
             </CardFlip>
@@ -293,9 +245,9 @@ const styles = StyleSheet.create({
     color: "black",
   },
   arrowContainer: {
+    width: "100%",
     position: "absolute",
     bottom: 5,
-    right: 10,
   },
   arrow: {
     fontFamily: "Tw-Bold",
