@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GameState } from "../states";
-import { Arrow, Timer } from "../components";
+import { Arrow, ArrowRight, Timer } from "../components";
 import { observer } from "mobx-react-lite";
 import CheckBox from "react-native-checkbox-animated";
 import {
@@ -12,6 +12,8 @@ import {
   ScrollView,
   Easing,
 } from "react-native";
+import { DoghouseIcon } from "./icons/DoghouseIcon";
+import { PlayerIcon } from "./icons/PlayerIcon";
 
 type props = {
   timer: boolean;
@@ -275,7 +277,11 @@ export const Doghouse: React.FC<props> = observer(
                 }
               }}
             >
-              <Text style={styles.doghouseText}>Send to Doghouse &#8594;</Text>
+              <PlayerIcon />
+              <View style={styles.arrowRightContainer}>
+                <ArrowRight />
+              </View>
+              <DoghouseIcon />
             </TouchableOpacity>
           )}
         </Animated.View>
@@ -393,5 +399,11 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#ff6700",
     justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  arrowRightContainer: {
+    marginLeft: 15,
+    marginRight: 15,
   },
 });
