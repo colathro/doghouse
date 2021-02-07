@@ -1,23 +1,10 @@
 import React, { useRef, useState } from "react";
 import { GameState } from "../states";
 import { Doghouse, Timer } from "../components";
-import { Player } from "../types";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import Modal from "react-native-modal";
-import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
-import { IObservableArray, makeAutoObservable } from "mobx";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-  Animated,
-  Easing,
-  Vibration,
-} from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type props = {
   visible: boolean;
@@ -60,13 +47,22 @@ export const Card: React.FC<props> = observer(
               <TouchableOpacity style={styles.card} activeOpacity={1}>
                 <View style={styles.cardInner}>
                   <TouchableOpacity
-                    style={styles.xContainer}
+                    style={styles.closeButton}
                     onPress={() => {
                       setFlipped(false);
                       props.callback();
                     }}
                   >
-                    <Text style={styles.x}>&#10006;</Text>
+                    <Text style={styles.closeButtonText}>X</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.helpButton}
+                    onPress={() => {
+                      setFlipped(false);
+                      props.callback();
+                    }}
+                  >
+                    <Text style={styles.helpButtonText}>?</Text>
                   </TouchableOpacity>
                   <Text style={styles.prompt}>
                     {GameState.decks[GameState.dice].prompt}
@@ -82,17 +78,20 @@ export const Card: React.FC<props> = observer(
                       }}
                     />
                   ) : null}
-                  <View style={{height: 100}}/>
                   <View style={styles.arrowContainer}>
-                    <Doghouse 
-                      limitDoghouse={GameState.decks[GameState.dice].maxDoghouse != -1} 
+                    <Doghouse
+                      timer={GameState.decks[GameState.dice].useTimer}
+                      limitDoghouse={
+                        GameState.decks[GameState.dice].maxDoghouse != -1
+                      }
                       onPressDone={(players: []) => {
                         setFlipped(false);
                         players.forEach((player) =>
                           GameState.adjustScore(player)
                         );
                         props.callback();
-                      }}/>
+                      }}
+                    />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -178,14 +177,39 @@ const styles = StyleSheet.create({
   doghouseDropDown: {
     height: 40,
   },
-  xContainer: {
+  closeButton: {
     position: "absolute",
-    top: 5,
+    top: 10,
     right: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    height: 18,
+    width: 18,
+    borderRadius: 50,
   },
-  x: {
-    fontSize: 32,
-    color: "black",
+  closeButtonText: {
+    color: "#ffffff",
+    fontFamily: "Tw-Bold",
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  helpButton: {
+    position: "absolute",
+    top: 10,
+    left: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    height: 18,
+    width: 18,
+    borderRadius: 50,
+  },
+  helpButtonText: {
+    color: "#ffffff",
+    fontFamily: "Tw-Bold",
+    fontWeight: "bold",
+    fontSize: 18,
   },
   arrowContainer: {
     width: "100%",

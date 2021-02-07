@@ -1,28 +1,45 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { GameState } from "../states";
-import { Arrow, Button} from "../components";
+import { Arrow, Timer } from "../components";
 import { observer } from "mobx-react-lite";
 import CheckBox from "react-native-checkbox-animated";
-import { StyleSheet, View, Animated, Text, TouchableOpacity, ScrollView, Easing, NativeSyntheticEvent, NativeTouchEvent } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Animated,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Easing,
+} from "react-native";
 
 type props = {
-  limitDoghouse: boolean
-  onPressDone: (players: any[]) => void
+  timer: boolean;
+  limitDoghouse: boolean;
+  onPressDone: (players: any[]) => void;
 };
 
 export const Doghouse: React.FC<props> = observer(
   (props: props): JSX.Element => {
-
+    const [timerFinished, setTimerFinished] = useState(false);
+    const [timerShowing, setTimerShowing] = useState(false);
     const [selectedName, setSelect] = useState("");
     const [multiSelectedNames, setMultiSelect] = useState([]);
 
-    const Player = (name: string, handleChecked: (n: string, checked: boolean) => boolean) => {
+    const Player = (
+      name: string,
+      handleChecked: (n: string, checked: boolean) => boolean
+    ) => {
       return (
         <View style={styles.playerContainer}>
-         <CheckBox
+          <CheckBox
             label={name}
-            onValueChange={val => handleChecked(name, val)}
-            checked={props.limitDoghouse ? selectedName === name : multiSelectedNames.includes(name)}
+            onValueChange={(val) => handleChecked(name, val)}
+            checked={
+              props.limitDoghouse
+                ? selectedName === name
+                : multiSelectedNames.includes(name)
+            }
             size={30}
             touchableLabel={true}
             checkedBackgroundColor={"#ff6700"}
@@ -40,7 +57,6 @@ export const Doghouse: React.FC<props> = observer(
             animationType={"scale"}
             checkStyle={styles.text}
             labelStyle={styles.text}
-            customMarker={<Text/>}
           />
         </View>
       );
@@ -55,10 +71,10 @@ export const Doghouse: React.FC<props> = observer(
         }
       } else {
         if (checked) {
-          setMultiSelect(multiSelectedNames => [...multiSelectedNames, name])
+          setMultiSelect((multiSelectedNames) => [...multiSelectedNames, name]);
         } else {
           var array = [...multiSelectedNames]; // make a separate copy of the array
-          var index = array.indexOf(name)
+          var index = array.indexOf(name);
           if (index !== -1) {
             array.splice(index, 1);
             setMultiSelect(array);
@@ -66,43 +82,43 @@ export const Doghouse: React.FC<props> = observer(
         }
       }
       return checked;
-    };    
+    };
 
     const [animatedValue, setAnimatedValue] = useState(new Animated.Value(1));
     const [dropdownOpen, setDropdownOpen] = useState(true);
 
-    const openAnimation=()=>{
+    const openAnimation = () => {
       Animated.timing(animatedValue, {
         toValue: 1,
         duration: 1000,
         easing: Easing.bounce,
         useNativeDriver: true,
-      }).start()
+      }).start();
     };
 
-    const closeAnimation=()=>{
+    const closeAnimation = () => {
       Animated.timing(animatedValue, {
         toValue: 0,
         duration: 1000,
         easing: Easing.bounce,
         useNativeDriver: true,
-      }).start()
-    }
+      }).start();
+    };
 
     const dropdownAnimatedStyle = {
       transform: [
         {
           translateY: animatedValue.interpolate({
-              inputRange: [0, 1],
-              outputRange: [75, 0]
-          })
+            inputRange: [0, 1],
+            outputRange: [75, 0],
+          }),
         },
         {
-            scaleY: animatedValue.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1, 0]
-            })
-        }
+          scaleY: animatedValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0],
+          }),
+        },
       ],
     };
 
@@ -110,50 +126,50 @@ export const Doghouse: React.FC<props> = observer(
       transform: [
         {
           translateY: animatedValue.interpolate({
-              inputRange: [0, 1],
-              outputRange: [150, 0]
-          })
+            inputRange: [0, 1],
+            outputRange: [150, 0],
+          }),
         },
       ],
     };
 
     const arrowAnimatedStyle = {
       transform: [
-        { 
+        {
           rotate: animatedValue.interpolate({
             inputRange: [0, 1],
-            outputRange: ['180deg', '0deg'],
-          })
-        }
+            outputRange: ["180deg", "0deg"],
+          }),
+        },
       ],
     };
 
     const shake = new Animated.Value(0); // Initial value for opacity: 0
 
-    const shakeAnimation=()=>{
-        Animated.sequence([
-          // start rotation in one direction (only half the time is needed)
-          Animated.timing(shake, {
-            toValue: 0.5,
-            duration: 100,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          // rotate in other direction, to minimum value (= twice the duration of above)
-          Animated.timing(shake, {
-            toValue: -0.5,
-            duration: 100,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          // return to begin position
-          Animated.timing(shake, {
-            toValue: 0.0,
-            duration: 100,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-        ]).start();
+    const shakeAnimation = () => {
+      Animated.sequence([
+        // start rotation in one direction (only half the time is needed)
+        Animated.timing(shake, {
+          toValue: 0.5,
+          duration: 100,
+          easing: Easing.linear,
+          useNativeDriver: true,
+        }),
+        // rotate in other direction, to minimum value (= twice the duration of above)
+        Animated.timing(shake, {
+          toValue: -0.5,
+          duration: 100,
+          easing: Easing.linear,
+          useNativeDriver: true,
+        }),
+        // return to begin position
+        Animated.timing(shake, {
+          toValue: 0.0,
+          duration: 100,
+          easing: Easing.linear,
+          useNativeDriver: true,
+        }),
+      ]).start();
     };
 
     const shakeAnimatedStyle = {
@@ -166,35 +182,60 @@ export const Doghouse: React.FC<props> = observer(
         },
       ],
     };
-    
+
     return (
       <View style={styles.container}>
+        {timerShowing ? (
+          <Timer
+            visible={true}
+            callback={() => {
+              setTimerShowing(false);
+              setTimerFinished(true);
+            }}
+          />
+        ) : null}
         <View style={styles.menuContainer}>
-          <View 
-            style={styles.textContainer}>
-            <Animated.Text style={[
-              (selectedName == "" && multiSelectedNames.length == 0) ?
-               styles.doghouseTextGrey
-               : styles.selectedText, shakeAnimatedStyle]}>
-                 {props.limitDoghouse ? (selectedName == "" ? "Select a Player": selectedName): (multiSelectedNames.toString().length >= 16 ? multiSelectedNames.toString().substring(0,13) + "..." : ( multiSelectedNames.length == 0 ? "Select Players": multiSelectedNames.toString()))}
+          <View style={styles.textContainer}>
+            <Animated.Text
+              style={[
+                selectedName == "" && multiSelectedNames.length == 0
+                  ? styles.doghouseTextGrey
+                  : styles.selectedText,
+                shakeAnimatedStyle,
+              ]}
+            >
+              {props.limitDoghouse
+                ? selectedName == ""
+                  ? "Select a Player"
+                  : selectedName
+                : multiSelectedNames.toString().length >= 16
+                ? multiSelectedNames.toString().substring(0, 13) + "..."
+                : multiSelectedNames.length == 0
+                ? "Select Players"
+                : multiSelectedNames.toString()}
             </Animated.Text>
+            <TouchableOpacity
+              style={styles.dropButton}
+              onPress={() => {
+                if (!dropdownOpen) {
+                  openAnimation();
+                } else {
+                  closeAnimation();
+                }
+                setDropdownOpen(!dropdownOpen);
+              }}
+            >
+              <Animated.View
+                style={[styles.arrowContainer, arrowAnimatedStyle]}
+              >
+                <Arrow />
+              </Animated.View>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity 
-            style={styles.dropButton}
-            onPress={() => {
-              if (!dropdownOpen) {
-                openAnimation();
-              } else {
-                closeAnimation();
-              }
-              setDropdownOpen(!dropdownOpen);
-            }}>
-            <Animated.View style={[styles.arrowContainer, arrowAnimatedStyle]}>
-              <Arrow/>
-            </Animated.View>
-          </TouchableOpacity>
         </View>
-        <Animated.View style={[styles.openMenuContainer, dropdownAnimatedStyle]}>
+        <Animated.View
+          style={[styles.openMenuContainer, dropdownAnimatedStyle]}
+        >
           <ScrollView
             style={styles.scrollableView}
             contentContainerStyle={styles.scrollableContainer}
@@ -205,26 +246,38 @@ export const Doghouse: React.FC<props> = observer(
             })}
           </ScrollView>
         </Animated.View>
-        <Animated.View style={[styles.doneButtonContainer, doghouseAnimatedStyle]}>
-        <TouchableOpacity 
-            style={styles.doneButton}
-            onPress={() => {
-              if (selectedName == "" && multiSelectedNames.length == 0) {
-                shakeAnimation();
-                closeAnimation();
-                setDropdownOpen(false);
-              } else {
-                if (props.limitDoghouse){
-                  props.onPressDone([selectedName]);
+        <Animated.View
+          style={[styles.doneButtonContainer, doghouseAnimatedStyle]}
+        >
+          {props.timer && !timerFinished ? (
+            <TouchableOpacity
+              style={styles.doneButton}
+              onPress={() => {
+                setTimerShowing(true);
+              }}
+            >
+              <Text style={styles.doghouseText}>Start Timer</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.doneButton}
+              onPress={() => {
+                if (selectedName == "" && multiSelectedNames.length == 0) {
+                  shakeAnimation();
+                  closeAnimation();
+                  setDropdownOpen(false);
                 } else {
-                  props.onPressDone(multiSelectedNames);
+                  if (props.limitDoghouse) {
+                    props.onPressDone([selectedName]);
+                  } else {
+                    props.onPressDone(multiSelectedNames);
+                  }
                 }
-              }
-            }}>
-            <Text style={styles.doghouseText}>
-              Send to Doghouse   &#8594;
-            </Text>
-          </TouchableOpacity>
+              }}
+            >
+              <Text style={styles.doghouseText}>Send to Doghouse &#8594;</Text>
+            </TouchableOpacity>
+          )}
         </Animated.View>
       </View>
     );
@@ -242,7 +295,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   openMenuContainer: {
     position: "absolute",
@@ -255,20 +308,20 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     borderColor: "transparent",
     borderWidth: 3,
-    width: 50,
-    height: 50,
-    backgroundColor: "#ff6700",
-    margin: 10,
-    justifyContent: "center"
+    justifyContent: "center",
+    marginRight: 10,
   },
   textContainer: {
     flex: 1,
+    flexDirection: "row",
     margin: 10,
     backgroundColor: "#ffe0cc",
     borderRadius: 7,
+    height: 50,
     borderColor: "transparent",
     borderWidth: 3,
-    justifyContent: "center"
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   selectedText: {
     marginLeft: 10,
@@ -316,7 +369,7 @@ const styles = StyleSheet.create({
     width: 250,
   },
   checkbox: {
-    padding: 10
+    padding: 10,
   },
   arrowContainer: {
     justifyContent: "center",
@@ -340,5 +393,5 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#ff6700",
     justifyContent: "center",
-  }
+  },
 });
