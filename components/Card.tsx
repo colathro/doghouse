@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { GameState } from "../states";
-import { Doghouse } from "../components";
+import { Doghouse, Timer } from "../components";
 import { Player } from "../types";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
@@ -26,69 +26,10 @@ type props = {
 
 export const Card: React.FC<props> = observer(
   (props: props): JSX.Element => {
-    const players = []; // list of players for doghouse dropdown
-    GameState.players.forEach((player) =>
-      players.push({ label: player.name, value: player.name })
-    );
-
     const [flipped, setFlipped] = useState(false);
-    const [playing, setPlaying] = useState(false);
-    const [timerFinished, setTimerFinished] = useState(false);
-    const [key, setKey] = useState(0);
-    const [doghouse, setDoghouse] = useState({
-      players: [],
-    });
 
     let card;
-    let timer;
-
-    if (GameState.decks[GameState.dice].useTimer) {
-      timer = (
-        <View style={styles.timerView}>
-          <TouchableOpacity
-            onPress={() => {
-              if (!playing) setPlaying(true);
-              if (playing && !timerFinished) {
-                setKey((prevKey) => prevKey + 1);
-              }
-            }}
-            style={styles.timerView}
-            activeOpacity={0.75}
-          >
-            <CountdownCircleTimer
-              key={key}
-              isPlaying={playing}
-              duration={10}
-              size={150}
-              strokeWidth={12}
-              initialRemainingTime={10}
-              colors={[
-                ["#004777", 0.4],
-                ["#F7B801", 0.4],
-                ["#A30000", 0.2],
-              ]}
-              onComplete={() => {
-                setTimerFinished(true);
-              }}
-            >
-              {({ remainingTime }) => (
-                <Text style={styles.cardText}>
-                  <Text style={styles.prompt}>
-                    {playing ? (remainingTime == 0 ? "" : "Tap + Pass\n") : ""}
-                  </Text>
-                  {playing
-                    ? remainingTime == 0
-                      ? "Times up!"
-                      : remainingTime
-                    : "Tap to start"}
-                </Text>
-              )}
-            </CountdownCircleTimer>
-          </TouchableOpacity>
-        </View>
-      );
-    }
-
+    const [showTimer, setShowTimer] = useState(false);
     return (
       <Modal
         backdropOpacity={0.0}
@@ -122,9 +63,6 @@ export const Card: React.FC<props> = observer(
                     style={styles.xContainer}
                     onPress={() => {
                       setFlipped(false);
-                      setPlaying(false);
-                      setTimerFinished(false);
-                      setDoghouse({ players: [] });
                       props.callback();
                     }}
                   >
@@ -136,14 +74,20 @@ export const Card: React.FC<props> = observer(
                   <Text style={styles.cardText}>
                     {GameState.activeCard.text}
                   </Text>
-                  {timer}
+                  {showTimer ? (
+                    <Timer
+                      visible={true}
+                      callback={() => {
+                        setShowTimer(false);
+                      }}
+                    />
+                  ) : null}
+                  <View style={{height: 100}}/>
                   <View style={styles.arrowContainer}>
                     <Doghouse 
                       limitDoghouse={GameState.decks[GameState.dice].maxDoghouse != -1} 
                       onPressDone={(players: []) => {
                         setFlipped(false);
-                        setPlaying(false);
-                        setTimerFinished(false);
                         players.forEach((player) =>
                           GameState.adjustScore(player)
                         );
@@ -240,7 +184,6 @@ const styles = StyleSheet.create({
     right: 10,
   },
   x: {
-    fontFamily: "Tw",
     fontSize: 32,
     color: "black",
   },
