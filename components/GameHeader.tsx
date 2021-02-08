@@ -11,22 +11,25 @@ import {
 
 type props = {
   navigation: any;
+  hideMenu: boolean;
 };
 
 export const GameHeader: React.FC<props> = (props: props): JSX.Element => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.helpButton}
-        onPress={() => {
-          props.navigation.reset({
-            index: 0,
-            routes: [{ name: "Home" }],
-          });
-        }}
-      >
-        <Text style={styles.helpButtonText}>Menu</Text>
-      </TouchableOpacity>
+      {!props.hideMenu ? (
+        <TouchableOpacity
+          style={styles.helpButton}
+          onPress={() => {
+            props.navigation.reset({
+              index: 0,
+              routes: [{ name: "Home" }],
+            });
+          }}
+        >
+          <Text style={styles.helpButtonText}>Menu</Text>
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };

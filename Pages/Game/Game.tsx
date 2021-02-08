@@ -31,7 +31,12 @@ function Game({ navigation }: any) {
   };
 
   return (
-    <GameView style={styles.container} title={"t"} navigation={navigation}>
+    <GameView
+      style={styles.container}
+      title={"t"}
+      navigation={navigation}
+      hideMenu={cardShow || scoreShow}
+    >
       <Card visible={cardShow} callback={cardFinish} />
       <Scoreboard visible={scoreShow} callback={scoreFinish} />
       <Dice

@@ -3,10 +3,17 @@ import { Header } from "../../components";
 import { StyleSheet, View } from "react-native";
 import { GameHeader } from "../GameHeader";
 
-export function GameView({ navigation, title, help, players, children }: any) {
+export function GameView({
+  navigation,
+  title,
+  help,
+  players,
+  children,
+  hideMenu,
+}: any) {
   let header;
   if (title) {
-    header = <GameHeader navigation={navigation} />;
+    header = <GameHeader navigation={navigation} hideMenu={hideMenu} />;
   } else {
     header = <></>;
   }
