@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Button, BigButton, Logo, Main, Spike, Timer, Doghouse } from "../../components";
+import {
+  Button,
+  BigButton,
+  Logo,
+  Main,
+  Spike,
+  Timer,
+  Doghouse,
+} from "../../components";
 
 function HomeScreen({ navigation }: any) {
   const [show, setShow] = useState(false);
@@ -20,7 +28,10 @@ function HomeScreen({ navigation }: any) {
         onPress={() => navigation.navigate("GameSetup")}
       />
       <Button title="PACKS" onPress={() => navigation.navigate("Settings")} />
-      <Button title="TEST" onPress={() => setShow(true)} />
+      <Button
+        title="Dice Roll Test"
+        onPress={() => navigation.navigate("DicePlayground")}
+      />
     </Main>
   );
 }

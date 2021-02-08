@@ -9,7 +9,7 @@ import {
   Animated,
   Easing,
 } from "react-native";
-import DropDownPicker from 'react-native-dropdown-picker';
+import DropDownPicker from "react-native-dropdown-picker";
 
 type props = {
   callback: any;
@@ -19,40 +19,39 @@ type props = {
 
 export const Dice: React.FC<props> = observer(
   (props: props): JSX.Element => {
-
     const [moveY, setMoveY] = useState(new Animated.Value(0));
     const [moveX, setMoveX] = useState(new Animated.Value(0));
 
-    const startAnimation=()=>{
-      Animated.timing(moveY,{
-        toValue : 270,
-        duration : 1000,
+    const startAnimation = () => {
+      Animated.timing(moveY, {
+        toValue: 270,
+        duration: 1000,
         easing: Easing.bounce,
         useNativeDriver: true,
       }).start();
-      Animated.timing(moveX,{
-        toValue : -125,
-        duration : 1000,
+      Animated.timing(moveX, {
+        toValue: -125,
+        duration: 1000,
         easing: Easing.bounce,
         useNativeDriver: true,
       }).start();
-    }
+    };
 
-    const resetAnimation=()=>{
-      Animated.timing(moveY,{
-        toValue : 0,
-        duration : 1000,
-        easing: Easing.bezier(0.25,0.1,0.25,1),
+    const resetAnimation = () => {
+      Animated.timing(moveY, {
+        toValue: 0,
+        duration: 1000,
+        easing: Easing.bezier(0.25, 0.1, 0.25, 1),
         useNativeDriver: true,
       }).start();
-      Animated.timing(moveX,{
-        toValue : 0,
-        duration : 1000,
-        easing: Easing.bezier(0.25,0.1,0.25,1),
+      Animated.timing(moveX, {
+        toValue: 0,
+        duration: 1000,
+        easing: Easing.bezier(0.25, 0.1, 0.25, 1),
         useNativeDriver: true,
       }).start();
       props.animationCallback();
-    }
+    };
 
     if (props.resetAnimation) {
       resetAnimation();
@@ -60,42 +59,18 @@ export const Dice: React.FC<props> = observer(
 
     const animatedStyle = {
       transform: [
-        { 
-          translateY : moveY
+        {
+          translateY: moveY,
         },
         {
-          translateX: moveX
-        }
+          translateX: moveX,
+        },
       ],
-     }
+    };
 
     return (
       <View>
-        <DropDownPicker
-          items={[
-              {label: '1', value: 0},
-              {label: '2', value: 1},
-              {label: '3', value: 2},
-              {label: '4', value: 3},
-              {label: '5', value: 4},
-              {label: '6', value: 5},
-          ]}
-          defaultValue={0}
-
-          isVisible={GameState.devMode}
-          containerStyle={{height: 40, position: "absolute", top: 100 , left: 20}}
-          style={{backgroundColor: '#fafafa'}}
-          itemStyle={{
-              justifyContent: 'flex-start'
-          }}
-          dropDownStyle={{backgroundColor: '#fafafa'}}
-          onChangeItem={item => {
-            GameState.dice = item.value
-          }}
-        />
-        <Animated.View
-          style={[styles.container, animatedStyle]}
-        >
+        <Animated.View style={[styles.container, animatedStyle]}>
           <TouchableOpacity
             style={styles.dice}
             onPress={() => {

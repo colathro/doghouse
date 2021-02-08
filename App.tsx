@@ -7,7 +7,7 @@ import HomeScreen from "./pages/home/Home";
 import Settings from "./pages/packselect/PackSelect";
 import GameSetup from "./pages/gamesetup/GameSetup";
 import Game from "./pages/game/Game";
-import Game2 from "./pages/game/Game2";
+import DicePlayground from "./pages/gl-playground/DicePlayground";
 import { LogBox, View, StyleSheet, FlexAlignType } from "react-native";
 import { GameState } from "./states";
 import { observer } from "mobx-react-lite";
@@ -44,6 +44,7 @@ export default function App() {
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="GameSetup" component={GameSetup} />
         <Stack.Screen name="Game" component={Game} />
+        <Stack.Screen name="DicePlayground" component={DicePlayground} />
       </Stack.Navigator>
     </NavigationContainer>
   );
