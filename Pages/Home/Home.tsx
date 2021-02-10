@@ -8,6 +8,7 @@ import {
   Timer,
   Doghouse,
 } from "../../components";
+import { GameState } from "../../states";
 
 function HomeScreen({ navigation }: any) {
   const [show, setShow] = useState(false);
@@ -28,10 +29,13 @@ function HomeScreen({ navigation }: any) {
         onPress={() => navigation.navigate("GameSetup")}
       />
       <Button title="PACKS" onPress={() => navigation.navigate("Settings")} />
-      <Button
-        title="Dice Roll Test"
-        onPress={() => navigation.navigate("DicePlayground")}
-      />
+      {GameState.devMode ? 
+      (
+        <Button
+          title="Dice Roll Test"
+          onPress={() => navigation.navigate("DicePlayground")}
+        />
+      ) : null}
     </Main>
   );
 }
