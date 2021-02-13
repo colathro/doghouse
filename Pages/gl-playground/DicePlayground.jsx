@@ -1,6 +1,6 @@
-import React, { Component, useState, useRef } from "react";
+import React, { Component, useState, useRef, useEffect } from "react";
 import { GameView } from "../../components";
-import { View, StyleSheet, Dimensions, PanResponder, Text } from "react-native";
+import { View, StyleSheet, Dimensions, PanResponder, Text, Animated, Easing} from "react-native";
 import MatrixMath from "react-native/Libraries/Utilities/MatrixMath";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -15,62 +15,52 @@ function DicePlayground({ navigation }) {
   const refViewTop = useRef(null);
   const refViewBottom = useRef(null);
 
-  const renderLeft = (color) => {
-    return (
+  const renderLeft = (
       <View
         ref={refViewRight}
-        style={[styles.rectangle, color ? { backgroundColor: color } : null]}
+        style={[styles.rectangle, { backgroundColor: "#4c72e0" }]}
       />
     );
-  };
 
-  const renderRight = (color) => {
-    return (
+  const renderRight = (
       <View
         ref={refViewLeft}
-        style={[styles.rectangle, color ? { backgroundColor: color } : null]}
+        style={[styles.rectangle, { backgroundColor: "#8697df" }]}
       />
     );
-  };
 
-  const renderFront = (color) => {
-    return (
+  const renderFront = (
       <View
         ref={refViewFront}
-        style={[styles.rectangle, color ? { backgroundColor: color } : null]}
+        style={[styles.rectangle,{ backgroundColor: "#b5bce2" }]}
       />
     );
-  };
 
-  const renderBack = (color) => {
-    return (
+  const renderBack = (
       <View
         ref={refViewBack}
-        style={[styles.rectangle, color ? { backgroundColor: color } : null]}
+        style={[styles.rectangle, { backgroundColor: "#e5afb9" } ]}
       />
     );
-  };
 
-  const renderTop = (color) => {
-    return (
+  const renderTop =  (
       <View
         ref={refViewTop}
-        style={[styles.rectangle, color ? { backgroundColor: color } : null]}
+        style={[styles.rectangle, { backgroundColor: "#de7c92" }]}
       />
     );
-  };
 
-  const renderBottom = (color) => {
-    return (
+  const renderBottom = (
       <View
         ref={refViewBottom}
-        style={[styles.rectangle, color ? { backgroundColor: color } : null]}
+        style={[styles.rectangle, {backgroundColor: "#d1426b" }]}
       />
     );
-  };
 
-  const handlePanResponderMove = (dx, dy) => {
-    console.log(refViewFront);
+  const [dx, setDX] = useState(new Animated.Value(0));
+  const [dy, setDY] =useState(new Animated.Value(0));
+  
+  useEffect(()=>{
     const origin = { x: 0, y: 0, z: -50 };
     let matrix = rotateXY(dx, dy);
     transformOrigin(matrix, origin);
@@ -107,24 +97,32 @@ function DicePlayground({ navigation }) {
     refViewBottom.current.setNativeProps({
       style: { transform: [{ perspective: 1000 }, { matrix: matrix }] },
     });
-  };
+  })
+    const roll = () => {
+      Animated.timing(dx, {
+        toValue: 720,
+        duration: 3000,
+        easing: Easing.Linear,
+        useNativeDriver: true,
+      }).start();
+    };
 
   return (
     <GameView hideMenu={false} navigation={navigation} title="poekdfjo">
       <TouchableOpacity
         onPress={() => {
-          handlePanResponderMove(-97, -167);
+            roll();
         }}
       >
         <Text>fuck</Text>
       </TouchableOpacity>
       <View style={styles.container}>
-        {renderFront("#4c72e0")}
-        {renderBack("#8697df")}
-        {renderLeft("#b5bce2")}
-        {renderRight("#e5afb9")}
-        {renderTop("#de7c92")}
-        {renderBottom("#d1426b")}
+        {renderFront}
+        {renderBack}
+        {renderLeft}
+        {renderRight}
+        {renderTop}
+        {renderBottom}
       </View>
     </GameView>
   );
