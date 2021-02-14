@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GameState } from "../states";
-import { Arrow, ArrowRight, Timer } from "../components";
+import { Arrow, ArrowRight, Timer } from ".";
 import { observer } from "mobx-react-lite";
 import CheckBox from "react-native-checkbox-animated";
 import {
