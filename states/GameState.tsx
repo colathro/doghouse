@@ -14,7 +14,6 @@ class GameStateObject {
     makeAutoObservable(this);
     this.addCardPack(require("../assets/cardpacks/Standard.json"));
     this.addCardPack(require("../assets/cardpacks/StandardPlus.json"));
-    this.addCardPack(require("../assets/cardpacks/ButtStuff.json"));
     this.addCardPack(require("../assets/cardpacks/420.json"));
     this.addCardPack(require("../assets/cardpacks/Couples.json"));
     this.addCardPack(require("../assets/cardpacks/GirlsNight.json"));
