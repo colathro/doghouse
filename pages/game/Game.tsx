@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Dice, Card, Doghouse, Scoreboard, GameView } from "../../components";
 import { View, StyleSheet } from "react-native";
-import { GameHeader } from "../../components/GameHeader";
 
 function Game({ navigation }: any) {
   const [cardShow, setCardShow] = useState(false);

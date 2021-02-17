@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GameState } from "../states";
 import { Doghouse, Timer } from "../components";
 import { observer } from "mobx-react-lite";
@@ -15,9 +15,17 @@ type props = {
 export const Card: React.FC<props> = observer(
   (props: props): JSX.Element => {
     const [flipped, setFlipped] = useState(false);
-
-    let card;
     const [showTimer, setShowTimer] = useState(false);
+    let card;
+
+    useEffect(() => {
+      setTimeout(() => {
+        if (props.visible) {
+          card.flip();
+        }
+      }, 1000);
+    }, [props.visible]);
+
     return (
       <Modal
         backdropOpacity={0.0}
@@ -29,18 +37,14 @@ export const Card: React.FC<props> = observer(
           <View style={styles.modalView}>
             <CardFlip
               ref={(cardObj) => {
-                card = cardObj;
+                console.log(cardObj);
+                if (cardObj) {
+                  card = cardObj;
+                }
               }}
               style={styles.cardContainer}
             >
-              <TouchableOpacity
-                onPress={() => {
-                  card.flip();
-                  setFlipped(true);
-                }}
-                style={styles.card}
-                activeOpacity={1}
-              >
+              <TouchableOpacity style={styles.card} activeOpacity={1}>
                 <Spike />
                 <Text style={styles.cardText}>
                   {GameState.decks[GameState.dice].name}
@@ -182,7 +186,7 @@ const styles = StyleSheet.create({
   closeButton: {
     position: "absolute",
     top: 10,
-    right: 10,
+    right: 5,
     alignItems: "center",
     justifyContent: "center",
     height: 36,
@@ -198,7 +202,7 @@ const styles = StyleSheet.create({
   helpButton: {
     position: "absolute",
     top: 10,
-    left: 10,
+    left: 5,
     alignItems: "center",
     justifyContent: "center",
     height: 36,

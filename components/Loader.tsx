@@ -37,10 +37,10 @@ export const Loader: React.FC<props> = (props: props): JSX.Element => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: "100%",
+    minWidth: "100%",
+    minHeight: "100%",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
   },
   text: {
     marginTop: 30,

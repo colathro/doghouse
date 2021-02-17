@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
 import {
@@ -53,9 +53,11 @@ export const Dice: React.FC<props> = observer(
       props.animationCallback();
     };
 
-    if (props.resetAnimation) {
-      resetAnimation();
-    }
+    useEffect(() => {
+      if (props.resetAnimation) {
+        resetAnimation();
+      }
+    }, [props.resetAnimation]);
 
     const animatedStyle = {
       transform: [
@@ -73,24 +75,28 @@ export const Dice: React.FC<props> = observer(
         {GameState.devMode ? (
           <DropDownPicker
             items={[
-                {label: '1', value: 0},
-                {label: '2', value: 1},
-                {label: '3', value: 2},
-                {label: '4', value: 3},
-                {label: '5', value: 4},
-                {label: '6', value: 5},
+              { label: "1", value: 0 },
+              { label: "2", value: 1 },
+              { label: "3", value: 2 },
+              { label: "4", value: 3 },
+              { label: "5", value: 4 },
+              { label: "6", value: 5 },
             ]}
             defaultValue={0}
-
             isVisible={GameState.devMode}
-            containerStyle={{height: 40, position: "absolute", top: 100 , left: 20}}
-            style={{backgroundColor: '#fafafa'}}
-            itemStyle={{
-                justifyContent: 'flex-start'
+            containerStyle={{
+              height: 40,
+              position: "absolute",
+              top: 100,
+              left: 20,
             }}
-            dropDownStyle={{backgroundColor: '#fafafa'}}
-            onChangeItem={item => {
-              GameState.dice = item.value
+            style={{ backgroundColor: "#fafafa" }}
+            itemStyle={{
+              justifyContent: "flex-start",
+            }}
+            dropDownStyle={{ backgroundColor: "#fafafa" }}
+            onChangeItem={(item) => {
+              GameState.dice = item.value;
             }}
           />
         ) : null}

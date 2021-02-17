@@ -39,6 +39,14 @@ const Score = (name: string, val: number) => {
   );
 };
 
+const GenerateBones = (count: number) => {
+  const tenBones = count / 10;
+  const leftOverFromTen = count % 10;
+
+  const fiveBones = leftOverFromTen / 5;
+  const leftoverFromFive = leftOverFromTen % 5;
+};
+
 export const Scoreboard: React.FC<props> = observer(
   (props: props): JSX.Element => {
     return (
