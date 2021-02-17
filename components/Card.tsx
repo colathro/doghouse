@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import Modal from "react-native-modal";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Spike } from "./icons/Spike";
 
 type props = {
   visible: boolean;
@@ -40,6 +41,7 @@ export const Card: React.FC<props> = observer(
                 style={styles.card}
                 activeOpacity={1}
               >
+                <Spike />
                 <Text style={styles.cardText}>
                   {GameState.decks[GameState.dice].name}
                 </Text>
@@ -183,16 +185,15 @@ const styles = StyleSheet.create({
     right: 10,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black",
-    height: 18,
-    width: 18,
+    height: 36,
+    width: 36,
     borderRadius: 50,
   },
   closeButtonText: {
-    color: "#ffffff",
+    color: "#000000",
     fontFamily: "Tw-Bold",
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 24,
   },
   helpButton: {
     position: "absolute",
@@ -200,16 +201,15 @@ const styles = StyleSheet.create({
     left: 10,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black",
-    height: 18,
-    width: 18,
+    height: 36,
+    width: 36,
     borderRadius: 50,
   },
   helpButtonText: {
-    color: "#ffffff",
+    color: "#000000",
     fontFamily: "Tw-Bold",
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 28,
   },
   arrowContainer: {
     width: "100%",

@@ -17,7 +17,7 @@ function Game({ navigation }: any) {
   const cardFinish = () => {
     setCardShow(false);
     setTimeout(() => {
-      setScoreShow(true);
+      setReset(true);
     }, 500);
   };
 
@@ -35,6 +35,9 @@ function Game({ navigation }: any) {
       style={styles.container}
       title={"t"}
       navigation={navigation}
+      showScores={() => {
+        setScoreShow(true);
+      }}
       hideMenu={cardShow || scoreShow}
     >
       <Card visible={cardShow} callback={cardFinish} />

@@ -10,10 +10,17 @@ export function GameView({
   players,
   children,
   hideMenu,
+  showScores,
 }: any) {
   let header;
   if (title) {
-    header = <GameHeader navigation={navigation} hideMenu={hideMenu} />;
+    header = (
+      <GameHeader
+        navigation={navigation}
+        hideMenu={hideMenu}
+        showScores={showScores}
+      />
+    );
   } else {
     header = <></>;
   }

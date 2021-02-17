@@ -12,6 +12,7 @@ import {
 type props = {
   navigation: any;
   hideMenu: boolean;
+  showScores: any;
 };
 
 export const GameHeader: React.FC<props> = (props: props): JSX.Element => {
@@ -27,7 +28,17 @@ export const GameHeader: React.FC<props> = (props: props): JSX.Element => {
             });
           }}
         >
-          <Text style={styles.helpButtonText}>Menu</Text>
+          <Text style={styles.helpButtonText}>menu</Text>
+        </TouchableOpacity>
+      ) : null}
+      {!props.hideMenu ? (
+        <TouchableOpacity
+          style={styles.helpButton}
+          onPress={() => {
+            props.showScores();
+          }}
+        >
+          <Text style={styles.helpButtonText}>scores</Text>
         </TouchableOpacity>
       ) : null}
     </View>
@@ -40,6 +51,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
     justifyContent: "space-between",
+    minHeight: 35,
   },
   title: {},
   button: {
@@ -61,13 +73,12 @@ const styles = StyleSheet.create({
   helpButton: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black",
     height: 28,
     width: 65,
     borderRadius: 10,
   },
   helpButtonText: {
-    color: "#ffffff",
+    color: "#000000",
     fontFamily: "Tw-Bold",
     fontWeight: "bold",
     fontSize: 28,

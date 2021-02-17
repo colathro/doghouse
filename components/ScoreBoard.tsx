@@ -29,7 +29,7 @@ const Score = (name: string, val: number) => {
               width: 48,
               height: 48,
               position: "absolute",
-              left: v * 10,
+              left: v * 10 + (v % 5 == 0 && v != 0 ? 30 : 0),
             },
           });
           return <Boner style={specStyle.boner}></Boner>;
@@ -92,8 +92,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   scrollableView: {
-    margin: 30,
-    marginLeft: 45,
+    margin: 20,
   },
   scrollableContainer: {
     width: "100%",
@@ -105,9 +104,9 @@ const styles = StyleSheet.create({
   },
   bonerContainer: {
     flexDirection: "row",
-    flex: 60,
+    flex: 65,
   },
-  textContainer: { flex: 35 },
+  textContainer: { flex: 30 },
   text: {
     fontFamily: "Tw-Bold",
     fontSize: 28,
