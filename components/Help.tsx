@@ -25,7 +25,7 @@ export const Help: React.FC<props> = (props: props): JSX.Element => {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          {contents[props.help]}
+          <Text style={styles.helpText}>{props.help}</Text>
           <Button
             title="CLOSE"
             onPress={() => {
@@ -53,6 +53,12 @@ const styles = StyleSheet.create({
     maxWidth: 500,
     alignItems: "center",
   },
+  helpText: {
+    textAlign: "center",
+    fontFamily: "Tw-Bold",
+    fontSize: 28,
+    margin: 12,
+  }
 });
 
 interface IIndexable {

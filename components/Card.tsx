@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GameState } from "../states";
-import { Doghouse, Timer } from "../components";
+import { Doghouse, Timer, Help } from "../components";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import Modal from "react-native-modal";
@@ -16,6 +16,7 @@ export const Card: React.FC<props> = observer(
   (props: props): JSX.Element => {
     const [flipped, setFlipped] = useState(false);
     const [showTimer, setShowTimer] = useState(false);
+    const [showHelp, setShowHelp] = useState(false);
     let card;
 
     useEffect(() => {
@@ -37,7 +38,6 @@ export const Card: React.FC<props> = observer(
           <View style={styles.modalView}>
             <CardFlip
               ref={(cardObj) => {
-                console.log(cardObj);
                 if (cardObj) {
                   card = cardObj;
                 }
@@ -46,7 +46,7 @@ export const Card: React.FC<props> = observer(
             >
               <TouchableOpacity style={styles.card} activeOpacity={1}>
                 <Spike />
-                <Text style={styles.cardText}>
+                <Text style={styles.deckName}>
                   {GameState.decks[GameState.dice].name}
                 </Text>
               </TouchableOpacity>
@@ -64,12 +64,18 @@ export const Card: React.FC<props> = observer(
                   <TouchableOpacity
                     style={styles.helpButton}
                     onPress={() => {
-                      setFlipped(false);
-                      props.callback();
+                      setShowHelp(true);
                     }}
                   >
                     <Text style={styles.helpButtonText}>?</Text>
                   </TouchableOpacity>
+                  {showHelp ? (
+                    <Help
+                      visible={true}
+                      callback={setShowHelp}
+                      help={GameState.decks[GameState.dice].help}
+                    />
+                  ) : null}
                   <Text style={styles.prompt}>
                     {GameState.decks[GameState.dice].prompt}
                   </Text>
@@ -178,6 +184,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Tw-Bold",
     fontSize: 28,
+    margin: 12,
+  },
+  deckName: {
+    textAlign: "center",
+    fontFamily: "ShowCardGothic",
+    fontSize: 34,
     margin: 12,
   },
   doghouseDropDown: {

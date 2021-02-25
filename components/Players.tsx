@@ -57,7 +57,6 @@ export const Players: React.FC<props> = observer(
 
     return (
       <View style={styles.spacing}>
-        <Text style={styles.text}>Players:</Text>
         <View style={styles.playerContainer}>
           <View style={styles.container}>
             {props.players.map((val, ind) => (

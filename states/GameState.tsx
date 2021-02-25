@@ -7,7 +7,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Players } from "../components";
 import { CardPack, Deck, Card, Player } from "../types";
-import { DeckPrompts, DeckNames } from "../constants";
+import { DeckPrompts, DeckNames, DeckHelp} from "../constants";
 
 class GameStateObject {
   constructor() {
@@ -30,6 +30,7 @@ class GameStateObject {
     {
       name: DeckNames.throwABone,
       prompt: DeckPrompts.throwABone,
+      help: DeckHelp.throwABone,
       maxDoghouse: 1,
       useTimer: false,
       cards: [] as Array<Card>,
@@ -37,6 +38,7 @@ class GameStateObject {
     {
       name: DeckNames.dogFight,
       prompt: DeckPrompts.dogFight,
+      help: DeckHelp.dogFight,
       maxDoghouse: -1,
       useTimer: false,
       cards: [] as Array<Card>,
@@ -44,6 +46,7 @@ class GameStateObject {
     {
       name: DeckNames.doghouseOrDare,
       prompt: DeckPrompts.doghouseOrDare,
+      help: DeckHelp.doghouseOrDare,
       maxDoghouse: 1,
       useTimer: false,
       cards: [] as Array<Card>,
@@ -51,6 +54,7 @@ class GameStateObject {
     {
       name: DeckNames.barkOrBite,
       prompt: DeckPrompts.barkOrBite,
+      help: DeckHelp.barkOrBite,
       maxDoghouse: -1,
       useTimer: false,
       cards: [] as Array<Card>,
@@ -58,6 +62,7 @@ class GameStateObject {
     {
       name: DeckNames.breeds,
       prompt: DeckPrompts.breeds,
+      help: DeckHelp.breeds,
       maxDoghouse: 1,
       useTimer: true,
       cards: [] as Array<Card>,
@@ -122,6 +127,7 @@ class GameStateObject {
   }
 
   addPlayer(name: string) {
+    name = name.toLowerCase();
     if (
       typeof name != "undefined" &&
       name !== "" &&

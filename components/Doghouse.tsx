@@ -12,7 +12,7 @@ import {
   ScrollView,
   Easing,
 } from "react-native";
-import { DoghouseIcon } from "./icons/DoghouseIcon";
+import { Logo } from "./icons/Logo";
 import { PlayerIcon } from "./icons/PlayerIcon";
 
 type props = {
@@ -59,6 +59,7 @@ export const Doghouse: React.FC<props> = observer(
             animationType={"scale"}
             checkStyle={styles.text}
             labelStyle={styles.text}
+            customMarker={<Text/>}//Leave me I know I'm red
           />
         </View>
       );
@@ -197,7 +198,17 @@ export const Doghouse: React.FC<props> = observer(
           />
         ) : null}
         <View style={styles.menuContainer}>
-          <View style={styles.textContainer}>
+          <TouchableOpacity
+            style={styles.textContainer}
+            onPress={() => {
+              if (!dropdownOpen) {
+                openAnimation();
+              } else {
+                closeAnimation();
+              }
+              setDropdownOpen(!dropdownOpen);
+            }}
+          >
             <Animated.Text
               style={[
                 selectedName == "" && multiSelectedNames.length == 0
@@ -208,32 +219,20 @@ export const Doghouse: React.FC<props> = observer(
             >
               {props.limitDoghouse
                 ? selectedName == ""
-                  ? "Select a Player"
+                  ? "send a player to..."
                   : selectedName
                 : multiSelectedNames.toString().length >= 16
                 ? multiSelectedNames.toString().substring(0, 13) + "..."
                 : multiSelectedNames.length == 0
-                ? "Select Players"
+                ? "send players to..."
                 : multiSelectedNames.toString()}
             </Animated.Text>
-            <TouchableOpacity
-              style={styles.dropButton}
-              onPress={() => {
-                if (!dropdownOpen) {
-                  openAnimation();
-                } else {
-                  closeAnimation();
-                }
-                setDropdownOpen(!dropdownOpen);
-              }}
+            <Animated.View
+              style={[styles.dropButton, arrowAnimatedStyle]}
             >
-              <Animated.View
-                style={[styles.arrowContainer, arrowAnimatedStyle]}
-              >
-                <Arrow />
-              </Animated.View>
-            </TouchableOpacity>
-          </View>
+              <Arrow />
+            </Animated.View>
+          </TouchableOpacity>
         </View>
         <Animated.View
           style={[styles.openMenuContainer, dropdownAnimatedStyle]}
@@ -277,11 +276,7 @@ export const Doghouse: React.FC<props> = observer(
                 }
               }}
             >
-              <PlayerIcon />
-              <View style={styles.arrowRightContainer}>
-                <ArrowRight />
-              </View>
-              <DoghouseIcon />
+              <Logo />
             </TouchableOpacity>
           )}
         </Animated.View>

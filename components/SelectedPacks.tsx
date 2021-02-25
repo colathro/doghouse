@@ -14,7 +14,7 @@ export const SelectedPacks: React.FC<props> = observer(
   (props: props): JSX.Element => {
     return (
       <View style={styles.spacing}>
-        <Text style={styles.text}>Selected Packs:</Text>
+        <Text style={styles.text}>selected packs:</Text>
         <View style={styles.container}>
           <ScrollView
             contentContainerStyle={styles.selectedPackContainer}
@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   text: {
+    textAlign: "center",
     fontFamily: "Tw-Bold",
-    fontSize: 24,
+    fontSize: 36,
   },
   selectedPackContainer: {
     flexDirection: "row",

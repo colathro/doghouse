@@ -12,7 +12,7 @@ import {
 
 function GameSetup({ navigation }: any) {
   return (
-    <Main navigation={navigation} title="Game Setup" help="setup">
+    <Main navigation={navigation} title="Game Setup" help="Doghouse is the party game that makes failure fun. Find some friends, pick your punishment for going to the doghouse, and start playering! There are no winners, but atleast one loser per round, and you guessed it... loser go to the doghouse!">
       <View style={styles.container}>
         <View>
           <Players

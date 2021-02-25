@@ -1,8 +1,8 @@
 export const DeckPrompts = {
-  breeds: "List.",
-  barkOrBite: "Raise your hand if you've",
-  dogFight: "Debate",
-  doghouseOrDare: "Choose someone to",
-  throwABone: "Who's most likely to",
-  teachersPet: "Guess",
+  breeds: "name...",
+  barkOrBite: "who has never...",
+  dogFight: "pick a side...",
+  doghouseOrDare: "dare you to...",
+  throwABone: "most likely to...",
+  teachersPet: "guess...",
 };
