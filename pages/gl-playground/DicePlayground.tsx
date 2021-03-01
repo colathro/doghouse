@@ -127,8 +127,8 @@ function DicePlayground({ navigation }) {
   });
 
   const roll = () => {
-    let spinX = getRandomInt(2,7);
-    let spinY = getRandomInt(2,7);
+    let spinX = getRandomInt(2,7); //[4,1,3,6]
+    let spinY = getRandomInt(2,7); //[4,5,3,2]
     let dirX = getRandomInt(0,2) == 0 ? -1 : 1;
     let dirY = getRandomInt(0,2) == 0 ? -1 : 1;
 
@@ -153,6 +153,7 @@ function DicePlayground({ navigation }) {
       setDY(new Animated.Value(0));
       setCurX(spinX * dirX);
       setCurY(spinY * dirY);
+      console.log((spinY * dirY) + " " + (spinX * dirX));
       setCurX(0);
       setCurY(0);
     });

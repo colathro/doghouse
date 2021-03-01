@@ -65,7 +65,7 @@ export const Header: React.FC<props> = (props: props): JSX.Element => {
     back = (
       <>
         <TouchableOpacity style={styles.button} onPress={props.navigation.goBack}>
-          <Text style={styles.buttonText}>Back</Text>
+          <Text style={styles.buttonText}>back</Text>
         </TouchableOpacity>
       </>
     );

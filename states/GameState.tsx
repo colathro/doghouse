@@ -101,6 +101,11 @@ class GameStateObject {
     this.drawCard();
   }
 
+  setDice(i: number){
+    this.dice = i;
+    this.drawCard();
+  }
+  
   startGame() {
     this.activeCard = {} as Card;
     this.decks.forEach((deck) => (deck.cards = [] as Array<Card>));

@@ -40,7 +40,7 @@ export const AvailablePack: React.FC<props> = observer(
             GameState.removeActivePack(props.pack);
           }}
         >
-          <Text style={selectStyles.selectButtonText}>{"Disable"}</Text>
+          <Text style={selectStyles.selectButtonText}>{"disable"}</Text>
         </TouchableOpacity>
       );
     } else if (props.pack.purchased) {
@@ -51,7 +51,7 @@ export const AvailablePack: React.FC<props> = observer(
             GameState.addActivePack(props.pack);
           }}
         >
-          <Text style={selectStyles.selectButtonText}>{"Enable"}</Text>
+          <Text style={selectStyles.selectButtonText}>{"enable"}</Text>
         </TouchableOpacity>
       );
     } else if (props.pack.ratePack && !props.pack.purchased) {
@@ -60,7 +60,7 @@ export const AvailablePack: React.FC<props> = observer(
           style={selectStyles.selectButtonRate}
           onPress={ratePack}
         >
-          <Text style={selectStyles.selectButtonText}>{"Rate"}</Text>
+          <Text style={selectStyles.selectButtonText}>{"rate"}</Text>
         </TouchableOpacity>
       );
     } else {
