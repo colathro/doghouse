@@ -18,119 +18,144 @@ function DicePlayground({ navigation }) {
   const renderLeft = (
       <Animated.View
         ref={refViewRight}
-        style={[styles.rectangle, { backgroundColor: "#4c72e0" }]}
-      />
+        style={[styles.rectangle, { backgroundColor: "#ff6700" }]}
+      >
+        <Text style={styles.text}>5</Text>
+      </Animated.View>
     );
 
   const renderRight = (
       <Animated.View
         ref={refViewLeft}
-        style={[styles.rectangle, { backgroundColor: "#8697df" }]}
-      />
+        style={[styles.rectangle, { backgroundColor: "#ff6700" }]}
+      >
+        <Text style={styles.text}>2</Text>
+      </Animated.View>
     );
 
   const renderFront = (
       <Animated.View
         ref={refViewFront}
-        style={[styles.rectangle,{ backgroundColor: "#b5bce2" }]}
-      />
+        style={[styles.rectangle,{ backgroundColor: "#ff6700" }]}
+      >
+        <Text style={styles.text}>4</Text>
+      </Animated.View>
     );
 
   const renderBack = (
       <Animated.View
         ref={refViewBack}
-        style={[styles.rectangle, { backgroundColor: "#e5afb9" } ]}
-      />
+        style={[styles.rectangle, { backgroundColor: "#ff6700" } ]}
+      >
+        <Text style={styles.text}>3</Text>
+      </Animated.View>
     );
 
   const renderTop =  (
       <Animated.View
         ref={refViewTop}
-        style={[styles.rectangle, { backgroundColor: "#de7c92" }]}
-      />
+        style={[styles.rectangle, { backgroundColor: "#ff6700" }]}
+      >
+        <Text style={styles.text}>1</Text>
+      </Animated.View>
     );
 
   const renderBottom = (
       <Animated.View
         ref={refViewBottom}
-        style={[styles.rectangle, {backgroundColor: "#d1426b" }]}
-      />
+        style={[styles.rectangle, {backgroundColor: "#ff6700" }]}
+      >
+        <Text style={styles.text}>6</Text>
+      </Animated.View>
     );
 
-  const setRotation = (dx, dy) => {
+  const setRotation = (dx, dy, scale) => {
     const origin = { x: 0, y: 0, z: -50 };
-    let matrix = rotateXY(dx, dy);
+    let matrix = rotateXY(dx, dy, scale);
     transformOrigin(matrix, origin);
     refViewFront.current.setNativeProps({
       style: { transform: [{ perspective: 1000 }, { matrix: matrix }] },
     });
 
-    matrix = rotateXY(dx + 180, dy);
+    matrix = rotateXY(dx + 180, dy, scale);
     transformOrigin(matrix, origin);
     refViewBack.current.setNativeProps({
       style: { transform: [{ perspective: 1000 }, { matrix: matrix }] },
     });
 
-    matrix = rotateXY(dx + 90, dy);
+    matrix = rotateXY(dx + 90, dy, scale);
     transformOrigin(matrix, origin);
     refViewRight.current.setNativeProps({
       style: { transform: [{ perspective: 1000 }, { matrix: matrix }] },
     });
 
-    matrix = rotateXY(dx - 90, dy);
+    matrix = rotateXY(dx - 90, dy, scale);
     transformOrigin(matrix, origin);
     refViewLeft.current.setNativeProps({
       style: { transform: [{ perspective: 1000 }, { matrix: matrix }] },
     });
 
-    matrix = rotateXZ(dx, dy - 90);
+    matrix = rotateXZ(dx, dy - 90, scale);
     transformOrigin(matrix, origin);
     refViewTop.current.setNativeProps({
       style: { transform: [{ perspective: 1000 }, { matrix: matrix }] },
     });
 
-    matrix = rotateXZ(-dx, dy + 90);
+    matrix = rotateXZ(-dx, dy + 90, scale);
     transformOrigin(matrix, origin);
     refViewBottom.current.setNativeProps({
       style: { transform: [{ perspective: 1000 }, { matrix: matrix }] },
     });
   };
 
-
   const [x, setDX] = useState(new Animated.Value(0));
   const [y, setDY] = useState(new Animated.Value(0));
+  const [scale, setScale] = useState(new Animated.Value(1));
+  const [curX, setCurX] = useState(0);
+  const [curY, setCurY] = useState(0);
+
   let dx = 0;
   let dy = 0;
   const [rolling, setRolling] = useState(false);
   x.addListener(({value}) => {
     dx = value;
-    setRotation(value, dy);
+    setRotation(value, dy, 1);
   });
   y.addListener(({value}) => {
     dy = value;
-    setRotation(dx, value);
+    setRotation(dx, value, 1);
   });
-  //y.addListener(({value}) => dy = value);
 
-  const roll = (xRolls, yRolls) => {
-    Animated.parallel([
-      Animated.timing(x, {
-        toValue: xRolls*90,
-        duration: 1000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }),
-      Animated.timing(y, {
-        toValue: yRolls*90,
-        duration: 1000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      })
-  ]).start(() => {
-    setRolling(false);
-    setDX(new Animated.Value(0));
-    setDY(new Animated.Value(0));
-  });
+  const roll = () => {
+    let spinX = getRandomInt(2,7);
+    let spinY = getRandomInt(2,7);
+    let dirX = getRandomInt(0,2) == 0 ? -1 : 1;
+    let dirY = getRandomInt(0,2) == 0 ? -1 : 1;
+
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(x, {
+          toValue: (spinX * dirX)*90,
+          duration: 800,
+          easing: Easing.bounce,
+          useNativeDriver: true,
+        }),
+        Animated.timing(y, {
+          toValue: (spinY * dirY)*90,
+          duration: 800,
+          easing: Easing.bounce,
+          useNativeDriver: true,
+        }),
+      ]),
+    ]).start(() => {
+      setRolling(false);
+      setDX(new Animated.Value(0));
+      setDY(new Animated.Value(0));
+      setCurX(spinX * dirX);
+      setCurY(spinY * dirY);
+      setCurX(0);
+      setCurY(0);
+    });
   };
 
   return (
@@ -139,7 +164,7 @@ function DicePlayground({ navigation }) {
         onPress={() => {
             if(!rolling){
               setRolling(!rolling);
-              roll(getRandomInt(5,10), getRandomInt(5,10));
+              roll();
             }
         }}
       >
@@ -174,12 +199,19 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     zIndex: 10,
+    borderRadius: 7,
     borderColor: "black",
     borderWidth: 3,
+    justifyContent: "center",
   },
+  text: {
+    textAlign: "center",
+    fontFamily: "Tw-Bold",
+    fontSize: 28,
+  }
 });
 
-const rotateXY = (dx, dy) => {
+const rotateXY = (dx, dy, scale) => {
   const radX = (Math.PI / 180) * dy;
   const cosX = Math.cos(radX);
   const sinX = Math.sin(radX);
@@ -204,11 +236,11 @@ const rotateXY = (dx, dy) => {
     0,
     0,
     0,
-    1,
+    scale, // 1 is normal, 2 is half size
   ];
 };
 
-const rotateXZ = (dx, dy) => {
+const rotateXZ = (dx, dy, scale) => {
   const radX = (Math.PI / 180) * dx;
   const cosX = Math.cos(radX);
   const sinX = Math.sin(radX);
@@ -233,7 +265,7 @@ const rotateXZ = (dx, dy) => {
     0,
     0,
     0,
-    1,
+    scale,
   ];
 };
 
@@ -250,8 +282,47 @@ const transformOrigin = (matrix, origin) => {
   MatrixMath.multiplyInto(matrix, matrix, untranslate);
 };
 
-function getRandomInt(min, max) {
+function getRandomInt(min, max) { // [min, max)
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function getRandomBounce(setCurX, setCurY, curX, curY, x, y, scale) { // dir -1 or 1 for direction
+  let spinX = getRandomInt(6,10);
+  let spinY = getRandomInt(6,10);
+  let dirX = getRandomInt(0,2) == 0 ? -1 : 1;
+  let dirY = getRandomInt(0,2) == 0 ? -1 : 1;
+  setCurX(curX.current + (spinX * dirX));
+  setCurY(curY.current + (spinY * dirY));
+  return Animated.parallel([
+    Animated.parallel([
+      Animated.timing(x, {
+        toValue: curX.current*90,
+        duration: 1000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+      Animated.timing(y, {
+        toValue: curY.current*90,
+        duration: 1000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+    ]),
+    Animated.sequence([
+      Animated.timing(scale, {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scale, {
+        toValue: .75,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+    ]),
+  ]);
 }
 
 export default DicePlayground;
