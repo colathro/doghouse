@@ -102,6 +102,7 @@ export const Card: React.FC<props> = observer(
                           GameState.adjustScore(player)
                         );
                         props.callback();
+                        GameState.resetDoghouse();
                       }}
                     />
                   </View>

@@ -8,6 +8,7 @@ import {
   Timer,
   Doghouse,
 } from "../../components";
+import { StyleSheet } from "react-native";
 import { GameState } from "../../states";
 
 function HomeScreen({ navigation }: any) {
@@ -23,14 +24,13 @@ function HomeScreen({ navigation }: any) {
         />
       ) : null}
       <Spike />
-      <Logo />
+      <Logo style={logoStyle.icon} />
       <BigButton
         title="PLAY"
         onPress={() => navigation.navigate("GameSetup")}
       />
       <Button title="PACKS" onPress={() => navigation.navigate("Settings")} />
-      {GameState.devMode ? 
-      (
+      {GameState.devMode ? (
         <Button
           title="Dice Roll Test"
           onPress={() => navigation.navigate("DicePlayground")}
@@ -39,5 +39,12 @@ function HomeScreen({ navigation }: any) {
     </Main>
   );
 }
+
+const logoStyle = StyleSheet.create({
+  icon: {
+    height: 62,
+    width: 250,
+  },
+});
 
 export default HomeScreen;

@@ -1,10 +1,15 @@
 import * as React from "react";
+import { ViewStyle } from "react-native";
 import Svg, { Defs, ClipPath, Path, G } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: style */
 
-export const Logo: React.FC = () => {
+type props = {
+  style: ViewStyle;
+};
+
+export const Logo: React.FC<props> = (props: props) => {
   return (
-    <Svg width={250} height={62} data-name="Layer 1" viewBox="0 0 250 62">
+    <Svg style={props.style} data-name="Layer 1" viewBox="0 0 250 62">
       <Defs>
         <ClipPath id="prefix__a">
           <Path fill="none" d="M0 0h250.33v62.48H0z" />

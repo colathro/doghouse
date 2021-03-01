@@ -59,7 +59,7 @@ export const Doghouse: React.FC<props> = observer(
             animationType={"scale"}
             checkStyle={styles.text}
             labelStyle={styles.text}
-            customMarker={<Text/>}//Leave me I know I'm red
+            customMarker={() => <Text />} //Leave me I know I'm red
           />
         </View>
       );
@@ -227,9 +227,7 @@ export const Doghouse: React.FC<props> = observer(
                 ? "send players to..."
                 : multiSelectedNames.toString()}
             </Animated.Text>
-            <Animated.View
-              style={[styles.dropButton, arrowAnimatedStyle]}
-            >
+            <Animated.View style={[styles.dropButton, arrowAnimatedStyle]}>
               <Arrow />
             </Animated.View>
           </TouchableOpacity>
@@ -276,7 +274,7 @@ export const Doghouse: React.FC<props> = observer(
                 }
               }}
             >
-              <Logo />
+              <Logo style={logoStyle.icon} />
             </TouchableOpacity>
           )}
         </Animated.View>
@@ -400,5 +398,12 @@ const styles = StyleSheet.create({
   arrowRightContainer: {
     marginLeft: 15,
     marginRight: 15,
+  },
+});
+
+const logoStyle = StyleSheet.create({
+  icon: {
+    height: 34,
+    width: 250,
   },
 });

@@ -16,39 +16,53 @@ type props = {
   callback: any;
 };
 
-const Score = (name: string, val: number) => {
+const Score = (name: string, val: number, index: number) => {
+  let background;
+  let icon;
+  if (index === 0) {
+    background = StyleSheet.create({
+      color: {
+        backgroundColor: "#ff6700",
+      },
+    });
+  } else if (index === 1) {
+    background = StyleSheet.create({
+      color: {
+        backgroundColor: "#ff954f",
+      },
+    });
+  } else if (index === 2) {
+    background = StyleSheet.create({
+      color: {
+        backgroundColor: "#ffbd91",
+      },
+    });
+  } else {
+    background = StyleSheet.create({
+      color: {
+        backgroundColor: "#fff",
+      },
+    });
+  }
   return (
-    <View style={styles.scoreContainer}>
+    <View style={{ ...styles.container, ...background.color }}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{name}</Text>
       </View>
       <View style={styles.bonerContainer}>
-        {Array.from({ length: val }, (x, i) => i).map((v) => {
-          const specStyle = StyleSheet.create({
-            boner: {
-              width: 48,
-              height: 48,
-              position: "absolute",
-              left: v * 10 + (v % 5 == 0 && v != 0 ? 30 : 0),
-            },
-          });
-          return <Boner style={specStyle.boner}></Boner>;
-        })}
+        <Text style={styles.text}>{val}</Text>
       </View>
     </View>
   );
 };
 
-const GenerateBones = (count: number) => {
-  const tenBones = count / 10;
-  const leftOverFromTen = count % 10;
-
-  const fiveBones = leftOverFromTen / 5;
-  const leftoverFromFive = leftOverFromTen % 5;
-};
-
 export const Scoreboard: React.FC<props> = observer(
   (props: props): JSX.Element => {
+    let localPlayers = [];
+    GameState.players.forEach((val) =>
+      localPlayers.push(Object.assign({}, val))
+    );
+    localPlayers = localPlayers.sort((a, b) => b["score"] - a["score"]);
     return (
       <Modal
         style={styles.modalView}
@@ -63,17 +77,14 @@ export const Scoreboard: React.FC<props> = observer(
               contentContainerStyle={styles.scrollableContainer}
               showsVerticalScrollIndicator={false}
             >
-              {GameState.players.map((val, ind) => {
-                return Score(val.name, val.score);
+              {localPlayers.map((val, ind) => {
+                return Score(val.name, val.score, ind);
               })}
             </ScrollView>
             <Button
-              title="Next Turn"
+              title="CLOSE"
               onPress={() => {
                 props.callback();
-                GameState.players.forEach(
-                  (player) => (player.selected = false)
-                );
               }}
             ></Button>
           </View>
@@ -87,7 +98,8 @@ const styles = StyleSheet.create({
   modalView: {
     backgroundColor: "white",
     borderRadius: 14,
-    width: "95%",
+    width: "90%",
+    height: "50%",
     maxWidth: 500,
     maxHeight: "50%",
     alignItems: "center",
@@ -101,22 +113,38 @@ const styles = StyleSheet.create({
   },
   scrollableView: {
     margin: 20,
+    width: "100%",
   },
   scrollableContainer: {
     width: "100%",
+    alignItems: "center",
   },
   scoreContainer: {
     flexDirection: "row",
     marginBottom: 20,
     width: "100%",
   },
-  bonerContainer: {
-    flexDirection: "row",
-    flex: 65,
-  },
-  textContainer: { flex: 30 },
+  bonerContainer: {},
+  textContainer: {},
   text: {
     fontFamily: "Tw-Bold",
     fontSize: 28,
+  },
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "90%",
+    height: 50,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.0,
+    elevation: 8,
+    borderRadius: 6,
+    margin: 8,
   },
 });
