@@ -70,6 +70,7 @@ class GameStateObject {
     {
       name: DeckNames.teachersPet,
       prompt: DeckPrompts.teachersPet,
+      help: DeckHelp.teachersPet,
       maxDoghouse: 1,
       useTimer: false,
       cards: [] as Array<Card>,

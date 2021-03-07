@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GameState } from "../states";
-import { Doghouse, Timer, Help } from "../components";
+import { Doghouse, Timer, CardHelp} from "../components";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import Modal from "react-native-modal";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, LayoutChangeEvent, UIManager } from "react-native";
 import { Spike } from "./icons/Spike";
 
 type props = {
@@ -18,6 +18,12 @@ export const Card: React.FC<props> = observer(
     const [showTimer, setShowTimer] = useState(false);
     const [showHelp, setShowHelp] = useState(false);
     let card;
+    const helpRef = React.useRef<TouchableOpacity>(null);
+    let xPage = null;
+    let yPage = null;
+    let hHeight = null;
+    let hWidth = null;
+
 
     useEffect(() => {
       setTimeout(() => {
@@ -66,14 +72,20 @@ export const Card: React.FC<props> = observer(
                     onPress={() => {
                       setShowHelp(true);
                     }}
+                    ref={helpRef}
                   >
                     <Text style={styles.helpButtonText}>?</Text>
                   </TouchableOpacity>
                   {showHelp ? (
-                    <Help
+                    <CardHelp
                       visible={true}
                       callback={setShowHelp}
                       help={GameState.decks[GameState.dice].help}
+                      helpRef={helpRef}
+                      hWidth={hWidth}
+                      hHeight={hHeight}
+                      xPage={xPage}
+                      yPage={yPage}
                     />
                   ) : null}
                   <Text style={styles.prompt}>
@@ -121,11 +133,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.0)",
     height: "80%",
     width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  playAreaContainer: {
-    height: 150,
     alignItems: "center",
     justifyContent: "center",
   },

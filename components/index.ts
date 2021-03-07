@@ -29,3 +29,4 @@ export * from "./icons/Arrow";
 export * from "./icons/DoghouseIcon";
 export * from "./icons/PlayerIcon";
 export * from "./icons/ArrowRight";
+export * from "./CardHelp";
