@@ -45,7 +45,7 @@ const Score = (name: string, val: number, index: number) => {
     });
   }
   return (
-    <View style={{ ...styles.container, ...background.color }}>
+    <View key={index} style={{ ...styles.container, ...background.color }}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{name}</Text>
       </View>

@@ -14,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*", "assets/fonts/*"],
     "ios": {
       "backgroundColor": "#FF6700",
       "supportsTablet": true,

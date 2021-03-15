@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#ff6700",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 24,
   },
   helpButton: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   helpButtonText: {
     color: "#000000",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 28,
   },
 });

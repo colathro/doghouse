@@ -53,10 +53,7 @@ export const Header: React.FC<props> = (props: props): JSX.Element => {
         >
           <Text style={styles.helpButtonText}>P</Text>
         </TouchableOpacity>
-        <PlayerDropdown
-          visible={modalVisible}
-          callback={setModalVisible}
-        />
+        <PlayerDropdown visible={modalVisible} callback={setModalVisible} />
       </>
     );
   }
@@ -64,7 +61,10 @@ export const Header: React.FC<props> = (props: props): JSX.Element => {
   if (props.allowBack) {
     back = (
       <>
-        <TouchableOpacity style={styles.button} onPress={props.navigation.goBack}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={props.navigation.goBack}
+        >
           <Text style={styles.buttonText}>back</Text>
         </TouchableOpacity>
       </>
@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#ff6700",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
     fontSize: 24,
   },
   helpButton: {
@@ -115,7 +114,6 @@ const styles = StyleSheet.create({
   helpButtonText: {
     color: "#ffffff",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
     fontSize: 28,
   },
 });

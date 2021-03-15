@@ -49,7 +49,7 @@ const titleStyles = StyleSheet.create({
     textAlign: "center",
     color: "black",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 14,
     margin: 4,
   },
@@ -117,7 +117,7 @@ const getMoreStyles = StyleSheet.create({
     textAlign: "center",
     color: "black",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 48,
   },
 });

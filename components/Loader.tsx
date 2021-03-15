@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     color: "black",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 40,
   },
 });

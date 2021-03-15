@@ -1,10 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GameState } from "../states";
-import { Doghouse, Timer, CardHelp} from "../components";
+import { Doghouse, Timer, CardHelp } from "../components";
 import { observer } from "mobx-react-lite";
 import CardFlip from "react-native-card-flip";
 import Modal from "react-native-modal";
-import { StyleSheet, Text, TouchableOpacity, View, LayoutChangeEvent, UIManager } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  LayoutChangeEvent,
+  UIManager,
+} from "react-native";
 import { Spike } from "./icons/Spike";
 
 type props = {
@@ -23,7 +30,6 @@ export const Card: React.FC<props> = observer(
     let yPage = null;
     let hHeight = null;
     let hWidth = null;
-
 
     useEffect(() => {
       setTimeout(() => {
@@ -216,7 +222,7 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: "#000000",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 24,
   },
   helpButton: {
@@ -232,7 +238,7 @@ const styles = StyleSheet.create({
   helpButtonText: {
     color: "#000000",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 28,
   },
   arrowContainer: {

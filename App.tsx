@@ -54,7 +54,7 @@ const loadResources = async () => {
   await Font.loadAsync({
     "Tw-Reg": require("./assets/fonts/tccm.ttf"),
     "Tw-Bold": require("./assets/fonts/tccb.ttf"),
-    "ShowCardGothic": require("./assets/fonts/scg.ttf"),
+    ShowCardGothic: require("./assets/fonts/scg.ttf"),
   });
   GameState.loadActivePacks();
 };

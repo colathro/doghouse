@@ -30,12 +30,6 @@ function HomeScreen({ navigation }: any) {
         onPress={() => navigation.navigate("GameSetup")}
       />
       <Button title="PACKS" onPress={() => navigation.navigate("Settings")} />
-      {GameState.devMode ? (
-        <Button
-          title="Dice Roll Test"
-          onPress={() => navigation.navigate("DicePlayground")}
-        />
-      ) : null}
     </Main>
   );
 }

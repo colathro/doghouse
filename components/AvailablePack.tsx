@@ -141,7 +141,7 @@ const titleStyles = StyleSheet.create({
     textAlign: "center",
     color: "black",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 22,
   },
 });
@@ -179,7 +179,7 @@ const infoStyle = StyleSheet.create({
   helpButtonText: {
     color: "#ffffff",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 18,
   },
 });
@@ -248,7 +248,7 @@ const selectStyles = StyleSheet.create({
   selectButtonText: {
     color: "black",
     fontFamily: "Tw-Bold",
-    fontWeight: "bold",
+
     fontSize: 24,
   },
 });
