@@ -7,7 +7,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Players } from "../components";
 import { CardPack, Deck, Card, Player } from "../types";
-import { DeckPrompts, DeckNames, DeckHelp} from "../constants";
+import { DeckPrompts, DeckNames, DeckHelp } from "../constants";
 
 class GameStateObject {
   constructor() {
@@ -102,11 +102,15 @@ class GameStateObject {
     this.drawCard();
   }
 
-  setDice(i: number){
+  visualRoll() {
+    return Math.floor(Math.random() * this.decks.length);
+  }
+
+  setDice(i: number) {
     this.dice = i;
     this.drawCard();
   }
-  
+
   startGame() {
     this.activeCard = {} as Card;
     this.decks.forEach((deck) => (deck.cards = [] as Array<Card>));

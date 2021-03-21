@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   container: {
     alignContent: "center",
     justifyContent: "space-between",
-    width: 148,
+    maxWidth: 148,
     height: 200,
     backgroundColor: "#fff",
     shadowColor: "#000",

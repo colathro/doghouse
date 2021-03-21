@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Dice, Card, Doghouse, Scoreboard, GameView } from "../../components";
+import {
+  Dice,
+  Card,
+  Doghouse,
+  Scoreboard,
+  GameView,
+  DiceSimple,
+} from "../../components";
 import { View, StyleSheet } from "react-native";
 
 function Game({ navigation }: any) {
@@ -41,11 +48,16 @@ function Game({ navigation }: any) {
     >
       <Card visible={cardShow} callback={cardFinish} />
       <Scoreboard visible={scoreShow} callback={scoreFinish} />
-      <Dice
+      {/*       <Dice
         resetAnimation={reset}
         callback={rollDice}
         animationCallback={newRound}
-      />
+      /> */}
+      <DiceSimple
+        resetAnimation={reset}
+        callback={rollDice}
+        animationCallback={newRound}
+      ></DiceSimple>
     </GameView>
   );
 }

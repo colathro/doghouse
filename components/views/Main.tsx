@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   container: {
     marginTop: 30,
-    maxHeight: "91%",
+    maxHeight: "90%",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
