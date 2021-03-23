@@ -23,6 +23,15 @@ export const DiceSimple: React.FC<props> = observer(
       }
     };
 
+    const Dice = [
+      <Dice1 style={styles.dice}></Dice1>,
+      <Dice2 style={styles.dice}></Dice2>,
+      <Dice3 style={styles.dice}></Dice3>,
+      <Dice4 style={styles.dice}></Dice4>,
+      <Dice5 style={styles.dice}></Dice5>,
+      <Dice6 style={styles.dice}></Dice6>,
+    ];
+
     var dice = GameState.visualRoll();
 
     if (changes == 0 && rolling) {
@@ -54,12 +63,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-const Dice = [
-  <Dice1 style={styles.dice}></Dice1>,
-  <Dice2 style={styles.dice}></Dice2>,
-  <Dice3 style={styles.dice}></Dice3>,
-  <Dice4 style={styles.dice}></Dice4>,
-  <Dice5 style={styles.dice}></Dice5>,
-  <Dice6 style={styles.dice}></Dice6>,
-];
