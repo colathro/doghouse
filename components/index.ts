@@ -37,3 +37,4 @@ export * from "./icons/Dice3";
 export * from "./icons/Dice4";
 export * from "./icons/Dice5";
 export * from "./icons/Dice6";
+export * from "./SetupHelp";

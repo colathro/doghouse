@@ -26,10 +26,6 @@ export const Card: React.FC<props> = observer(
     const [showHelp, setShowHelp] = useState(false);
     let card;
     const helpRef = React.useRef<TouchableOpacity>(null);
-    let xPage = null;
-    let yPage = null;
-    let hHeight = null;
-    let hWidth = null;
 
     useEffect(() => {
       setTimeout(() => {
@@ -88,10 +84,6 @@ export const Card: React.FC<props> = observer(
                       callback={setShowHelp}
                       help={GameState.decks[GameState.dice].help}
                       helpRef={helpRef}
-                      hWidth={hWidth}
-                      hHeight={hHeight}
-                      xPage={xPage}
-                      yPage={yPage}
                     />
                   ) : null}
                   <Text style={styles.prompt}>

@@ -19,6 +19,7 @@ type props = {
   doghouse: boolean;
   showScore: boolean;
   players: IObservableArray<Player>;
+  plusRef: React.MutableRefObject<TouchableOpacity>;
 };
 
 export const Players: React.FC<props> = observer(
@@ -106,7 +107,7 @@ export const Players: React.FC<props> = observer(
                 </Animated.Text>
               </TouchableOpacity>
             ))}
-            {props.allowEdit ? <AddPlayer></AddPlayer> : <></>}
+            {props.allowEdit ? <AddPlayer plusRef={props.plusRef}></AddPlayer> : <></>}
           </View>
         </View>
         {!props.doghouse ? null : (
@@ -164,8 +165,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const AddPlayer: React.FC = observer(
-  (): JSX.Element => {
+
+type props2 = {
+  plusRef: React.MutableRefObject<TouchableOpacity>;
+};
+
+const AddPlayer: React.FC<props2> = observer(
+  (props: props2): JSX.Element => {
     const [editing, setEditing] = useState(false);
     const [text, setText] = useState("");
 
@@ -177,6 +183,7 @@ const AddPlayer: React.FC = observer(
       <View>
         {!editing ? (
           <TouchableOpacity
+            ref={props.plusRef}
             onPress={() => {
               setEditing(true);
               setText("");

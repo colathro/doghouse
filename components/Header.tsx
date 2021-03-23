@@ -13,7 +13,7 @@ import { PlayerDropdown } from "./PlayerDropdown";
 type props = {
   title: string;
   navigation: any;
-  help?: string;
+  help?: any;
   players: boolean;
   allowBack: boolean;
 };
@@ -21,22 +21,17 @@ type props = {
 export const Header: React.FC<props> = (props: props): JSX.Element => {
   let help;
   if (props.help) {
-    const [modalVisible, setModalVisible] = useState(false);
     help = (
       <>
         <TouchableOpacity
           style={styles.helpButton}
           onPress={() => {
-            setModalVisible(true);
+            props.help(true);
+            console.log("here");
           }}
         >
           <Text style={styles.helpButtonText}>?</Text>
         </TouchableOpacity>
-        <Help
-          visible={modalVisible}
-          callback={setModalVisible}
-          help={props.help!}
-        />
       </>
     );
   }

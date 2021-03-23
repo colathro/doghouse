@@ -16,10 +16,6 @@ type props = {
   callback: any;
   help: string;
   helpRef: React.MutableRefObject<TouchableOpacity>;
-  xPage: number;
-  yPage: number;
-  hWidth: number;
-  hHeight: number;
 };
 
 export const CardHelp: React.FC<props> = (props: props): JSX.Element => {

@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { GameState } from "../../states";
 import { observer } from "mobx-react-lite";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import {
   BigButton,
   Players,
   Main,
-  Spike,
+  SetupHelp,
   SelectedPacks,
 } from "../../components";
 
 function GameSetup({ navigation }: any) {
+  const [showHelp, setShowHelp] = useState(false);
+  
+  const plusRef = React.useRef<TouchableOpacity>(null);
+
   return (
-    <Main navigation={navigation} title="Game Setup" help="Doghouse is the party game that makes failure fun. Find some friends, pick your punishment for going to the doghouse, and start playering! Each game is a unique and has a different way of getting sent to the doghouse. There are no winners, but atleast one loser per round, and you guessed it... loser go to the doghouse!">
+    <Main navigation={navigation} title="Game Setup" help={setShowHelp}>
       <View style={styles.container}>
         <View>
           <Players
@@ -20,9 +24,17 @@ function GameSetup({ navigation }: any) {
             allowEdit={true}
             doghouse={false}
             showScore={false}
+            plusRef={plusRef}
           />
           <SelectedPacks linkToPurchase={true} navigation={navigation} />
         </View>
+        {showHelp ? (
+          <SetupHelp
+            visible={true}
+            callback={setShowHelp}
+            helpRef={plusRef}
+          />
+        ) : null}
         <BigButton
           title="START"
           onPress={() => {
