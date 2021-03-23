@@ -55,11 +55,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Dice = {
-  0: <Dice1 style={styles.dice}></Dice1>,
-  1: <Dice2 style={styles.dice}></Dice2>,
-  2: <Dice3 style={styles.dice}></Dice3>,
-  3: <Dice4 style={styles.dice}></Dice4>,
-  4: <Dice5 style={styles.dice}></Dice5>,
-  5: <Dice6 style={styles.dice}></Dice6>,
-};
+const Dice = [
+  <Dice1 style={styles.dice}></Dice1>,
+  <Dice2 style={styles.dice}></Dice2>,
+  <Dice3 style={styles.dice}></Dice3>,
+  <Dice4 style={styles.dice}></Dice4>,
+  <Dice5 style={styles.dice}></Dice5>,
+  <Dice6 style={styles.dice}></Dice6>,
+];
