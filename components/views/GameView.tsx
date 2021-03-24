@@ -11,6 +11,7 @@ export function GameView({
   children,
   hideMenu,
   showScores,
+  showPlayers,
 }: any) {
   let header;
   if (title) {
@@ -19,6 +20,7 @@ export function GameView({
         navigation={navigation}
         hideMenu={hideMenu}
         showScores={showScores}
+        showPlayers={showPlayers}
       />
     );
   } else {

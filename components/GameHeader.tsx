@@ -13,6 +13,7 @@ type props = {
   navigation: any;
   hideMenu: boolean;
   showScores: any;
+  showPlayers: any;
 };
 
 export const GameHeader: React.FC<props> = (props: props): JSX.Element => {
@@ -29,6 +30,16 @@ export const GameHeader: React.FC<props> = (props: props): JSX.Element => {
           }}
         >
           <Text style={styles.helpButtonText}>menu</Text>
+        </TouchableOpacity>
+      ) : null}
+      {!props.hideMenu ? (
+        <TouchableOpacity
+          style={styles.helpButton}
+          onPress={() => {
+            props.showPlayers();
+          }}
+        >
+          <Text style={styles.helpButtonText}>players</Text>
         </TouchableOpacity>
       ) : null}
       {!props.hideMenu ? (
@@ -74,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 28,
-    width: 65,
+    width: 80,
     borderRadius: 10,
   },
   helpButtonText: {

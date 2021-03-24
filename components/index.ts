@@ -38,3 +38,4 @@ export * from "./icons/Dice4";
 export * from "./icons/Dice5";
 export * from "./icons/Dice6";
 export * from "./SetupHelp";
+export * from "./PlayersEdit";
