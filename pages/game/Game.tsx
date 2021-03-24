@@ -6,12 +6,14 @@ import {
   Scoreboard,
   GameView,
   DiceSimple,
+  PlayersEdit,
 } from "../../components";
 import { View, StyleSheet } from "react-native";
 
 function Game({ navigation }: any) {
   const [cardShow, setCardShow] = useState(false);
   const [scoreShow, setScoreShow] = useState(false);
+  const [playersShow, setPlayerShow] = useState(false);
   const [reset, setReset] = useState(false);
 
   const rollDice = () => {
@@ -32,6 +34,10 @@ function Game({ navigation }: any) {
     setReset(true);
   };
 
+  const playersFinish = () => {
+    setPlayerShow(false);
+  };
+
   const newRound = () => {
     setReset(false);
   };
@@ -44,10 +50,14 @@ function Game({ navigation }: any) {
       showScores={() => {
         setScoreShow(true);
       }}
+      showPlayers={() => {
+        setPlayerShow(true);
+      }}
       hideMenu={cardShow || scoreShow}
     >
       <Card visible={cardShow} callback={cardFinish} />
       <Scoreboard visible={scoreShow} callback={scoreFinish} />
+      <PlayersEdit visible={playersShow} callback={playersFinish} />
       {/*       <Dice
         resetAnimation={reset}
         callback={rollDice}
