@@ -14,6 +14,7 @@ function GameSetup({ navigation }: any) {
   const [showHelp, setShowHelp] = useState(false);
   
   const plusRef = React.useRef<TouchableOpacity>(null);
+  const packsRef = React.useRef<TouchableOpacity>(null);
 
   return (
     <Main navigation={navigation} title="Game Setup" help={setShowHelp}>
@@ -26,13 +27,14 @@ function GameSetup({ navigation }: any) {
             showScore={false}
             plusRef={plusRef}
           />
-          <SelectedPacks linkToPurchase={true} navigation={navigation} />
+          <SelectedPacks linkToPurchase={true} navigation={navigation} cardRef={packsRef}/>
         </View>
         {showHelp ? (
           <SetupHelp
             visible={true}
             callback={setShowHelp}
-            helpRef={plusRef}
+            playersHelpRef={plusRef}
+            cardsHelpRef={packsRef}
           />
         ) : null}
         <BigButton

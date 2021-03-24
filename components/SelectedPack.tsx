@@ -10,6 +10,7 @@ type props = {
   pack?: CardPack;
   addMore: boolean;
   navigation?: any;
+  cardRef?: React.MutableRefObject<TouchableOpacity>;
 };
 
 export const SelectedPack: React.FC<props> = observer(
@@ -17,6 +18,7 @@ export const SelectedPack: React.FC<props> = observer(
     if (props.addMore) {
       return (
         <TouchableOpacity
+          ref={props.cardRef}
           activeOpacity={0.5}
           style={getMoreStyles.container}
           onPress={() => props.navigation.navigate("Settings")}

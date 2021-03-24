@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity} from "react-native";
 import { SelectedPack } from "./SelectedPack";
 import { ScrollView } from "react-native";
 
 type props = {
   linkToPurchase: boolean;
   navigation: any;
+  cardRef: React.MutableRefObject<TouchableOpacity>;
 };
 
 export const SelectedPacks: React.FC<props> = observer(
@@ -21,7 +22,7 @@ export const SelectedPacks: React.FC<props> = observer(
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-            <SelectedPack addMore={true} navigation={props.navigation} />
+            <SelectedPack addMore={true} navigation={props.navigation} cardRef={props.cardRef} />
             {GameState.activePacks.map((val, ind) => (
               <SelectedPack addMore={false} pack={val} key={ind}></SelectedPack>
             ))}

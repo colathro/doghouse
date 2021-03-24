@@ -13,30 +13,36 @@ import Svg, { Path } from "react-native-svg";
 type props = {
   visible: boolean;
   callback: any;
-  helpRef: React.MutableRefObject<TouchableOpacity>;
+  playersHelpRef: React.MutableRefObject<TouchableOpacity>;
+  cardsHelpRef: React.MutableRefObject<TouchableOpacity>;
 };
 
 export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
-  const [xPage, setXPage] = useState(null);
-  const [yPage, setYPage] = useState(null);
-  const [hWidth, setHWidth] = useState(null);
-  const [hHeight, setHHeight] = useState(null);
+  const [playersXPage, setplayersXPage] = useState(null);
+  const [playersYPage, setplayersYPage] = useState(null);
+  const [playersHWidth, setplayersHWidth] = useState(null);
+  const [playersHHeight, setplayersHHeight] = useState(null);
+
+  const [cardsXPage, setcardsXPage] = useState(null);
+  const [cardsYPage, setcardsYPage] = useState(null);
+  const [cardsHWidth, setcardsHWidth] = useState(null);
+  const [cardsHHeight, setcardsHHeight] = useState(null);
 
   useEffect(() => {
-    props.helpRef.current.measure((fx, fy, width, height, px, py) => {
-      console.log("Component width is: " + width);
-      console.log("Component height is: " + height);
-      console.log("X offset to frame: " + fx);
-      console.log("Y offset to frame: " + fy);
-      console.log("X offset to page: " + px);
-      console.log("Y offset to page: " + py);
-      setHWidth(width);
-      setHHeight(height);
-      setXPage(px);
-      setYPage(py);
+    props.playersHelpRef.current.measure((fx, fy, width, height, px, py) => {
+      setplayersHWidth(width);
+      setplayersHHeight(height);
+      setplayersXPage(px);
+      setplayersYPage(py);
+    });
+    props.cardsHelpRef.current.measure((fx, fy, width, height, px, py) => {
+      setcardsHWidth(width);
+      setcardsHHeight(height);
+      setcardsXPage(px);
+      setcardsYPage(py);
     });
   }, []);
-  
+
   return (
     <Modal animationType="fade" transparent={true} visible={props.visible}>
       <TouchableOpacity
@@ -48,18 +54,49 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
         <View
           style={[
             styles.helpView,
-            { left: xPage + hWidth, width: width - xPage - hWidth },
+            { alignItems: "flex-end", justifyContent: "flex-end", right: width - playersXPage, width: playersXPage, bottom: height - playersYPage - playersHHeight, height: height - playersYPage - playersHHeight},
           ]}
         >
-          <View style={styles.item}>
+          <View style={[styles.item]}>
+            <View style={[styles.balloon]}>
+              <Text style={styles.helpText}>Add Players</Text>
+              <View
+              style={[
+                styles.arrowContainer,
+                styles.arrowRightContainer,
+              ]}
+              >
+                <Svg style={styles.arrowRight} width={moderateScale(15.5, 0.6)} height={moderateScale(17.5, 0.6)} viewBox="32.485 17.5 15.515 17.5"  enable-background="new 32.485 17.5 15.515 17.5">
+                  <Path
+                      d="M48,35c-7-4-6-8.75-6-17.5C28,17.5,29,35,48,35z"
+                      fill="black"
+                      x="0"
+                      y="0"
+                  />
+                </Svg>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={[
+            styles.helpView,
+            { justifyContent: "flex-end", left: cardsXPage + (cardsHWidth/4*3), width: width - cardsXPage - (cardsHWidth/4*3), bottom: height - cardsYPage - (cardsHHeight/2), height: height - cardsYPage - (cardsHHeight/2) },
+          ]}
+        >
+          <View style={[ styles.item, { paddingRight: 10 } ]}>
             <View
               style={[
-                styles.balloon,
-                { backgroundColor: "#ffe0cc", minHeight: yPage },
+                styles.balloon
               ]}
             >
               <Text style={styles.helpText}>Add Players</Text>
-              <View style={[styles.arrowContainer, { height: yPage }]}>
+              <View 
+                style={[
+                  styles.arrowContainer,
+                  styles.arrowLeftContainer
+                ]}
+              >
                 <Svg
                   style={styles.arrowLeft}
                   width={moderateScale(15.5, 0.6)}
@@ -69,7 +106,7 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
                 >
                   <Path
                     d="M38.484,17.5c0,8.75,1,13.5-6,17.5C51.484,35,52.484,17.5,38.484,17.5z"
-                    fill="#ffe0cc"
+                    fill="black"
                     x="0"
                     y="0"
                   />
@@ -116,10 +153,12 @@ const styles = StyleSheet.create({
   arrowLeft: {
     left: moderateScale(-6, 0.5),
   },
+  arrowRight: {
+    right:moderateScale(-6, 0.5),
+  },
   item: {
     marginVertical: moderateScale(7, 2),
     flexDirection: "row",
-    paddingRight: 10,
   },
   balloon: {
     maxWidth: moderateScale(250, 2),
@@ -128,6 +167,9 @@ const styles = StyleSheet.create({
     paddingBottom: moderateScale(7, 2),
     borderRadius: 20,
     justifyContent: "center",
+    borderColor: "black",
+    borderWidth: 3,
+    backgroundColor: "#ff6700", 
   },
   arrowContainer: {
     position: "absolute",
@@ -135,9 +177,14 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: -1,
     flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
   },
+  arrowLeftContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+  },
+  arrowRightContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+},
 });
