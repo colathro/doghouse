@@ -19,19 +19,13 @@ type props = {
 };
 
 export const CardHelp: React.FC<props> = (props: props): JSX.Element => {
-  const [xPage, setXPage] = useState(null);
-  const [yPage, setYPage] = useState(null);
-  const [hWidth, setHWidth] = useState(null);
-  const [hHeight, setHHeight] = useState(null);
+  const [xPage, setXPage] = useState(-500);
+  const [yPage, setYPage] = useState(-500);
+  const [hWidth, setHWidth] = useState(-500);
+  const [hHeight, setHHeight] = useState(-500);
 
   useEffect(() => {
     props.helpRef.current.measure((fx, fy, width, height, px, py) => {
-      console.log("Component width is: " + width);
-      console.log("Component height is: " + height);
-      console.log("X offset to frame: " + fx);
-      console.log("Y offset to frame: " + fy);
-      console.log("X offset to page: " + px);
-      console.log("Y offset to page: " + py);
       setHWidth(width);
       setHHeight(height);
       setXPage(px);
@@ -53,30 +47,25 @@ export const CardHelp: React.FC<props> = (props: props): JSX.Element => {
             { left: xPage + hWidth, width: width - xPage - hWidth },
           ]}
         >
-          <View style={styles.item}>
-            <View
-              style={[
-                styles.balloon,
-                { backgroundColor: "#ffe0cc", minHeight: yPage },
-              ]}
-            >
+          <View style={[styles.item, { paddingRight: 10 }]}>
+            <View style={[styles.arrowContainer, { height: yPage }]}>
+              <Svg
+                style={styles.arrowLeft}
+                width={moderateScale(15.5, 0.6)}
+                height={moderateScale(17.5, 0.6)}
+                viewBox="32.484 17.5 15.515 17.5"
+                enable-background="new 32.485 17.5 15.515 17.5"
+              >
+                <Path
+                  d="M38.484,17.5c0,8.75,1,13.5-6,17.5C51.484,35,52.484,17.5,38.484,17.5z"
+                  fill="black"
+                  x="0"
+                  y="0"
+                />
+              </Svg>
+            </View>
+            <View style={[styles.balloon]}>
               <Text style={styles.helpText}>{props.help}</Text>
-              <View style={[styles.arrowContainer, { height: yPage }]}>
-                <Svg
-                  style={styles.arrowLeft}
-                  width={moderateScale(15.5, 0.6)}
-                  height={moderateScale(17.5, 0.6)}
-                  viewBox="32.484 17.5 15.515 17.5"
-                  enable-background="new 32.485 17.5 15.515 17.5"
-                >
-                  <Path
-                    d="M38.484,17.5c0,8.75,1,13.5-6,17.5C51.484,35,52.484,17.5,38.484,17.5z"
-                    fill="#ffe0cc"
-                    x="0"
-                    y="0"
-                  />
-                </Svg>
-              </View>
             </View>
           </View>
         </View>
@@ -130,6 +119,15 @@ const styles = StyleSheet.create({
     paddingBottom: moderateScale(7, 2),
     borderRadius: 20,
     justifyContent: "center",
+    borderColor: "black",
+    borderWidth: 3,
+    backgroundColor: "#ff6700",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
   },
   arrowContainer: {
     position: "absolute",
@@ -137,7 +135,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: -1,
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "flex-start",
