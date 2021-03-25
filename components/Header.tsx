@@ -27,7 +27,6 @@ export const Header: React.FC<props> = (props: props): JSX.Element => {
           style={styles.helpButton}
           onPress={() => {
             props.help(true);
-            console.log("here");
           }}
         >
           <Text style={styles.helpButtonText}>?</Text>

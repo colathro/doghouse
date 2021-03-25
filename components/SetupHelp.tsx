@@ -54,64 +54,69 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
         <View
           style={[
             styles.helpView,
-            { alignItems: "flex-end", justifyContent: "flex-end", right: width - playersXPage, width: playersXPage, bottom: height - playersYPage - playersHHeight, height: height - playersYPage - playersHHeight},
+            {
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
+              right: width - playersXPage,
+              width: playersXPage,
+              bottom: height - playersYPage - playersHHeight,
+              height: height - playersYPage - playersHHeight,
+            },
           ]}
         >
           <View style={[styles.item]}>
-            <View style={[styles.balloon]}>
-              <Text style={styles.helpText}>Add Players</Text>
-              <View
-              style={[
-                styles.arrowContainer,
-                styles.arrowRightContainer,
-              ]}
+            <View style={[styles.arrowContainer, styles.arrowRightContainer]}>
+              <Svg
+                style={styles.arrowRight}
+                width={moderateScale(15.5, 0.6)}
+                height={moderateScale(17.5, 0.6)}
+                viewBox="32.485 17.5 15.515 17.5"
+                enable-background="new 32.485 17.5 15.515 17.5"
               >
-                <Svg style={styles.arrowRight} width={moderateScale(15.5, 0.6)} height={moderateScale(17.5, 0.6)} viewBox="32.485 17.5 15.515 17.5"  enable-background="new 32.485 17.5 15.515 17.5">
-                  <Path
-                      d="M48,35c-7-4-6-8.75-6-17.5C28,17.5,29,35,48,35z"
-                      fill="black"
-                      x="0"
-                      y="0"
-                  />
-                </Svg>
-              </View>
+                <Path
+                  d="M48,35c-7-4-6-8.75-6-17.5C28,17.5,29,35,48,35z"
+                  fill="black"
+                  x="0"
+                  y="0"
+                />
+              </Svg>
+            </View>
+            <View style={[styles.balloon]}>
+              <Text style={styles.helpText}>Add some players here!</Text>
             </View>
           </View>
         </View>
         <View
           style={[
             styles.helpView,
-            { justifyContent: "flex-end", left: cardsXPage + (cardsHWidth/4*3), width: width - cardsXPage - (cardsHWidth/4*3), bottom: height - cardsYPage - (cardsHHeight/2), height: height - cardsYPage - (cardsHHeight/2) },
+            {
+              justifyContent: "flex-end",
+              left: cardsXPage + (cardsHWidth / 4) * 3,
+              width: width - cardsXPage - (cardsHWidth / 4) * 3,
+              bottom: height - cardsYPage - cardsHHeight / 2,
+              height: height - cardsYPage - cardsHHeight / 2,
+            },
           ]}
         >
-          <View style={[ styles.item, { paddingRight: 10 } ]}>
-            <View
-              style={[
-                styles.balloon
-              ]}
-            >
-              <Text style={styles.helpText}>Add Players</Text>
-              <View 
-                style={[
-                  styles.arrowContainer,
-                  styles.arrowLeftContainer
-                ]}
+          <View style={[styles.item, { paddingRight: 10 }]}>
+            <View style={[styles.arrowContainer, styles.arrowLeftContainer]}>
+              <Svg
+                style={styles.arrowLeft}
+                width={moderateScale(15.5, 0.6)}
+                height={moderateScale(17.5, 0.6)}
+                viewBox="32.484 17.5 15.515 17.5"
+                enable-background="new 32.485 17.5 15.515 17.5"
               >
-                <Svg
-                  style={styles.arrowLeft}
-                  width={moderateScale(15.5, 0.6)}
-                  height={moderateScale(17.5, 0.6)}
-                  viewBox="32.484 17.5 15.515 17.5"
-                  enable-background="new 32.485 17.5 15.515 17.5"
-                >
-                  <Path
-                    d="M38.484,17.5c0,8.75,1,13.5-6,17.5C51.484,35,52.484,17.5,38.484,17.5z"
-                    fill="black"
-                    x="0"
-                    y="0"
-                  />
-                </Svg>
-              </View>
+                <Path
+                  d="M38.484,17.5c0,8.75,1,13.5-6,17.5C51.484,35,52.484,17.5,38.484,17.5z"
+                  fill="black"
+                  x="0"
+                  y="0"
+                />
+              </Svg>
+            </View>
+            <View style={[styles.balloon]}>
+              <Text style={styles.helpText}>Get more packs here!</Text>
             </View>
           </View>
         </View>
@@ -154,7 +159,7 @@ const styles = StyleSheet.create({
     left: moderateScale(-6, 0.5),
   },
   arrowRight: {
-    right:moderateScale(-6, 0.5),
+    right: moderateScale(-6, 0.5),
   },
   item: {
     marginVertical: moderateScale(7, 2),
@@ -169,7 +174,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "black",
     borderWidth: 3,
-    backgroundColor: "#ff6700", 
+    backgroundColor: "#ff6700",
   },
   arrowContainer: {
     position: "absolute",
@@ -180,11 +185,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   arrowLeftContainer: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+    justifyContent: "flex-end",
+    alignItems: "flex-start",
   },
   arrowRightContainer: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-},
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },
 });
