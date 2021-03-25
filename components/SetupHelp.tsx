@@ -18,15 +18,15 @@ type props = {
 };
 
 export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
-  const [playersXPage, setplayersXPage] = useState(null);
-  const [playersYPage, setplayersYPage] = useState(null);
-  const [playersHWidth, setplayersHWidth] = useState(null);
-  const [playersHHeight, setplayersHHeight] = useState(null);
+  const [playersXPage, setplayersXPage] = useState(-500);
+  const [playersYPage, setplayersYPage] = useState(-500);
+  const [playersHWidth, setplayersHWidth] = useState(-500);
+  const [playersHHeight, setplayersHHeight] = useState(-500);
 
-  const [cardsXPage, setcardsXPage] = useState(null);
-  const [cardsYPage, setcardsYPage] = useState(null);
-  const [cardsHWidth, setcardsHWidth] = useState(null);
-  const [cardsHHeight, setcardsHHeight] = useState(null);
+  const [cardsXPage, setcardsXPage] = useState(-500);
+  const [cardsYPage, setcardsYPage] = useState(-500);
+  const [cardsHWidth, setcardsHWidth] = useState(-500);
+  const [cardsHHeight, setcardsHHeight] = useState(-500);
 
   useEffect(() => {
     props.playersHelpRef.current.measure((fx, fy, width, height, px, py) => {
@@ -59,12 +59,12 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
               justifyContent: "flex-end",
               right: width - playersXPage,
               width: playersXPage,
-              bottom: height - playersYPage - playersHHeight,
+              bottom: height - playersYPage - playersHHeight + 14,
               height: height - playersYPage - playersHHeight,
             },
           ]}
         >
-          <View style={[styles.item]}>
+          <View style={[styles.item, {paddingLeft: 10}]}>
             <View style={[styles.arrowContainer, styles.arrowRightContainer]}>
               <Svg
                 style={styles.arrowRight}
@@ -82,7 +82,7 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
               </Svg>
             </View>
             <View style={[styles.balloon]}>
-              <Text style={styles.helpText}>Add some players here!</Text>
+              <Text style={styles.helpText}>add players here! double tap to remove</Text>
             </View>
           </View>
         </View>
@@ -116,7 +116,7 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
               </Svg>
             </View>
             <View style={[styles.balloon]}>
-              <Text style={styles.helpText}>Get more packs here!</Text>
+              <Text style={styles.helpText}>select card packs to use! selected packs will be randomly shuffled</Text>
             </View>
           </View>
         </View>
@@ -175,6 +175,12 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 3,
     backgroundColor: "#ff6700",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
   },
   arrowContainer: {
     position: "absolute",
