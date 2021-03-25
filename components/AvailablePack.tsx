@@ -8,6 +8,7 @@ import { LockedIcon } from "./icons/LockedIcon";
 import { CardPack } from "../types";
 import { PackPreview } from "./PackPreview";
 import * as StoreReview from "expo-store-review";
+import { PackIconMapper } from "../components";
 
 type props = {
   pack: CardPack;
@@ -101,7 +102,7 @@ export const AvailablePack: React.FC<props> = observer(
           </TouchableOpacity>
         </View>
         <View style={iconStyles.container}>
-          <BoneMartiniIcon style={iconStyles.icon} />
+          <PackIconMapper packName={props.pack.name} style={iconStyles.icon} />
         </View>
         <View style={titleStyles.titleContainer}>
           <Text style={titleStyles.text}>{props.pack.name}</Text>

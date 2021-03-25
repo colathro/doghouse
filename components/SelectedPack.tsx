@@ -5,6 +5,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
 import { CardPack, Deck } from "../types";
 import { Joker } from "./icons/Joker";
+import { PackIconMapper } from "./PackIconMapper";
 
 type props = {
   pack?: CardPack;
@@ -33,7 +34,10 @@ export const SelectedPack: React.FC<props> = observer(
       return (
         <View style={styles.container}>
           <View style={iconStyles.container}>
-            <BoneMartiniIcon style={iconStyles.icon} />
+            <PackIconMapper
+              packName={props.pack.name}
+              style={iconStyles.icon}
+            />
           </View>
           <Text style={titleStyles.text}>{props.pack.name}</Text>
         </View>
