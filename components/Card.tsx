@@ -9,10 +9,10 @@ import {
   Text,
   TouchableOpacity,
   View,
-  LayoutChangeEvent,
-  UIManager,
+  Dimensions,
 } from "react-native";
 import { Spike } from "./icons/Spike";
+import { Joker } from "./icons/Joker";
 
 type props = {
   visible: boolean;
@@ -26,8 +26,10 @@ export const Card: React.FC<props> = observer(
     const [showHelp, setShowHelp] = useState(false);
     let card;
     const helpRef = React.useRef<TouchableOpacity>(null);
+    const [isJoker, setJoker] = useState(false);
 
     useEffect(() => {
+      setJoker(GameState.activeCard.text == "joker");
       setTimeout(() => {
         if (props.visible) {
           card.flip();
@@ -82,24 +84,36 @@ export const Card: React.FC<props> = observer(
                     <CardHelp
                       visible={true}
                       callback={setShowHelp}
-                      help={GameState.decks[GameState.dice].help}
+                      help={isJoker ? "you drew the joker and are automatically sent to the doghouse" : GameState.decks[GameState.dice].help}
                       helpRef={helpRef}
                     />
                   ) : null}
-                  <Text style={styles.prompt}>
-                    {GameState.decks[GameState.dice].prompt}
-                  </Text>
-                  <Text style={styles.cardText}>
-                    {GameState.activeCard.text}
-                  </Text>
-                  {showTimer ? (
-                    <Timer
-                      visible={true}
-                      callback={() => {
-                        setShowTimer(false);
-                      }}
-                    />
-                  ) : null}
+                  {isJoker ? (
+                    <View style={iconStyles.container}>
+                      <Joker style={iconStyles.icon} />
+                      <Text style={styles.prompt}>
+                        you're in the doghouse...
+                      </Text>
+                    </View>
+                  ) : (
+                    <View>
+                      <Text style={styles.prompt}>
+                        {GameState.decks[GameState.dice].prompt}
+                      </Text>
+                      <Text style={styles.cardText}>
+                        {GameState.activeCard.text}
+                      </Text>
+                      {showTimer ? (
+                        <Timer
+                          visible={true}
+                          callback={() => {
+                            setShowTimer(false);
+                          }}
+                        />
+                      ) : null}
+                    </View>
+                  )}
+                  
                   <View style={styles.arrowContainer}>
                     <Doghouse
                       timer={GameState.decks[GameState.dice].useTimer}
@@ -125,6 +139,20 @@ export const Card: React.FC<props> = observer(
     );
   }
 );
+
+const { width, height } = Dimensions.get("window");
+
+const iconStyles = StyleSheet.create({
+  container: {
+    marginBottom: 80,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    height: width/2,
+    width: width/2,
+  },
+});
 
 const styles = StyleSheet.create({
   cardContainer: {

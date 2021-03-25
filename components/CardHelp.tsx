@@ -47,7 +47,7 @@ export const CardHelp: React.FC<props> = (props: props): JSX.Element => {
             { left: xPage + hWidth, width: width - xPage - hWidth },
           ]}
         >
-          <View style={[styles.item, { paddingRight: 10 }]}>
+          <View style={[styles.item, { paddingRight: 10, paddingTop: 20 }]}>
             <View style={[styles.arrowContainer, { height: yPage }]}>
               <Svg
                 style={styles.arrowLeft}
