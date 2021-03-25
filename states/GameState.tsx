@@ -82,7 +82,7 @@ class GameStateObject {
   public dice = 0;
 
   drawCard() {
-    var isJoker = true;//Math.floor(Math.random() * 60) == 13;
+    var isJoker = Math.floor(Math.random() * 60) == 13;
     if (isJoker) {
       this.activeCard = { text: "joker"} as Card;
     } else if (this.decks[this.dice].cards.length == 0) {
