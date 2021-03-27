@@ -75,7 +75,7 @@ class GameStateObject {
         help: DeckHelp.throwABone,
         maxDoghouse: 1,
         useTimer: false,
-        dice: 1,
+        dice: 0,
         cards: [] as Array<Card>,
       },
       {
@@ -84,7 +84,7 @@ class GameStateObject {
         help: DeckHelp.dogFight,
         maxDoghouse: -1,
         useTimer: false,
-        dice: 2,
+        dice: 1,
         cards: [] as Array<Card>,
       },
       {
@@ -93,7 +93,7 @@ class GameStateObject {
         help: DeckHelp.doghouseOrDare,
         maxDoghouse: 1,
         useTimer: false,
-        dice: 3,
+        dice: 2,
         cards: [] as Array<Card>,
       },
       {
@@ -102,7 +102,7 @@ class GameStateObject {
         help: DeckHelp.barkOrBite,
         maxDoghouse: -1,
         useTimer: false,
-        dice: 4,
+        dice: 3,
         cards: [] as Array<Card>,
       },
       {
@@ -111,7 +111,7 @@ class GameStateObject {
         help: DeckHelp.breeds,
         maxDoghouse: 1,
         useTimer: true,
-        dice: 5,
+        dice: 4,
         cards: [] as Array<Card>,
       },
       {
@@ -120,7 +120,7 @@ class GameStateObject {
         help: DeckHelp.teachersPet,
         maxDoghouse: 1,
         useTimer: false,
-        dice: 6,
+        dice: 5,
         cards: [] as Array<Card>,
       },
     ] as Array<Deck>;
