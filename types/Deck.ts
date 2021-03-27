@@ -7,4 +7,5 @@ export interface Deck {
   maxDoghouse: number;
   cards: Array<Card>;
   useTimer: boolean;
+  dice: number;
 }

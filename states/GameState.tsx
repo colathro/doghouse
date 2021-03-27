@@ -26,66 +26,14 @@ class GameStateObject {
 
   public devMode = true;
 
-  public decks: Array<Deck> = [
-    {
-      name: DeckNames.throwABone,
-      prompt: DeckPrompts.throwABone,
-      help: DeckHelp.throwABone,
-      maxDoghouse: 1,
-      useTimer: false,
-      cards: [] as Array<Card>,
-    },
-    {
-      name: DeckNames.dogFight,
-      prompt: DeckPrompts.dogFight,
-      help: DeckHelp.dogFight,
-      maxDoghouse: -1,
-      useTimer: false,
-      cards: [] as Array<Card>,
-    },
-    {
-      name: DeckNames.doghouseOrDare,
-      prompt: DeckPrompts.doghouseOrDare,
-      help: DeckHelp.doghouseOrDare,
-      maxDoghouse: 1,
-      useTimer: false,
-      cards: [] as Array<Card>,
-    },
-    {
-      name: DeckNames.barkOrBite,
-      prompt: DeckPrompts.barkOrBite,
-      help: DeckHelp.barkOrBite,
-      maxDoghouse: -1,
-      useTimer: false,
-      cards: [] as Array<Card>,
-    },
-    {
-      name: DeckNames.breeds,
-      prompt: DeckPrompts.breeds,
-      help: DeckHelp.breeds,
-      maxDoghouse: 1,
-      useTimer: true,
-      cards: [] as Array<Card>,
-    },
-    {
-      name: DeckNames.teachersPet,
-      prompt: DeckPrompts.teachersPet,
-      help: DeckHelp.teachersPet,
-      maxDoghouse: 1,
-      useTimer: false,
-      cards: [] as Array<Card>,
-    },
-  ] as Array<Deck>;
+  public decks: Array<Deck>;
 
   public activeCard: Card = {} as Card;
 
   public dice = 0;
 
   drawCard() {
-    var isJoker = Math.floor(Math.random() * 60) == 13;
-    if (isJoker) {
-      this.activeCard = { text: "joker"} as Card;
-    } else if (this.decks[this.dice].cards.length == 0) {
+    if (this.decks[this.dice].cards.length == 0) {
       this.activeCard = { text: "null" } as Card;
     } else {
       var index = Math.floor(
@@ -94,6 +42,10 @@ class GameStateObject {
       this.activeCard = this.decks[this.dice].cards[index];
       this.decks[this.dice].cards.splice(index, 1);
     }
+    
+    if (this.decks[this.dice].cards.length == 0) {
+      this.decks.splice(this.dice, 1);
+    }
   }
 
   addCardPack(pack: CardPack) {
@@ -101,12 +53,12 @@ class GameStateObject {
   }
 
   rollDice() {
-    this.dice = Math.floor(Math.random() * this.decks.length);
+    this.dice = GameState.decks[Math.floor(Math.random() * this.decks.length)].dice;
     this.drawCard();
   }
 
   visualRoll() {
-    return Math.floor(Math.random() * this.decks.length);
+    return GameState.decks[Math.floor(Math.random() * this.decks.length)].dice;
   }
 
   setDice(i: number) {
@@ -116,17 +68,78 @@ class GameStateObject {
 
   startGame() {
     this.activeCard = {} as Card;
-    this.decks.forEach((deck) => (deck.cards = [] as Array<Card>));
+    this.decks = [
+      {
+        name: DeckNames.throwABone,
+        prompt: DeckPrompts.throwABone,
+        help: DeckHelp.throwABone,
+        maxDoghouse: 1,
+        useTimer: false,
+        dice: 1,
+        cards: [] as Array<Card>,
+      },
+      {
+        name: DeckNames.dogFight,
+        prompt: DeckPrompts.dogFight,
+        help: DeckHelp.dogFight,
+        maxDoghouse: -1,
+        useTimer: false,
+        dice: 2,
+        cards: [] as Array<Card>,
+      },
+      {
+        name: DeckNames.doghouseOrDare,
+        prompt: DeckPrompts.doghouseOrDare,
+        help: DeckHelp.doghouseOrDare,
+        maxDoghouse: 1,
+        useTimer: false,
+        dice: 3,
+        cards: [] as Array<Card>,
+      },
+      {
+        name: DeckNames.barkOrBite,
+        prompt: DeckPrompts.barkOrBite,
+        help: DeckHelp.barkOrBite,
+        maxDoghouse: -1,
+        useTimer: false,
+        dice: 4,
+        cards: [] as Array<Card>,
+      },
+      {
+        name: DeckNames.breeds,
+        prompt: DeckPrompts.breeds,
+        help: DeckHelp.breeds,
+        maxDoghouse: 1,
+        useTimer: true,
+        dice: 5,
+        cards: [] as Array<Card>,
+      },
+      {
+        name: DeckNames.teachersPet,
+        prompt: DeckPrompts.teachersPet,
+        help: DeckHelp.teachersPet,
+        maxDoghouse: 1,
+        useTimer: false,
+        dice: 6,
+        cards: [] as Array<Card>,
+      },
+    ] as Array<Deck>;
 
     // add all decks in active packs to the current deck.
     for (var i = 0; i < this.activePacks.length; i++) {
-      this.decks[0].cards = this.activePacks[i].throwABone;
+      this.decks[0].cards = this.activePacks[i].throwABone
       this.decks[1].cards = this.activePacks[i].dogFight;
       this.decks[2].cards = this.activePacks[i].doghouseOrDare;
       this.decks[3].cards = this.activePacks[i].barkOrBite;
       this.decks[4].cards = this.activePacks[i].breeds;
       this.decks[5].cards = this.activePacks[i].teachersPet;
     }
+    this.decks[0].cards.push({ text: "joker"} as Card);
+    this.decks[1].cards.push({ text: "joker"} as Card);
+    this.decks[2].cards.push({ text: "joker"} as Card);
+    this.decks[3].cards.push({ text: "joker"} as Card);
+    this.decks[4].cards.push({ text: "joker"} as Card);
+    this.decks[5].cards.push({ text: "joker"} as Card);
   }
 
   adjustScore(name: string) {
