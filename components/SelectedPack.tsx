@@ -37,6 +37,7 @@ export const SelectedPack: React.FC<props> = observer(
             <PackIconMapper
               packName={props.pack.name}
               style={iconStyles.icon}
+              watermark={false}
             />
           </View>
           <Text style={titleStyles.text}>{props.pack.name}</Text>

@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { Spike } from "./icons/Spike";
 import { Joker } from "./icons/Joker";
+import { PackIconMapper } from "./PackIconMapper";
 
 type props = {
   visible: boolean;
@@ -62,6 +63,11 @@ export const Card: React.FC<props> = observer(
               </TouchableOpacity>
               <TouchableOpacity style={styles.card} activeOpacity={1}>
                 <View style={styles.cardInner}>
+                  <PackIconMapper
+                    packName={GameState.activeCard.pack}
+                    style={iconStyles.cardIcon}
+                    watermark={true}
+                  />
                   <TouchableOpacity
                     style={styles.closeButton}
                     onPress={() => {
@@ -84,7 +90,7 @@ export const Card: React.FC<props> = observer(
                     <CardHelp
                       visible={true}
                       callback={setShowHelp}
-                      help={isJoker ? "you drew the joker and are automatically sent to the doghouse" : GameState.decks[GameState.dice].help}
+                      help={isJoker ? "joke's on you! you're going to the doghouse" : GameState.decks[GameState.dice].help}
                       helpRef={helpRef}
                     />
                   ) : null}
@@ -96,7 +102,7 @@ export const Card: React.FC<props> = observer(
                       </Text>
                     </View>
                   ) : (
-                    <View>
+                    <View style={iconStyles.container}>
                       <Text style={styles.prompt}>
                         {GameState.decks[GameState.dice].prompt}
                       </Text>
@@ -152,6 +158,13 @@ const iconStyles = StyleSheet.create({
     height: width/2,
     width: width/2,
   },
+  cardIcon: {
+    position: "absolute",
+    left: width*.69/2 - (width/6),
+    top: (height*.60 - 80)/2 - (width/6),
+    height: width/3,
+    width: width/3,
+  }
 });
 
 const styles = StyleSheet.create({
