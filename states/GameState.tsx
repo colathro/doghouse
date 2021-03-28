@@ -128,17 +128,17 @@ class GameStateObject {
     // add all decks in active packs to the current deck.
     for (var i = 0; i < this.activePacks.length; i++) {
       this.activePacks[i].throwABone.forEach(_ => _.pack = this.activePacks[i].name);
-      this.decks[0].cards = this.activePacks[i].throwABone;
+      this.decks[0].cards.push(...this.activePacks[i].throwABone);
       this.activePacks[i].dogFight.forEach(_ => _.pack = this.activePacks[i].name);
-      this.decks[1].cards = this.activePacks[i].dogFight;
+      this.decks[1].cards.push(...this.activePacks[i].dogFight);
       this.activePacks[i].doghouseOrDare.forEach(_ => _.pack = this.activePacks[i].name);
-      this.decks[2].cards = this.activePacks[i].doghouseOrDare;
+      this.decks[2].cards.push(...this.activePacks[i].doghouseOrDare);
       this.activePacks[i].barkOrBite.forEach(_ => _.pack = this.activePacks[i].name);
-      this.decks[3].cards = this.activePacks[i].barkOrBite;
+      this.decks[3].cards.push(...this.activePacks[i].barkOrBite);
       this.activePacks[i].breeds.forEach(_ => _.pack = this.activePacks[i].name);
-      this.decks[4].cards = this.activePacks[i].breeds;
+      this.decks[4].cards.push(...this.activePacks[i].breeds);
       this.activePacks[i].teachersPet.forEach(_ => _.pack = this.activePacks[i].name);
-      this.decks[5].cards = this.activePacks[i].teachersPet;
+      this.decks[5].cards.push(...this.activePacks[i].teachersPet);
     }
     this.decks[0].cards.push({ text: "joker"} as Card);
     this.decks[1].cards.push({ text: "joker"} as Card);

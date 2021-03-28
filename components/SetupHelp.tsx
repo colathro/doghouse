@@ -91,7 +91,7 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
             styles.helpView,
             {
               justifyContent: "flex-end",
-              left: cardsXPage + (cardsHWidth / 4) * 3,
+              left: cardsXPage + (cardsHWidth / 4) * 3 < 20 ? 20 : cardsXPage + (cardsHWidth / 4) * 3,
               width: width - cardsXPage - (cardsHWidth / 4) * 3,
               bottom: height - cardsYPage - cardsHHeight / 2,
               height: height - cardsYPage - cardsHHeight / 2,
