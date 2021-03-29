@@ -6,7 +6,7 @@ function PackSelect() {
   const navigation = useNavigation();
 
   return (
-    <Main navigation={navigation} title="Pack Select" help="packs">
+    <Main navigation={navigation} title="Pack Select">
       <Packs />
     </Main>
   );

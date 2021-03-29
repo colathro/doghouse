@@ -98,11 +98,11 @@ export const AvailablePack: React.FC<props> = observer(
               setModalVisible(true);
             }}
           >
-            <Text style={infoStyle.helpButtonText}>!</Text>
+            <Text style={infoStyle.helpButtonText}>?</Text>
           </TouchableOpacity>
         </View>
         <View style={iconStyles.container}>
-          <PackIconMapper packName={props.pack.name} style={iconStyles.icon} />
+          <PackIconMapper packName={props.pack.name} style={iconStyles.icon} watermark={false} />
         </View>
         <View style={titleStyles.titleContainer}>
           <Text style={titleStyles.text}>{props.pack.name}</Text>

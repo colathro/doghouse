@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../components";
+import { Button, PackIconMapper } from "../components";
 import {
   Modal,
   StyleSheet,
@@ -17,10 +17,15 @@ type props = {
   pack: CardPack;
 };
 
-const cardPreview = (prompt: string, card: Card) => {
+const cardPreview = (prompt: string, pack: string, card: Card) => {
   return (
     <View style={cardStyles.background}>
-      <View style={cardStyles.body}>
+      <View style={cardStyles.body}>  
+       <PackIconMapper
+          packName={pack}
+          style={iconStyles.cardIcon}
+          watermark={true}
+        />
         <Text style={cardStyles.prompt}>{prompt}</Text>
         <Text style={cardStyles.text}>{card.text}</Text>
       </View>
@@ -43,13 +48,14 @@ export const PackPreview: React.FC<props> = (props: props): JSX.Element => {
             contentContainerStyle={styles.cardContainer}
             showsVerticalScrollIndicator={false}
           >
-            {cardPreview(DeckPrompts.barkOrBite, props.pack.barkOrBite[0])}
-            {cardPreview(DeckPrompts.breeds, props.pack.breeds[0])}
-            {cardPreview(DeckPrompts.dogFight, props.pack.dogFight[0])}
-            {cardPreview(DeckPrompts.teachersPet, props.pack.teachersPet[0])}
-            {cardPreview(DeckPrompts.throwABone, props.pack.throwABone[0])}
+            {cardPreview(DeckPrompts.barkOrBite, props.pack.name, props.pack.barkOrBite[0])}
+            {cardPreview(DeckPrompts.breeds, props.pack.name, props.pack.breeds[0])}
+            {cardPreview(DeckPrompts.dogFight, props.pack.name, props.pack.dogFight[0])}
+            {cardPreview(DeckPrompts.teachersPet, props.pack.name, props.pack.teachersPet[0])}
+            {cardPreview(DeckPrompts.throwABone, props.pack.name, props.pack.throwABone[0])}
             {cardPreview(
               DeckPrompts.doghouseOrDare,
+              props.pack.name, 
               props.pack.doghouseOrDare[0]
             )}
           </ScrollView>
@@ -64,6 +70,16 @@ export const PackPreview: React.FC<props> = (props: props): JSX.Element => {
     </Modal>
   );
 };
+
+const iconStyles = StyleSheet.create({
+  cardIcon: {
+    position: "absolute",
+    left: 120*.9/2 - (120/4),
+    top: 180.9/2 - (120/4),
+    height: 120/2,
+    width: 120/2,
+  }
+});
 
 const styles = StyleSheet.create({
   centeredView: {
