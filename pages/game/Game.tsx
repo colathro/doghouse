@@ -9,8 +9,10 @@ import {
   PlayersEdit,
 } from "../../components";
 import { View, StyleSheet } from "react-native";
+import { useKeepAwake } from 'expo-keep-awake';
 
 function Game({ navigation }: any) {
+  useKeepAwake();
   const [cardShow, setCardShow] = useState(false);
   const [scoreShow, setScoreShow] = useState(false);
   const [playersShow, setPlayerShow] = useState(false);
