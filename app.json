@@ -3,6 +3,7 @@
     "name": "doghouse",
     "slug": "doghouse",
     "version": "1.0.0",
+    "privacy": "unlisted",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "backgroundColor": "#ff6700",
@@ -14,11 +15,11 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*", "assets/fonts/*"],
+    "assetBundlePatterns": ["**/*", "assets/*"],
     "ios": {
       "backgroundColor": "#FF6700",
       "supportsTablet": true,
-      "bundleIdentifier": "Fivestack"
+      "bundleIdentifier": "com.fivestack.doghouse"
     },
     "android": {
       "adaptiveIcon": {
