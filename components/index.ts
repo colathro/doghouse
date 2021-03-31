@@ -40,6 +40,8 @@ export * from "./icons/Dice6";
 export * from "./icons/packs/FourTwenty";
 export * from "./icons/packs/GirlsNight";
 export * from "./icons/packs/KissAndTell";
+export * from "./icons/packs/Standard";
+export * from "./icons/packs/StandardPlus";
 export * from "./SetupHelp";
 export * from "./PlayersEdit";
 export * from "./PackIconMapper";
