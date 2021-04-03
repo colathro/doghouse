@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AppLoading } from "expo";
@@ -8,7 +8,7 @@ import Settings from "./pages/packselect/PackSelect";
 import GameSetup from "./pages/gamesetup/GameSetup";
 import Game from "./pages/game/Game";
 import DicePlayground from "./pages/gl-playground/DicePlayground";
-import { LogBox, View, StyleSheet, FlexAlignType } from "react-native";
+import { LogBox, Alert } from "react-native";
 import { GameState } from "./states";
 import { observer } from "mobx-react-lite";
 
@@ -20,6 +20,11 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
 
   if (!isReady) {
+    Alert.alert(
+      "Warning",
+      "Please play responsibly. By continuing to play, you agree that you are responsible for all consequences that may result from playing doghouse."
+    );
+
     return (
       <AppLoading
         startAsync={loadResources}
