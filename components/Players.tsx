@@ -143,11 +143,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  spacing: {
-    marginTop: 10,
-    marginBottom: 10,
-    minHeight: 150,
-  },
+  spacing: {},
   text: {
     fontFamily: "Tw-Bold",
     fontSize: 24,
