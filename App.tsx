@@ -22,11 +22,11 @@ export default function App() {
     async function prepare() {
       try {
         // Keep the splash screen visible while we fetch resources
-        await SplashScreen.preventAutoHideAsync();
+        //await SplashScreen.preventAutoHideAsync();
         // Pre-load fonts, make any API calls you need to do here
         await loadResources();
       } catch (e) {
-        console.warn(e);
+        Alert.alert("error", e.message);
       } finally {
         // Tell the application to render
         setAppIsReady(true);
