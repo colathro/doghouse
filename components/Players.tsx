@@ -107,7 +107,7 @@ export const Players: React.FC<props> = observer(
                 </Animated.Text>
               </TouchableOpacity>
             ))}
-            {props.allowEdit ? (
+            {props.allowEdit && GameState.players.length <= 9 ? (
               <AddPlayer plusRef={props.plusRef}></AddPlayer>
             ) : (
               <></>
