@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GameState } from "../states";
 import { observer } from "mobx-react-lite";
-import { StyleSheet, View, Text, TouchableOpacity} from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { SelectedPack } from "./SelectedPack";
 import { ScrollView } from "react-native";
 
@@ -19,10 +19,14 @@ export const SelectedPacks: React.FC<props> = observer(
         <View style={styles.container}>
           <ScrollView
             contentContainerStyle={styles.selectedPackContainer}
-            horizontal={true}
+            style={styles.selectedPacks}
             showsHorizontalScrollIndicator={false}
           >
-            <SelectedPack addMore={true} navigation={props.navigation} cardRef={props.cardRef} />
+            <SelectedPack
+              addMore={true}
+              navigation={props.navigation}
+              cardRef={props.cardRef}
+            />
             {GameState.activePacks.map((val, ind) => (
               <SelectedPack addMore={false} pack={val} key={ind}></SelectedPack>
             ))}
@@ -47,11 +51,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   text: {
-    textAlign: "center",
+    marginLeft: 10,
     fontFamily: "Tw-Bold",
     fontSize: 36,
   },
+  selectedPacks: { height: 200 },
   selectedPackContainer: {
+    width: "100%",
     flexDirection: "row",
+    flexWrap: "wrap",
+    margin: 20,
   },
 });

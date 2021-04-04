@@ -19,14 +19,24 @@
     "ios": {
       "backgroundColor": "#FF6700",
       "supportsTablet": true,
-      "bundleIdentifier": "com.fivestack.doghouse"
+      "bundleIdentifier": "com.fivestack.doghouse",
+      "splash": {
+        "image": "./assets/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#FF6700"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.fivestack.doghouse"
+      "package": "com.fivestack.doghouse",
+      "splash": {
+        "image": "./assets/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#FF6700"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -8,11 +8,28 @@ import {
   Timer,
   Doghouse,
 } from "../../components";
-import { StyleSheet } from "react-native";
-import { GameState } from "../../states";
+import { StyleSheet, Alert } from "react-native";
+
+let showedWarning = false;
 
 function HomeScreen({ navigation }: any) {
   const [show, setShow] = useState(false);
+
+  const alert = async (cb) => {
+    Alert.alert(
+      "Warning",
+      "Please play responsibly. By continuing to play, you agree that you are responsible for all consequences that may result from playing doghouse.",
+      [
+        {
+          text: "Continue",
+          onPress: () => {
+            cb();
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <Main navigation={navigation}>
       {show ? (
@@ -27,7 +44,16 @@ function HomeScreen({ navigation }: any) {
       <Logo style={logoStyle.icon} />
       <BigButton
         title="PLAY"
-        onPress={() => navigation.navigate("GameSetup")}
+        onPress={() => {
+          if (showedWarning) {
+            navigation.navigate("GameSetup");
+          } else {
+            alert(() => {
+              navigation.navigate("GameSetup");
+            });
+            showedWarning = true;
+          }
+        }}
       />
       <Button title="PACKS" onPress={() => navigation.navigate("Settings")} />
     </Main>
