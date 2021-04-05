@@ -8,8 +8,9 @@ import {
   DiceSimple,
   PlayersEdit,
 } from "../../components";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, Alert  } from "react-native";
 import { useKeepAwake } from 'expo-keep-awake';
+import { GameState } from "../../states";
 
 function Game({ navigation }: any) {
   useKeepAwake();
@@ -17,6 +18,21 @@ function Game({ navigation }: any) {
   const [scoreShow, setScoreShow] = useState(false);
   const [playersShow, setPlayerShow] = useState(false);
   const [reset, setReset] = useState(false);
+
+  const alert = async (cb) => {
+    Alert.alert(
+      "oops! you ran out of cards",
+      "We reshuffled your cards for you so you can keep playing. Return to the menu to get more packs.",
+      [
+        {
+          text: "Continue",
+          onPress: () => {
+            cb();
+          },
+        },
+      ]
+    );
+  };
 
   const rollDice = () => {
     setTimeout(() => {
@@ -27,7 +43,13 @@ function Game({ navigation }: any) {
   const cardFinish = () => {
     setCardShow(false);
     setTimeout(() => {
-      setReset(true);
+      if (GameState.decks.length == GameState.emptyDecks) {
+        alert(() => {
+          GameState.startGame();
+        });
+      } else {
+        setReset(true);
+      }
     }, 500);
   };
 

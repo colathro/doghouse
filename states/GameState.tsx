@@ -32,6 +32,8 @@ class GameStateObject {
 
   public dice = 0;
 
+  public emptyDecks = 0;
+
   drawCard() {
     if (this.decks[this.dice].cards.length == 0) {
       this.activeCard = { text: "null" } as Card;
@@ -42,9 +44,9 @@ class GameStateObject {
       this.activeCard = this.decks[this.dice].cards[index];
       this.decks[this.dice].cards.splice(index, 1);
     }
-    
+
     if (this.decks[this.dice].cards.length == 0) {
-      this.decks.splice(this.dice, 1);
+      this.emptyDecks++;
     }
   }
 
@@ -53,7 +55,11 @@ class GameStateObject {
   }
 
   rollDice() {
-    this.dice = GameState.decks[Math.floor(Math.random() * this.decks.length)].dice;
+    this.dice = Math.floor(Math.random() * this.decks.length);
+    // infinite loop if all decks are empty
+    while (this.decks[this.dice].cards.length == 0) {
+      this.dice = Math.floor(Math.random() * this.decks.length);
+    }
     this.drawCard();
   }
 
@@ -124,7 +130,7 @@ class GameStateObject {
         cards: [] as Array<Card>,
       },
     ] as Array<Deck>;
-
+i
     // add all decks in active packs to the current deck.
     for (var i = 0; i < this.activePacks.length; i++) {
       this.activePacks[i].throwABone.forEach(_ => _.pack = this.activePacks[i].name);
@@ -146,6 +152,8 @@ class GameStateObject {
     this.decks[3].cards.push({ text: "joker"} as Card);
     this.decks[4].cards.push({ text: "joker"} as Card);
     this.decks[5].cards.push({ text: "joker"} as Card);
+
+    this.emptyDecks = 0;
   }
 
   adjustScore(name: string) {

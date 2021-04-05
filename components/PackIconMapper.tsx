@@ -1,6 +1,5 @@
 import React from "react";
-import { ViewStyle } from "react-native";
-import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
+import { ViewStyle, View } from "react-native";
 import { FourTwenty } from "./icons/packs/FourTwenty";
 import { GirlsNight } from "./icons/packs/GirlsNight";
 import { KissAndTell } from "./icons/packs/KissAndTell";
@@ -22,7 +21,7 @@ export const PackIconMapper: React.FC<props> = (props: props): JSX.Element => {
     "Standard Plus": <StandardPlus style={props.style} fill={props.watermark ? "#ffe0cc" : "#1a1a1a"} fill2={props.watermark ? "#fff0e6" : "#ff6700"}></StandardPlus>,
   };
   if (packs[props.packName] == undefined) {
-    return <BoneMartiniIcon style={props.style} />;
+    return <View />
   }
 
   return packs[props.packName];
