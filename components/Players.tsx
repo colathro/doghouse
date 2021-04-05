@@ -107,7 +107,7 @@ export const Players: React.FC<props> = observer(
                 </Animated.Text>
               </TouchableOpacity>
             ))}
-            {props.allowEdit ? (
+            {props.allowEdit && GameState.players.length <= 9 ? (
               <AddPlayer plusRef={props.plusRef}></AddPlayer>
             ) : (
               <></>
@@ -143,11 +143,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  spacing: {
-    marginTop: 10,
-    marginBottom: 10,
-    minHeight: 150,
-  },
+  spacing: {},
   text: {
     fontFamily: "Tw-Bold",
     fontSize: 24,

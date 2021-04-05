@@ -6,6 +6,7 @@ import { BoneMartiniIcon } from "./icons/BoneMartiniIcon";
 import { CardPack, Deck } from "../types";
 import { Joker } from "./icons/Joker";
 import { PackIconMapper } from "./PackIconMapper";
+import { AddIcon } from "./icons/AddIcon";
 
 type props = {
   pack?: CardPack;
@@ -24,10 +25,8 @@ export const SelectedPack: React.FC<props> = observer(
           style={getMoreStyles.container}
           onPress={() => props.navigation.navigate("Settings")}
         >
-          <View style={iconStyles.container}>
-            <Joker style={iconStyles.icon} />
-          </View>
           <Text style={titleStyles.text}>Get More Packs</Text>
+          <AddIcon />
         </TouchableOpacity>
       );
     } else {
@@ -105,20 +104,10 @@ const getMoreStyles = StyleSheet.create({
     height: 108,
     width: 78,
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     backgroundColor: "#fff",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 3.0,
-    elevation: 8,
     borderRadius: 6,
     margin: 6,
-    borderColor: "#ff6700",
-    borderWidth: 3,
   },
   text: {
     textAlign: "center",

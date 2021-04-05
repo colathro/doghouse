@@ -12,14 +12,14 @@ import {
 
 function GameSetup({ navigation }: any) {
   const [showHelp, setShowHelp] = useState(false);
-  
+
   const plusRef = React.useRef<TouchableOpacity>(null);
   const packsRef = React.useRef<TouchableOpacity>(null);
 
   return (
     <Main navigation={navigation} title="Game Setup" help={setShowHelp}>
       <View style={styles.container}>
-        <View>
+        <View style={styles.secondContainer}>
           <Players
             players={GameState.players}
             allowEdit={true}
@@ -27,7 +27,11 @@ function GameSetup({ navigation }: any) {
             showScore={false}
             plusRef={plusRef}
           />
-          <SelectedPacks linkToPurchase={true} navigation={navigation} cardRef={packsRef}/>
+          <SelectedPacks
+            linkToPurchase={true}
+            navigation={navigation}
+            cardRef={packsRef}
+          />
         </View>
         {showHelp ? (
           <SetupHelp
@@ -56,7 +60,11 @@ const styles = StyleSheet.create({
   container: {
     height: "98%",
     alignItems: "center",
+    flexDirection: "column",
     justifyContent: "space-between",
+  },
+  secondContainer: {
+    flexDirection: "column",
   },
 });
 

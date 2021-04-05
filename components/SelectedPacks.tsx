@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { SelectedPack } from "./SelectedPack";
 import { ScrollView } from "react-native";
+import { useLinkProps } from "@react-navigation/native";
 
 type props = {
   linkToPurchase: boolean;
@@ -14,19 +15,23 @@ type props = {
 export const SelectedPacks: React.FC<props> = observer(
   (props: props): JSX.Element => {
     return (
-      <View style={styles.spacing}>
-        <Text style={styles.text}>selected packs:</Text>
+      <View style={styles.container}>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>selected packs:</Text>
+        </View>
         <View style={styles.container}>
           <ScrollView
             contentContainerStyle={styles.selectedPackContainer}
             style={styles.selectedPacks}
+            horizontal={true}
             showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
           >
             <SelectedPack
               addMore={true}
               navigation={props.navigation}
               cardRef={props.cardRef}
-            />
+            ></SelectedPack>
             {GameState.activePacks.map((val, ind) => (
               <SelectedPack addMore={false} pack={val} key={ind}></SelectedPack>
             ))}
@@ -44,22 +49,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    width: "90%",
+    margin: 10,
+    marginTop: 20,
   },
-  spacing: {
-    marginTop: 10,
-    marginBottom: 10,
+  textContainer: {
+    width: "90%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   text: {
-    marginLeft: 10,
     fontFamily: "Tw-Bold",
     fontSize: 36,
   },
-  selectedPacks: { height: 200 },
+  textMore: { color: "#FF6700", fontFamily: "Tw-Bold", fontSize: 24 },
+  selectedPacks: { maxHeight: 200, width: "100%" },
   selectedPackContainer: {
-    width: "100%",
     flexDirection: "row",
-    flexWrap: "wrap",
-    margin: 20,
   },
 });

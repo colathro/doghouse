@@ -133,26 +133,38 @@ class GameStateObject {
 i
     // add all decks in active packs to the current deck.
     for (var i = 0; i < this.activePacks.length; i++) {
-      this.activePacks[i].throwABone.forEach(_ => _.pack = this.activePacks[i].name);
+      this.activePacks[i].throwABone.forEach(
+        (_) => (_.pack = this.activePacks[i].name)
+      );
       this.decks[0].cards.push(...this.activePacks[i].throwABone);
-      this.activePacks[i].dogFight.forEach(_ => _.pack = this.activePacks[i].name);
+      this.activePacks[i].dogFight.forEach(
+        (_) => (_.pack = this.activePacks[i].name)
+      );
       this.decks[1].cards.push(...this.activePacks[i].dogFight);
-      this.activePacks[i].doghouseOrDare.forEach(_ => _.pack = this.activePacks[i].name);
+      this.activePacks[i].doghouseOrDare.forEach(
+        (_) => (_.pack = this.activePacks[i].name)
+      );
       this.decks[2].cards.push(...this.activePacks[i].doghouseOrDare);
-      this.activePacks[i].barkOrBite.forEach(_ => _.pack = this.activePacks[i].name);
+      this.activePacks[i].barkOrBite.forEach(
+        (_) => (_.pack = this.activePacks[i].name)
+      );
       this.decks[3].cards.push(...this.activePacks[i].barkOrBite);
-      this.activePacks[i].breeds.forEach(_ => _.pack = this.activePacks[i].name);
+      this.activePacks[i].breeds.forEach(
+        (_) => (_.pack = this.activePacks[i].name)
+      );
       this.decks[4].cards.push(...this.activePacks[i].breeds);
-      this.activePacks[i].teachersPet.forEach(_ => _.pack = this.activePacks[i].name);
+      this.activePacks[i].teachersPet.forEach(
+        (_) => (_.pack = this.activePacks[i].name)
+      );
       this.decks[5].cards.push(...this.activePacks[i].teachersPet);
     }
-    this.decks[0].cards.push({ text: "joker"} as Card);
-    this.decks[1].cards.push({ text: "joker"} as Card);
-    this.decks[2].cards.push({ text: "joker"} as Card);
-    this.decks[3].cards.push({ text: "joker"} as Card);
-    this.decks[4].cards.push({ text: "joker"} as Card);
-    this.decks[5].cards.push({ text: "joker"} as Card);
-
+    this.decks[0].cards.push({ text: "joker" } as Card);
+    this.decks[1].cards.push({ text: "joker" } as Card);
+    this.decks[2].cards.push({ text: "joker" } as Card);
+    this.decks[3].cards.push({ text: "joker" } as Card);
+    this.decks[4].cards.push({ text: "joker" } as Card);
+    this.decks[5].cards.push({ text: "joker" } as Card);
+    
     this.emptyDecks = 0;
   }
 
@@ -168,6 +180,7 @@ i
 
   addPlayer(name: string) {
     name = name.toLowerCase();
+    name = name.substring(0, 10);
     if (
       typeof name != "undefined" &&
       name !== "" &&

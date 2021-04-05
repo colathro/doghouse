@@ -64,7 +64,7 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
             },
           ]}
         >
-          <View style={[styles.item, {paddingLeft: 10}]}>
+          <View style={[styles.item, { paddingLeft: 10 }]}>
             <View style={[styles.arrowContainer, styles.arrowRightContainer]}>
               <Svg
                 style={styles.arrowRight}
@@ -82,7 +82,9 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
               </Svg>
             </View>
             <View style={[styles.balloon]}>
-              <Text style={styles.helpText}>add players here! double tap to remove</Text>
+              <Text style={styles.helpText}>
+                add players here! double tap to remove
+              </Text>
             </View>
           </View>
         </View>
@@ -91,7 +93,10 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
             styles.helpView,
             {
               justifyContent: "flex-end",
-              left: cardsXPage + (cardsHWidth / 4) * 3 < 20 ? 20 : cardsXPage + (cardsHWidth / 4) * 3,
+              left:
+                cardsXPage + (cardsHWidth / 4) * 3 < 20
+                  ? 20
+                  : cardsXPage + (cardsHWidth / 4) * 3,
               width: width - cardsXPage - (cardsHWidth / 4) * 3,
               bottom: height - cardsYPage - cardsHHeight / 2,
               height: height - cardsYPage - cardsHHeight / 2,
@@ -116,7 +121,10 @@ export const SetupHelp: React.FC<props> = (props: props): JSX.Element => {
               </Svg>
             </View>
             <View style={[styles.balloon]}>
-              <Text style={styles.helpText}>select card packs to use! selected packs will be randomly shuffled</Text>
+              <Text style={styles.helpText}>
+                select card packs to use! selected packs will be randomly
+                shuffled
+              </Text>
             </View>
           </View>
         </View>
