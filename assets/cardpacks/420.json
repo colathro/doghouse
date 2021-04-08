@@ -4,194 +4,254 @@
   "ratePack": false,
   "breeds": [
     {
-      "text": "types of edibles."
+      "text": "types of edibles.",
+      "mature": true
     },
     {
-      "text": "names of weed strains."
+      "text": "names of weed strains.",
+      "mature": true
     },
     {
-      "text": "slang names for marijuana."
+      "text": "slang names for marijuana.",
+      "mature": true
     },
     {
-      "text": "members of The Beatles."
+      "text": "members of The Beatles.",
+      "mature": false
     },
     {
-      "text": "songs about weed."
+      "text": "songs about weed.",
+      "mature": true
     },
     {
-      "text": "movies about weed."
+      "text": "movies about weed.",
+      "mature": true
     },
     {
-      "text": "things you can smoke out of."
+      "text": "things you can smoke out of.",
+      "mature": true
     },
     {
-      "text": "countries where weed is legal."
+      "text": "countries where weed is legal.",
+      "mature": true
     },
     {
-      "text": "reasons parents give their kids to not smoke weed."
+      "text": "reasons parents give their kids to not smoke weed.",
+      "mature": true
     },
     {
-      "text": "stoner icons."
+      "text": "stoner icons.",
+      "mature": true
     }
   ],
   "barkOrBite": [
     {
-      "text": "used a gravity bong."
+      "text": "used a gravity bong.",
+      "mature": true
     },
     {
-      "text": "smoked out of a fruit or vegetable."
+      "text": "smoked out of a fruit or vegetable.",
+      "mature": true
     },
     {
-      "text": "ate multiple edibles because the first one didn't hit fast enough."
+      "text": "ate multiple edibles because the first one didn't hit fast enough.",
+      "mature": true
     },
     {
-      "text": "been high on a flight."
+      "text": "been high on a flight.",
+      "mature": true
     },
     {
-      "text": "been sold Oregano being told it was weed."
+      "text": "been sold Oregano being told it was weed.",
+      "mature": true
     },
     {
-      "text": "gotten high in a foreign country."
+      "text": "gotten high in a foreign country.",
+      "mature": true
     },
     {
-      "text": "wake and baked."
+      "text": "wake and baked.",
+      "mature": true
     },
     {
-      "text": "gone to class/work stoned."
+      "text": "gone to class/work stoned.",
+      "mature": true
     },
     {
-      "text": "failed a drug test."
+      "text": "failed a drug test.",
+      "mature": true
     },
     {
-      "text": "gotten high with my parents."
+      "text": "gotten high with my parents.",
+      "mature": true
     }
   ],
   "dogFight": [
     {
-      "text": "sativa or indica?"
+      "text": "sativa or indica?",
+      "mature": true
     },
     {
-      "text": "stoned or drunk?"
+      "text": "stoned or drunk?",
+      "mature": true
     },
     {
-      "text": "smoke alone or in group?"
+      "text": "smoke alone or in group?",
+      "mature": true
     },
     {
-      "text": "bong or blunt?"
+      "text": "bong or blunt?",
+      "mature": true
     },
     {
-      "text": "mixing with tobacco is a sacrilegious stoner act. true or false?"
+      "text": "mixing with tobacco is a sacrilegious stoner act. true or false?",
+      "mature": true
     },
     {
-      "text": "if given the chance, would you smoke with Snoop or Wiz?"
+      "text": "if given the chance, would you smoke with Snoop or Wiz?",
+      "mature": true
     },
     {
-      "text": "sex is better high. true or false?"
+      "text": "sex is better high. true or false?",
+      "mature": true
     },
     {
-      "text": "take an edible or smoke?"
+      "text": "take an edible or smoke?",
+      "mature": true
     },
     {
-      "text": "weed is a gateway drug. true or false?"
+      "text": "weed is a gateway drug. true or false?",
+      "mature": true
     },
     {
-      "text": "when stoned, sweet or savory foods?"
+      "text": "when stoned, sweet or savory foods?",
+      "mature": true
     }
   ],
   "doghouseOrDare": [
     {
-      "text": "drink the bong water."
+      "text": "drink the bong water.",
+      "mature": true
     },
     {
-      "text": "reply all to your last email and ask if anyone knows a plug."
+      "text": "reply all to your last email and ask if anyone knows a plug.",
+      "mature": true
     },
     {
-      "text": "roll a smoke using one hand."
+      "text": "roll a smoke using one hand.",
+      "mature": true
     },
     {
-      "text": "make a \"green party\" endorsement post on your social media."
+      "text": "make a \"green party\" endorsement post on your social media.",
+      "mature": true
     },
     {
-      "text": "tell the group a story about your worst paranoid experience."
+      "text": "tell the group a story about your worst paranoid experience.",
+      "mature": true
     },
     {
-      "text": "make an apple pipe."
+      "text": "make an apple pipe.",
+      "mature": true
     },
     {
-      "text": "pull up your resume and add your rolling skills (or lack of)."
+      "text": "pull up your resume and add your rolling skills (or lack of).",
+      "mature": true
     },
     {
-      "text": "makeup a recipe for edibles and ask your grandma to make a batch."
+      "text": "makeup a recipe for edibles and ask your grandma to make a batch.",
+      "mature": true
     },
     {
-      "text": "make a Bob Marley macaroni art portrait."
+      "text": "make a Bob Marley macaroni art portrait.",
+      "mature": false
     },
     {
-      "text": "tell the group your worst social encounter while high."
+      "text": "tell the group your worst social encounter while high.",
+      "mature": true
     }
   ],
   "throwABone": [
     {
-      "text": "mooch weed."
+      "text": "mooch weed.",
+      "mature": true
     },
     {
-      "text": "slobber on a joint."
+      "text": "slobber on a joint.",
+      "mature": true
     },
     {
-      "text": "hog the joint."
+      "text": "hog the joint.",
+      "mature": true
     },
     {
-      "text": "buy one gram at a time."
+      "text": "buy one gram at a time.",
+      "mature": true
     },
     {
-      "text": "idiolize pablo escobar."
+      "text": "idiolize pablo escobar.",
+      "mature": true
     },
     {
-      "text": "quit weed for nicotine."
+      "text": "quit weed for nicotine.",
+      "mature": true
     },
     {
-      "text": "have an existential crisis in the shower while high."
+      "text": "have an existential crisis in the shower while high.",
+      "mature": true
     },
     {
-      "text": "think that weed makes than more creative than they actually are."
+      "text": "think that weed makes than more creative than they actually are.",
+      "mature": true
     },
     {
-      "text": "be the most paranoid about getting caught."
+      "text": "be the most paranoid about getting caught.",
+      "mature": true
     },
     {
-      "text": "be a dealer."
+      "text": "be a dealer.",
+      "mature": true
     }
   ],
   "teachersPet": [
     {
-      "text": "what's my favorite high movie?"
+      "text": "what's my favorite high movie?",
+      "mature": true
     },
     {
-      "text": "what's my favorite high snack?"
+      "text": "what's my favorite high snack?",
+      "mature": true
     },
     {
-      "text": "what's the weirdest thing I have smoked out of?"
+      "text": "what's the weirdest thing I have smoked out of?",
+      "mature": true
     },
     {
-      "text": "what's my favorite tune to listen to while smoking?"
+      "text": "what's my favorite tune to listen to while smoking?",
+      "mature": true
     },
     {
-      "text": "how old was I when I first smoked?"
+      "text": "how old was I when I first smoked?",
+      "mature": true
     },
     {
-      "text": "who would I not want to know I'm a stoner?"
+      "text": "who would I not want to know I'm a stoner?",
+      "mature": true
     },
     {
-      "text": "what's the most I've ever spent on weed?"
+      "text": "what's the most I've ever spent on weed?",
+      "mature": true
     },
     {
-      "text": "who would I want to smoke with the most?"
+      "text": "who would I want to smoke with the most?",
+      "mature": true
     },
     {
-      "text": "if i were a dealer, what would my anonymous social media name be?"
+      "text": "if i were a dealer, what would my anonymous social media name be?",
+      "mature": true
     },
     {
-      "text": "if I created a strain of weed, what would I call it?"
+      "text": "if I created a strain of weed, what would I call it?",
+      "mature": true
     }
   ]
 }

@@ -4,194 +4,254 @@
   "ratePack": false,
   "breeds": [
     {
-      "text": "red flags in a relationship."
+      "text": "red flags in a relationship.",
+      "mature": false
     },
     {
-      "text": "date locations."
+      "text": "date locations.",
+      "mature": false
     },
     {
-      "text": "aphrodisiac foods."
+      "text": "aphrodisiac foods.",
+      "mature": false
     },
     {
-      "text": "brands of condoms."
+      "text": "brands of condoms.",
+      "mature": true
     },
     {
-      "text": "romantic gestures."
+      "text": "romantic gestures.",
+      "mature": false
     },
     {
-      "text": "sex playlist songs."
+      "text": "sex playlist songs.",
+      "mature": true
     },
     {
-      "text": "STDs."
+      "text": "STDs.",
+      "mature": true
     },
     {
-      "text": "pick-up lines."
+      "text": "pick-up lines.",
+      "mature": false
     },
     {
-      "text": "dating apps."
+      "text": "dating apps.",
+      "mature": false
     },
     {
-      "text": "couple pet names."
+      "text": "couple pet names.",
+      "mature": false
     }
   ],
   "barkOrBite": [
     {
-      "text": "had a threesome."
+      "text": "had a threesome.",
+      "mature": true
     },
     {
-      "text": "had a horrible first kiss."
+      "text": "had a horrible first kiss.",
+      "mature": false
     },
     {
-      "text": "done bondage."
+      "text": "done bondage.",
+      "mature": true
     },
     {
-      "text": "watched a pornographic film with a significant other."
+      "text": "watched a pornographic film with a significant other.",
+      "mature": true
     },
     {
-      "text": "left a date half-way through."
+      "text": "left a date half-way through.",
+      "mature": false
     },
     {
-      "text": "posted on social media about relationship issues."
+      "text": "posted on social media about relationship issues.",
+      "mature": false
     },
     {
-      "text": "made love to Marvin Gaye music."
+      "text": "made love to Marvin Gaye music.",
+      "mature": true
     },
     {
-      "text": "started dating someone I met online."
+      "text": "started dating someone I met online.",
+      "mature": false
     },
     {
-      "text": "been catfished."
+      "text": "been catfished.",
+      "mature": false
     },
     {
-      "text": "tattooed their partner's name on them."
+      "text": "tattooed their partner's name on them.",
+      "mature": false
     }
   ],
   "dogFight": [
     {
-      "text": "height doesn't matter. true or false?"
+      "text": "height doesn't matter. true or false?",
+      "mature": false
     },
     {
-      "text": "nudes are encouraged. true or false?"
+      "text": "nudes are encouraged. true or false?",
+      "mature": true
     },
     {
-      "text": "astrology is a meaningful way to determine a significant other. true or false?"
+      "text": "astrology is a meaningful way to determine a significant other. true or false?",
+      "mature": false
     },
     {
-      "text": "nice guys finish last. true or false?"
+      "text": "nice guys finish last. true or false?",
+      "mature": false
     },
     {
-      "text": "family needs to approve a significant other. true or false?"
+      "text": "family needs to approve a significant other. true or false?",
+      "mature": false
     },
     {
-      "text": "flirting is cheating. true or false?"
+      "text": "flirting is cheating. true or false?",
+      "mature": false
     },
     {
-      "text": "double dates are the worst. true or false?"
+      "text": "double dates are the worst. true or false?",
+      "mature": false
     },
     {
-      "text": "match outfits or hell no?"
+      "text": "match outfits or hell no?",
+      "mature": false
     },
     {
-      "text": "\"breaks\" are perfectly healthy and work wonders for a relationship. true or false?"
+      "text": "\"breaks\" are perfectly healthy and work wonders for a relationship. true or false?",
+      "mature": false
     },
     {
-      "text": "you should date someone with the mindset of marrying them in the future. true or false?"
+      "text": "you should date someone with the mindset of marrying them in the future. true or false?",
+      "mature": false
     }
   ],
   "doghouseOrDare": [
     {
-      "text": "text your ex."
+      "text": "text your ex.",
+      "mature": false
     },
     {
-      "text": "tell an embarassing story about your current or a past significant other."
+      "text": "tell an embarassing story about your current or a past significant other.",
+      "mature": false
     },
     {
-      "text": "text your parents and tell them you're having a baby."
+      "text": "text your parents and tell them you're having a baby.",
+      "mature": true
     },
     {
-      "text": "show the group your most recent text messages with your partner."
+      "text": "show the group your most recent text messages with your partner.",
+      "mature": false
     },
     {
-      "text": "rank your past significant others."
+      "text": "rank your past significant others.",
+      "mature": false
     },
     {
-      "text": "order an Edible Arrangement for an ex you had a bad break with."
+      "text": "order an Edible Arrangement for an ex you had a bad break with.",
+      "mature": false
     },
     {
-      "text": "like an old social media post from an ex."
+      "text": "like an old social media post from an ex.",
+      "mature": false
     },
     {
-      "text": "find your ex on LinkedIn and endorse one of their skills."
+      "text": "find your ex on LinkedIn and endorse one of their skills.",
+      "mature": false
     },
     {
-      "text": "describe a current or past partner's scent."
+      "text": "describe a current or past partner's scent.",
+      "mature": false
     },
     {
-      "text": "search \"sex\" in your text messages and read the most recent message to the group."
+      "text": "search \"sex\" in your text messages and read the most recent message to the group.",
+      "mature": false
     }
   ],
   "throwABone": [
     {
-      "text": "make out in public."
+      "text": "make out in public.",
+      "mature": false
     },
     {
-      "text": "argue in public."
+      "text": "argue in public.",
+      "mature": false
     },
     {
-      "text": "have sex in a strange place."
+      "text": "have sex in a strange place.",
+      "mature": true
     },
     {
-      "text": "share every detail of their relationship with their friends."
+      "text": "share every detail of their relationship with their friends.",
+      "mature": false
     },
     {
-      "text": "propose too soon."
+      "text": "propose too soon.",
+      "mature": false
     },
     {
-      "text": "ruin their relationship during their bachelor(ette) party."
+      "text": "ruin their relationship during their bachelor(ette) party.",
+      "mature": false
     },
     {
-      "text": "fall in love at first sight."
+      "text": "fall in love at first sight.",
+      "mature": false
     },
     {
-      "text": "go through their partner's phone."
+      "text": "go through their partner's phone.",
+      "mature": false
     },
     {
-      "text": "get too drunk at their own wedding."
+      "text": "get too drunk at their own wedding.",
+      "mature": true
     },
     {
-      "text": "never have kids and travel the world."
+      "text": "never have kids and travel the world.",
+      "mature": false
     }
   ],
   "teachersPet": [
     {
-      "text": "why am I still single?"
+      "text": "why am I still single?",
+      "mature": false
     },
     {
-      "text": "what's my type?"
+      "text": "what's my type?",
+      "mature": false
     },
     {
-      "text": "what characteristic will I avoid completely?"
+      "text": "what characteristic will I avoid completely?",
+      "mature": false
     },
     {
-      "text": "what's my biggest complaint about a current or past significant other?"
+      "text": "what's my biggest complaint about a current or past significant other?",
+      "mature": false
     },
     {
-      "text": "where would I go to find a significant other?"
+      "text": "where would I go to find a significant other?",
+      "mature": false
     },
     {
-      "text": "what's my top sexual fantasy?"
+      "text": "what's my top sexual fantasy?",
+      "mature": true
     },
     {
-      "text": "what's my go-to pick-up line?"
+      "text": "what's my go-to pick-up line?",
+      "mature": false
     },
     {
-      "text": "who's my hall pass celebrity?"
+      "text": "who's my hall pass celebrity?",
+      "mature": true
     },
     {
-      "text": "what's my worst habit?"
+      "text": "what's my worst habit?",
+      "mature": false
     },
     {
-      "text": "what's the dumbest fight I have ever had with a significant other?"
+      "text": "what's the dumbest fight I have ever had with a significant other?",
+      "mature": false
     }
   ]
 }

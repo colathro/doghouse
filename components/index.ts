@@ -45,3 +45,4 @@ export * from "./icons/packs/StandardPlus";
 export * from "./SetupHelp";
 export * from "./PlayersEdit";
 export * from "./PackIconMapper";
+export * from "./MatureSwitch";

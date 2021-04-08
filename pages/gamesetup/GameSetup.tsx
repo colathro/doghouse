@@ -8,6 +8,7 @@ import {
   Main,
   SetupHelp,
   SelectedPacks,
+  MatureSwitch,
 } from "../../components";
 
 function GameSetup({ navigation }: any) {
@@ -41,6 +42,7 @@ function GameSetup({ navigation }: any) {
             cardsHelpRef={packsRef}
           />
         ) : null}
+        <MatureSwitch/>
         <BigButton
           title="START"
           onPress={() => {

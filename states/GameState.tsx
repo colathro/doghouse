@@ -26,6 +26,8 @@ class GameStateObject {
 
   public devMode = true;
 
+  public mature = false;
+
   public decks: Array<Deck>;
 
   public activeCard: Card = {} as Card;
@@ -136,27 +138,27 @@ i
       this.activePacks[i].throwABone.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[0].cards.push(...this.activePacks[i].throwABone);
+      this.decks[0].cards.push(...this.activePacks[i].throwABone.filter(_ => this.mature ? true : !_.mature));
       this.activePacks[i].dogFight.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[1].cards.push(...this.activePacks[i].dogFight);
+      this.decks[1].cards.push(...this.activePacks[i].dogFight.filter(_ => this.mature ? true : !_.mature));
       this.activePacks[i].doghouseOrDare.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[2].cards.push(...this.activePacks[i].doghouseOrDare);
+      this.decks[2].cards.push(...this.activePacks[i].doghouseOrDare.filter(_ => this.mature ? true : !_.mature));
       this.activePacks[i].barkOrBite.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[3].cards.push(...this.activePacks[i].barkOrBite);
+      this.decks[3].cards.push(...this.activePacks[i].barkOrBite.filter(_ => this.mature ? true : !_.mature));
       this.activePacks[i].breeds.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[4].cards.push(...this.activePacks[i].breeds);
+      this.decks[4].cards.push(...this.activePacks[i].breeds.filter(_ => this.mature ? true : !_.mature));
       this.activePacks[i].teachersPet.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[5].cards.push(...this.activePacks[i].teachersPet);
+      this.decks[5].cards.push(...this.activePacks[i].teachersPet.filter(_ => this.mature ? true : !_.mature));
     }
     this.decks[0].cards.push({ text: "joker" } as Card);
     this.decks[1].cards.push({ text: "joker" } as Card);
@@ -164,7 +166,7 @@ i
     this.decks[3].cards.push({ text: "joker" } as Card);
     this.decks[4].cards.push({ text: "joker" } as Card);
     this.decks[5].cards.push({ text: "joker" } as Card);
-    
+
     this.emptyDecks = 0;
   }
 

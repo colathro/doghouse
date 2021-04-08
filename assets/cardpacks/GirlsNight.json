@@ -4,194 +4,254 @@
   "ratePack": false,
   "breeds": [
     {
-      "text": "sex toys."
+      "text": "sex toys.",
+      "mature": true
     },
     {
-      "text": "makeup brands."
+      "text": "makeup brands.",
+      "mature": false
     },
     {
-      "text": "tampon brands."
+      "text": "tampon brands.",
+      "mature": false
     },
     {
-      "text": "female anthems."
+      "text": "female anthems.",
+      "mature": false
     },
     {
-      "text": "turn offs."
+      "text": "turn offs.",
+      "mature": false
     },
     {
-      "text": "lingerie brands."
+      "text": "lingerie brands.",
+      "mature": true
     },
     {
-      "text": "women in seats of political power."
+      "text": "women in seats of political power.",
+      "mature": false
     },
     {
-      "text": "types of fitness classes."
+      "text": "types of fitness classes.",
+      "mature": false
     },
     {
-      "text": "fits of jeans."
+      "text": "fits of jeans.",
+      "mature": false
     },
     {
-      "text": "children of famous people."
+      "text": "children of famous people.",
+      "mature": false
     }
   ],
   "barkOrBite": [
     {
-      "text": "been with someone twice my age."
+      "text": "been with someone twice my age.",
+      "mature": false
     },
     {
-      "text": "kissed more than three people in one night."
+      "text": "kissed more than three people in one night.",
+      "mature": false
     },
     {
-      "text": "sucked on someone's toe/gotten my toes sucked."
+      "text": "sucked on someone's toe/gotten my toes sucked.",
+      "mature": false
     },
     {
-      "text": "taken Plan B."
+      "text": "taken Plan B.",
+      "mature": true
     },
     {
-      "text": "gone on a date with no intention of paying for anything."
+      "text": "gone on a date with no intention of paying for anything.",
+      "mature": false
     },
     {
-      "text": "gone on a date just to make someone jealous."
+      "text": "gone on a date just to make someone jealous.",
+      "mature": false
     },
     {
-      "text": "used handcuffs."
+      "text": "used handcuffs.",
+      "mature": false
     },
     {
-      "text": "faked an orgasm."
+      "text": "faked an orgasm.",
+      "mature": true
     },
     {
-      "text": "been mansplained."
+      "text": "been mansplained.",
+      "mature": false
     },
     {
-      "text": "faked drowning to get mouth-to-mouth by the cute lifeguard."
+      "text": "faked drowning to get mouth-to-mouth by the cute lifeguard.",
+      "mature": false
     }
   ],
   "dogFight": [
     {
-      "text": "tampon or diva cup?"
+      "text": "tampon or diva cup?",
+      "mature": false
     },
     {
-      "text": "choke or get choked?"
+      "text": "choke or get choked?",
+      "mature": true
     },
     {
-      "text": "leggings are pants. true or false?"
+      "text": "leggings are pants. true or false?",
+      "mature": false
     },
     {
-      "text": "WAP is a feminist anthem. true or false?"
+      "text": "WAP is a feminist anthem. true or false?",
+      "mature": false
     },
     {
-      "text": "red or white wine?"
+      "text": "red or white wine?",
+      "mature": false
     },
     {
-      "text": "69ing is enjoyable. true or false?"
+      "text": "69ing is enjoyable. true or false?",
+      "mature": true
     },
     {
-      "text": "bottom or top?"
+      "text": "bottom or top?",
+      "mature": true
     },
     {
-      "text": "the bill should be split on a first date. true or false?"
+      "text": "the bill should be split on a first date. true or false?",
+      "mature": false
     },
     {
-      "text": "shaved or hairy?"
+      "text": "shaved or hairy?",
+      "mature": true
     },
     {
-      "text": "all of our problems would be solved if women ruled the world. true or false?"
+      "text": "all of our problems would be solved if women ruled the world. true or false?",
+      "mature": false
     }
   ],
   "doghouseOrDare": [
     {
-      "text": "share your most embarassing period story."
+      "text": "share your most embarassing period story.",
+      "mature": false
     },
     {
-      "text": "share your most recent wet dream."
+      "text": "share your most recent wet dream.",
+      "mature": true
     },
     {
-      "text": "post a thirst trap."
+      "text": "post a thirst trap.",
+      "mature": true
     },
     {
-      "text": "text your most recent hookup."
+      "text": "text your most recent hookup.",
+      "mature": true
     },
     {
-      "text": "twerk for the group."
+      "text": "twerk for the group.",
+      "mature": false
     },
     {
-      "text": "slide into your crush's DMs."
+      "text": "slide into your crush's DMs.",
+      "mature": false
     },
     {
-      "text": "lead the group in one minute of yoga."
+      "text": "lead the group in one minute of yoga.",
+      "mature": false
     },
     {
-      "text": "create an OnlyfansTM page."
+      "text": "create an OnlyfansTM page.",
+      "mature": true
     },
     {
-      "text": "ask your most recent dating app match how many kids they want."
+      "text": "ask your most recent dating app match how many kids they want.",
+      "mature": true
     },
     {
-      "text": "go for a practice round of giving \"the talk\" to your kids."
+      "text": "go for a practice round of giving \"the talk\" to your kids.",
+      "mature": false
     }
   ],
   "throwABone": [
     {
-      "text": "go commando on a night out."
+      "text": "go commando on a night out.",
+      "mature": true
     },
     {
-      "text": "take the longest getting ready."
+      "text": "take the longest getting ready.",
+      "mature": false
     },
     {
-      "text": "be on the Bachelor�."
+      "text": "be on the Bachelor�.",
+      "mature": false
     },
     {
-      "text": "marry rich."
+      "text": "marry rich.",
+      "mature": false
     },
     {
-      "text": "have a sugar daddy."
+      "text": "have a sugar daddy.",
+      "mature": false
     },
     {
-      "text": "be a cougar."
+      "text": "be a cougar.",
+      "mature": false
     },
     {
-      "text": "become the first female Pope."
+      "text": "become the first female Pope.",
+      "mature": false
     },
     {
-      "text": "send a nude to the wrong person."
+      "text": "send a nude to the wrong person.",
+      "mature": true
     },
     {
-      "text": "get plastic surgery."
+      "text": "get plastic surgery.",
+      "mature": false
     },
     {
-      "text": "never wash their hair again."
+      "text": "never wash their hair again.",
+      "mature": false
     }
   ],
   "teachersPet": [
     {
-      "text": "what's my signature scent?"
+      "text": "what's my signature scent?",
+      "mature": false
     },
     {
-      "text": "what's the kinkiest thing I've ever done?"
+      "text": "what's the kinkiest thing I've ever done?",
+      "mature": true
     },
     {
-      "text": "how many people have I kissed?"
+      "text": "how many people have I kissed?",
+      "mature": false
     },
     {
-      "text": "what's my sexual fantasy?"
+      "text": "what's my sexual fantasy?",
+      "mature": true
     },
     {
-      "text": "how many piercings do I have?"
+      "text": "how many piercings do I have?",
+      "mature": false
     },
     {
-      "text": "who is my style icon?"
+      "text": "who is my style icon?",
+      "mature": false
     },
     {
-      "text": "what's the longest I've gone without washing my hair?"
+      "text": "what's the longest I've gone without washing my hair?",
+      "mature": false
     },
     {
-      "text": "what's the most expensive piece of clothing I own?"
+      "text": "what's the most expensive piece of clothing I own?",
+      "mature": false
     },
     {
-      "text": "what would my first executive order as President be?"
+      "text": "what would my first executive order as President be?",
+      "mature": false
     },
     {
-      "text": "if I could be in any movie, what would it be?"
+      "text": "if I could be in any movie, what would it be?",
+      "mature": false
     }
   ]
 }

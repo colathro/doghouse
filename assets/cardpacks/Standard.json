@@ -4,536 +4,710 @@
   "ratePack": false,
   "breeds": [
     {
-      "text": "\"where are they now\" artists."
+      "text": "\"where are they now\" artists.",
+      "mature": false
     },
     {
-      "text": "\"hello\" in different languages."
+      "text": "\"hello\" in different languages.",
+      "mature": false
     },
     {
-      "text": "2000\u0027s television shows."
+      "text": "2000\u0027s television shows.",
+      "mature": false
     },
     {
-      "text": "alarm sounds."
+      "text": "alarm sounds.",
+      "mature": false
     },
     {
-      "text": "books of the Bible."
+      "text": "books of the Bible.",
+      "mature": false
     },
     {
-      "text": "brands of vodka."
+      "text": "brands of vodka.",
+      "mature": true
     },
     {
-      "text": "Browaday productions."
+      "text": "Browaday productions.",
+      "mature": false
     },
     {
-      "text": "bucket-list activities."
+      "text": "bucket-list activities.",
+      "mature": false
     },
     {
-      "text": "bugs."
+      "text": "bugs.",
+      "mature": false
     },
     {
-      "text": "businesses that filed for bankruptcy."
+      "text": "businesses that filed for bankruptcy.",
+      "mature": false
     },
     {
-      "text": "car brands."
+      "text": "car brands.",
+      "mature": false
     },
     {
-      "text": "celebrities."
+      "text": "celebrities.",
+      "mature": false
     },
     {
-      "text": "celebrity power couples."
+      "text": "celebrity power couples.",
+      "mature": false
     },
     {
-      "text": "chip brands."
+      "text": "chip brands.",
+      "mature": false
     },
     {
-      "text": "clich� couple social media captions."
+      "text": "clich� couple social media captions.",
+      "mature": false
     },
     {
-      "text": "typical college girl Halloween costumes."
+      "text": "typical college girl Halloween costumes.",
+      "mature": false
     },
     {
-      "text": "superheroes."
+      "text": "superheroes.",
+      "mature": false
     },
     {
-      "text": "deadly sins."
+      "text": "deadly sins.",
+      "mature": false
     },
     {
-      "text": "deodorant brands."
+      "text": "deodorant brands.",
+      "mature": false
     },
     {
-      "text": "designer brands."
+      "text": "designer brands.",
+      "mature": false
     },
     {
-      "text": "dog breeds."
+      "text": "dog breeds.",
+      "mature": false
     },
     {
-      "text": "drinking games."
+      "text": "drinking games.",
+      "mature": true
     },
     {
-      "text": "EU countries."
+      "text": "EU countries.",
+      "mature": false
     },
     {
-      "text": "flavors of ice cream."
+      "text": "flavors of ice cream.",
+      "mature": false
     },
     {
-      "text": "forms of contraception."
+      "text": "forms of contraception.",
+      "mature": true
     },
     {
-      "text": "ways to eat potatoes."
+      "text": "ways to eat potatoes.",
+      "mature": false
     },
     {
-      "text": "gas station franchises."
+      "text": "gas station franchises.",
+      "mature": false
     },
     {
-      "text": "grocery store chains."
+      "text": "grocery store chains.",
+      "mature": false
     },
     {
-      "text": "illegal drugs."
+      "text": "illegal drugs.",
+      "mature": true
     }
   ],
   "barkOrBite": [
     {
-      "text": "ate food that was on the floor for longer than 5 seconds."
+      "text": "ate food that was on the floor for longer than 5 seconds.",
+      "mature": false
     },
     {
-      "text": "been the third wheel."
+      "text": "been the third wheel.",
+      "mature": false
     },
     {
-      "text": "been breathalyzed."
+      "text": "been breathalyzed.",
+      "mature": true
     },
     {
-      "text": "been drunk at a wedding reception."
+      "text": "been drunk at a wedding reception.",
+      "mature": true
     },
     {
-      "text": "been in a fist fight."
+      "text": "been in a fist fight.",
+      "mature": false
     },
     {
-      "text": "been to jail."
+      "text": "been to jail.",
+      "mature": false
     },
     {
-      "text": "bet on a sporting event."
+      "text": "bet on a sporting event.",
+      "mature": false
     },
     {
-      "text": "blocked someone on social media."
+      "text": "blocked someone on social media.",
+      "mature": false
     },
     {
-      "text": "called in on a radio show."
+      "text": "called in on a radio show.",
+      "mature": false
     },
     {
-      "text": "cried while watching a movie."
+      "text": "cried while watching a movie.",
+      "mature": false
     },
     {
-      "text": "denied evolution."
+      "text": "denied evolution.",
+      "mature": false
     },
     {
-      "text": "drunk texted a co-worker."
+      "text": "drunk texted a co-worker.",
+      "mature": true
     },
     {
-      "text": "failed a class."
+      "text": "failed a class.",
+      "mature": false
     },
     {
-      "text": "forged my parent\u0027s signature."
+      "text": "forged my parent\u0027s signature.",
+      "mature": false
     },
     {
-      "text": "forgotten my carry-on in the airplane."
+      "text": "forgotten my carry-on in the airplane.",
+      "mature": false
     },
     {
-      "text": "gone on a diet and failed miserably."
+      "text": "gone on a diet and failed miserably.",
+      "mature": false
     },
     {
-      "text": "gone a week without showering."
+      "text": "gone a week without showering.",
+      "mature": false
     },
     {
-      "text": "been punished for swearing."
+      "text": "been punished for swearing.",
+      "mature": false
     },
     {
-      "text": "been stuck in an elevator."
+      "text": "been stuck in an elevator.",
+      "mature": false
     },
     {
-      "text": "been given a way too thorough pat down from TSA."
+      "text": "been given a way too thorough pat down from TSA.",
+      "mature": false
     },
     {
-      "text": "gotten drunk on a long flight."
+      "text": "gotten drunk on a long flight.",
+      "mature": true
     },
     {
-      "text": "gotten in the wrong ride-share."
+      "text": "gotten in the wrong ride-share.",
+      "mature": false
     },
     {
-      "text": "been ripped off by a dealer."
+      "text": "been ripped off by a dealer.",
+      "mature": true
     },
     {
-      "text": "had 500+ likes on a social media post."
+      "text": "had 500+ likes on a social media post.",
+      "mature": false
     },
     {
-      "text": "had braces."
+      "text": "had braces.",
+      "mature": false
     },
     {
-      "text": "had my mugshot taken."
+      "text": "had my mugshot taken.",
+      "mature": false
     },
     {
-      "text": "made out with someone I didn\u0027t know."
+      "text": "made out with someone I didn\u0027t know.",
+      "mature": false
     },
     {
-      "text": "owned an Android�."
+      "text": "owned an Android�.",
+      "mature": false
     },
     {
-      "text": "peed outside."
+      "text": "peed outside.",
+      "mature": false
     }
   ],
   "dogFight": [
     {
-      "text": "Apple™ or Samung™"
+      "text": "Apple™ or Samung™",
+      "mature": false
     },
     {
-      "text": "baked or fried"
+      "text": "baked or fried",
+      "mature": false
     },
     {
-      "text": "bath or shower"
+      "text": "bath or shower",
+      "mature": false
     },
     {
-      "text": "beer or cider"
+      "text": "beer or cider",
+      "mature": true
     },
     {
-      "text": "birds are government spies. True or false?"
+      "text": "birds are government spies. True or false?",
+      "mature": false
     },
     {
-      "text": "boneless or bone-in wings?"
+      "text": "boneless or bone-in wings?",
+      "mature": false
     },
     {
-      "text": "boxers or briefs?"
+      "text": "boxers or briefs?",
+      "mature": false
     },
     {
-      "text": "breakfast or dinner?"
+      "text": "breakfast or dinner?",
+      "mature": false
     },
     {
-      "text": "McDonalds™ or Burger King™?"
+      "text": "McDonalds™ or Burger King™?",
+      "mature": false
     },
     {
-      "text": "Chipotle™ or Qdoba™"
+      "text": "Chipotle™ or Qdoba™",
+      "mature": false
     },
     {
-      "text": "Coke™ or Pepsi™"
+      "text": "Coke™ or Pepsi™",
+      "mature": false
     },
     {
-      "text": "country music or hell no?"
+      "text": "country music or hell no?",
+      "mature": false
     },
     {
-      "text": "Crocs™ or Chacos™?"
+      "text": "Crocs™ or Chacos™?",
+      "mature": false
     },
     {
-      "text": "dark or milk chocolate?"
+      "text": "dark or milk chocolate?",
+      "mature": false
     },
     {
-      "text": "dogs or cats?"
+      "text": "dogs or cats?",
+      "mature": false
     },
     {
-      "text": "DoorDash™ or Ubereats™?"
+      "text": "DoorDash™ or Ubereats™?",
+      "mature": false
     },
     {
-      "text": "duck, duck, goose or duck, duck, gray duck?"
+      "text": "duck, duck, goose or duck, duck, gray duck?",
+      "mature": false
     },
     {
-      "text": "road trip or fly?"
+      "text": "road trip or fly?",
+      "mature": false
     },
     {
-      "text": "Game of Thrones is overrated. True or false?"
+      "text": "Game of Thrones is overrated. True or false?",
+      "mature": false
     },
     {
-      "text": "ghosts are real. True or false?"
+      "text": "ghosts are real. True or false?",
+      "mature": false
     },
     {
-      "text": "Harry Potter™ or Lord of the Rings™?"
+      "text": "Harry Potter™ or Lord of the Rings™?",
+      "mature": false
     },
     {
-      "text": "it is acceptable to pee in the shower. True or false?"
+      "text": "it is acceptable to pee in the shower. True or false?",
+      "mature": false
     },
     {
-      "text": "Jack could have fit on the board with Rose (Titanic). True or false?"
+      "text": "Jack could have fit on the board with Rose (Titanic). True or false?",
+      "mature": false
     },
     {
-      "text": "Kevin Hart or Dave Chapelle?"
+      "text": "Kevin Hart or Dave Chapelle?",
+      "mature": false
     },
     {
-      "text": "lefties are oppressed. True or false?"
+      "text": "lefties are oppressed. True or false?",
+      "mature": false
     },
     {
-      "text": "Mac™ or PC?"
+      "text": "Mac™ or PC?",
+      "mature": false
     },
     {
-      "text": "movies or plays?"
+      "text": "movies or plays?",
+      "mature": false
     },
     {
-      "text": "multiple texts or one long text?"
+      "text": "multiple texts or one long text?",
+      "mature": false
     },
     {
-      "text": "music or podcasts?"
+      "text": "music or podcasts?",
+      "mature": false
     }
   ],
   "doghouseOrDare": [
     {
-      "text": "ask Siri™, \"Who\u0027s her daddy?\""
+      "text": "ask Siri™, \"Who\u0027s her daddy?\"",
+      "mature": false
     },
     {
-      "text": "attempt to say the alphabet backwards."
+      "text": "attempt to say the alphabet backwards.",
+      "mature": false
     },
     {
-      "text": "brush your teeth."
+      "text": "brush your teeth.",
+      "mature": false
     },
     {
-      "text": "call a pizza place and ask if they have tacos."
+      "text": "call a pizza place and ask if they have tacos.",
+      "mature": false
     },
     {
-      "text": "call a random number and see what happens."
+      "text": "call a random number and see what happens.",
+      "mature": false
     },
     {
-      "text": "call someone and immediately tell them that you\u0027re busy."
+      "text": "call someone and immediately tell them that you\u0027re busy.",
+      "mature": false
     },
     {
-      "text": "comment \"play doghouse\" under Oprah\u0027s last social media post."
+      "text": "comment \"play doghouse\" under Oprah\u0027s last social media post.",
+      "mature": false
     },
     {
-      "text": "describe a \"first time\" experience."
+      "text": "describe a \"first time\" experience.",
+      "mature": false
     },
     {
-      "text": "do 10 burpees."
+      "text": "do 10 burpees.",
+      "mature": false
     },
     {
-      "text": "do 25 jumping jacks."
+      "text": "do 25 jumping jacks.",
+      "mature": false
     },
     {
-      "text": "do a handstand."
+      "text": "do a handstand.",
+      "mature": false
     },
     {
-      "text": "do a split."
+      "text": "do a split.",
+      "mature": false
     },
     {
-      "text": "do the Cha Cha Slide for the group."
+      "text": "do the Cha Cha Slide for the group.",
+      "mature": false
     },
     {
-      "text": "drop ice down your shirt."
+      "text": "drop ice down your shirt.",
+      "mature": false
     },
     {
-      "text": "video call your oldest relative and ask if they\u0027re down to do \"something crazy.\""
+      "text": "video call your oldest relative and ask if they\u0027re down to do \"something crazy.\"",
+      "mature": false
     },
     {
-      "text": "give a compliment to every player."
+      "text": "give a compliment to every player.",
+      "mature": false
     },
     {
-      "text": "give the person on your right a massage."
+      "text": "give the person on your right a massage.",
+      "mature": true
     },
     {
-      "text": "guess the middle name of every player."
+      "text": "guess the middle name of every player.",
+      "mature": false
     },
     {
-      "text": "let the group look through your phone for one minute."
+      "text": "let the group look through your phone for one minute.",
+      "mature": false
     },
     {
-      "text": "let the group pose you in an embarassing position and take a picture."
+      "text": "let the group pose you in an embarassing position and take a picture.",
+      "mature": false
     },
     {
-      "text": "let the group DM your celebrity crush on one of your social media accounts."
+      "text": "let the group DM your celebrity crush on one of your social media accounts.",
+      "mature": false
     },
     {
-      "text": "lotion the eldest player\u0027s elbows."
+      "text": "lotion the eldest player\u0027s elbows.",
+      "mature": false
     },
     {
-      "text": "message your mom and ask where you can find the day-after pill."
+      "text": "message your mom and ask where you can find the day-after pill.",
+      "mature": true
     },
     {
-      "text": "name 7 European countries and their capitals."
+      "text": "name 7 European countries and their capitals.",
+      "mature": false
     },
     {
-      "text": "open a bottle without a bottle opener."
+      "text": "open a bottle without a bottle opener.",
+      "mature": true
     },
     {
-      "text": "order a copy of doghouse for your boss."
+      "text": "order a copy of doghouse for your boss.",
+      "mature": false
     },
     {
-      "text": "post a picture of your feet on one of your social media stories."
+      "text": "post a picture of your feet on one of your social media stories.",
+      "mature": false
     },
     {
-      "text": "prank call your favorite cousin."
+      "text": "prank call your favorite cousin.",
+      "mature": false
     },
     {
-      "text": "pretend to be the person to your right for five minutes."
+      "text": "pretend to be the person to your right for five minutes.",
+      "mature": false
     }
   ],
   "throwABone": [
     {
-      "text": "accidentally join a cult"
+      "text": "accidentally join a cult",
+      "mature": false
     },
     {
-      "text": "ask for the aux at a party"
+      "text": "ask for the aux at a party",
+      "mature": false
     },
     {
-      "text": "be an intense soccer parent"
+      "text": "be an intense soccer parent",
+      "mature": false
     },
     {
-      "text": "become a social media \"influencer\""
+      "text": "become a social media \"influencer\"",
+      "mature": false
     },
     {
-      "text": "become a voice actor"
+      "text": "become a voice actor",
+      "mature": false
     },
     {
-      "text": "burp in a crowded room"
+      "text": "burp in a crowded room",
+      "mature": false
     },
     {
-      "text": "buy a flight for the wrong date"
+      "text": "buy a flight for the wrong date",
+      "mature": false
     },
     {
-      "text": "buy a TV commercial to show off their GPA"
+      "text": "buy a TV commercial to show off their GPA",
+      "mature": false
     },
     {
-      "text": "buy all of the toilet paper at a store"
+      "text": "buy all of the toilet paper at a store",
+      "mature": false
     },
     {
-      "text": "call in sick to work because of a pimple"
+      "text": "call in sick to work because of a pimple",
+      "mature": false
     },
     {
-      "text": "call the cops on their own party"
+      "text": "call the cops on their own party",
+      "mature": true
     },
     {
-      "text": "cancel plans at the last second"
+      "text": "cancel plans at the last second",
+      "mature": false
     },
     {
-      "text": "die first in a zombie apocalypse "
+      "text": "die first in a zombie apocalypse",
+      "mature": false
     },
     {
-      "text": "drunk text their therapist"
+      "text": "drunk text their therapist",
+      "mature": true
     },
     {
-      "text": "dump someone on Valentine\u0027s Day"
+      "text": "dump someone on Valentine\u0027s Day",
+      "mature": false
     },
     {
-      "text": "elope with their partner of three weeks"
+      "text": "elope with their partner of three weeks",
+      "mature": true
     },
     {
-      "text": "fall for a call-center scam"
+      "text": "fall for a call-center scam",
+      "mature": false
     },
     {
-      "text": "take a business call and accidentally leave their mic and video on while going to the bathroom"
+      "text": "take a business call and accidentally leave their mic and video on while going to the bathroom",
+      "mature": false
     },
     {
-      "text": "freak out during flight turbulence"
+      "text": "freak out during flight turbulence",
+      "mature": false
     },
     {
-      "text": "get caught going 50mph over the speed limit on their way to church"
+      "text": "get caught going 50mph over the speed limit on their way to church",
+      "mature": false
     },
     {
-      "text": "get back with their ex"
+      "text": "get back with their ex",
+      "mature": false
     },
     {
-      "text": "get banned from a bar"
+      "text": "get banned from a bar",
+      "mature": true
     },
     {
-      "text": "get canonized"
+      "text": "get canonized",
+      "mature": false
     },
     {
-      "text": "get catfished by someone they met online"
+      "text": "get catfished by someone they met online",
+      "mature": true
     },
     {
-      "text": "get denied by a bouncer because they look too young"
+      "text": "get denied by a bouncer because they look too young",
+      "mature": true
     },
     {
-      "text": "get thrown out of a night club because of their terrible dance moves"
+      "text": "get thrown out of a night club because of their terrible dance moves",
+      "mature": true
     },
     {
-      "text": "get wrapped up in conspiracy theories"
+      "text": "get wrapped up in conspiracy theories",
+      "mature": false
     },
     {
-      "text": "go an entire day with their zipper down"
+      "text": "go an entire day with their zipper down",
+      "mature": false
     },
     {
-      "text": "go vegan because it\u0027s \"trendy\""
+      "text": "go vegan because it\u0027s \"trendy\"",
+      "mature": false
     }
   ],
   "teachersPet": [
     {
-      "text": "as a kid what did I want to be when I grew up?"
+      "text": "as a kid what did I want to be when I grew up?",
+      "mature": false
     },
     {
-      "text": "how do I like my coffee?"
+      "text": "how do I like my coffee?",
+      "mature": false
     },
     {
-      "text": "how many alarms does it take to wake me up?"
+      "text": "how many alarms does it take to wake me up?",
+      "mature": false
     },
     {
-      "text": "how many car accidents have I been in?"
+      "text": "how many car accidents have I been in?",
+      "mature": false
     },
     {
-      "text": "how many colleges did I apply to?"
+      "text": "how many colleges did I apply to?",
+      "mature": false
     },
     {
-      "text": "how many countries have I visited?"
+      "text": "how many countries have I visited?",
+      "mature": false
     },
     {
-      "text": "how many social media followers do I have in total?"
+      "text": "how many social media followers do I have in total?",
+      "mature": false
     },
     {
-      "text": "how many pairs of shoes do I own?"
+      "text": "how many pairs of shoes do I own?",
+      "mature": false
     },
     {
-      "text": "how old was I when I lost my virginity?"
+      "text": "how old was I when I lost my virginity?",
+      "mature": true
     },
     {
-      "text": "if all of my ex\u0027s could describe me with one word, what would it be?"
+      "text": "if all of my ex\u0027s could describe me with one word, what would it be?",
+      "mature": false
     },
     {
-      "text": "if I could only eat one thing for the rest of my life, what would it be?"
+      "text": "if I could only eat one thing for the rest of my life, what would it be?",
+      "mature": false
     },
     {
-      "text": "if I had a daughter right now, what would I name her?"
+      "text": "if I had a daughter right now, what would I name her?",
+      "mature": false
     },
     {
-      "text": "if I had to pick an ex to get back together with, who would it be?"
+      "text": "if I had to pick an ex to get back together with, who would it be?",
+      "mature": false
     },
     {
-      "text": "if there was a warrant out for my arrest, where would I hide?"
+      "text": "if there was a warrant out for my arrest, where would I hide?",
+      "mature": false
     },
     {
-      "text": "if there\u0027s a picture on my desk, who\u0027s most likely in the photo?"
+      "text": "if there\u0027s a picture on my desk, who\u0027s most likely in the photo?",
+      "mature": false
     },
     {
-      "text": "on a scale of 1-10, how much of my love life do my parents know about?"
+      "text": "on a scale of 1-10, how much of my love life do my parents know about?",
+      "mature": false
     },
     {
-      "text": "on what occasion in my life did I get the most drunk?"
+      "text": "on what occasion in my life did I get the most drunk?",
+      "mature": true
     },
     {
-      "text": "what am I afraid of?"
+      "text": "what am I afraid of?",
+      "mature": false
     },
     {
-      "text": "what am I allergic to?"
+      "text": "what am I allergic to?",
+      "mature": false
     },
     {
-      "text": "what breed of dog would I be?"
+      "text": "what breed of dog would I be?",
+      "mature": false
     },
     {
-      "text": "what color underwear am I wearing right now?"
+      "text": "what color underwear am I wearing right now?",
+      "mature": false
     },
     {
-      "text": "what did I get in trouble for when I was a kid?"
+      "text": "what did I get in trouble for when I was a kid?",
+      "mature": false
     },
     {
-      "text": "what do I take off first during foreplay?"
+      "text": "what do I take off first during foreplay?",
+      "mature": true
     },
     {
-      "text": "what is my go-to karaoke song?"
+      "text": "what is my go-to karaoke song?",
+      "mature": false
     },
     {
-      "text": "what is my ideal bachelorette/bachelor party location?"
+      "text": "what is my ideal bachelorette/bachelor party location?",
+      "mature": false
     },
     {
-      "text": "what kind of milk do I drink?"
+      "text": "what kind of milk do I drink?",
+      "mature": false
     },
     {
-      "text": "what movie will most likely make me cry?"
+      "text": "what movie will most likely make me cry?",
+      "mature": false
     },
     {
-      "text": "what one thing would I never do?"
+      "text": "what one thing would I never do?",
+      "mature": false
     },
     {
-      "text": "what was my first email handle?"
+      "text": "what was my first email handle?",
+      "mature": false
     }
   ]
 }
