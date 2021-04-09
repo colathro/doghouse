@@ -132,33 +132,57 @@ class GameStateObject {
         cards: [] as Array<Card>,
       },
     ] as Array<Deck>;
-i
+
     // add all decks in active packs to the current deck.
     for (var i = 0; i < this.activePacks.length; i++) {
       this.activePacks[i].throwABone.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[0].cards.push(...this.activePacks[i].throwABone.filter(_ => this.mature ? true : !_.mature));
+      this.decks[0].cards.push(
+        ...this.activePacks[i].throwABone.filter((_) =>
+          this.mature ? true : !_.mature
+        )
+      );
       this.activePacks[i].dogFight.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[1].cards.push(...this.activePacks[i].dogFight.filter(_ => this.mature ? true : !_.mature));
+      this.decks[1].cards.push(
+        ...this.activePacks[i].dogFight.filter((_) =>
+          this.mature ? true : !_.mature
+        )
+      );
       this.activePacks[i].doghouseOrDare.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[2].cards.push(...this.activePacks[i].doghouseOrDare.filter(_ => this.mature ? true : !_.mature));
+      this.decks[2].cards.push(
+        ...this.activePacks[i].doghouseOrDare.filter((_) =>
+          this.mature ? true : !_.mature
+        )
+      );
       this.activePacks[i].barkOrBite.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[3].cards.push(...this.activePacks[i].barkOrBite.filter(_ => this.mature ? true : !_.mature));
+      this.decks[3].cards.push(
+        ...this.activePacks[i].barkOrBite.filter((_) =>
+          this.mature ? true : !_.mature
+        )
+      );
       this.activePacks[i].breeds.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[4].cards.push(...this.activePacks[i].breeds.filter(_ => this.mature ? true : !_.mature));
+      this.decks[4].cards.push(
+        ...this.activePacks[i].breeds.filter((_) =>
+          this.mature ? true : !_.mature
+        )
+      );
       this.activePacks[i].teachersPet.forEach(
         (_) => (_.pack = this.activePacks[i].name)
       );
-      this.decks[5].cards.push(...this.activePacks[i].teachersPet.filter(_ => this.mature ? true : !_.mature));
+      this.decks[5].cards.push(
+        ...this.activePacks[i].teachersPet.filter((_) =>
+          this.mature ? true : !_.mature
+        )
+      );
     }
     this.decks[0].cards.push({ text: "joker" } as Card);
     this.decks[1].cards.push({ text: "joker" } as Card);
