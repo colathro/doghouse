@@ -30,10 +30,11 @@ export const Doghouse: React.FC<props> = observer(
 
     const Player = (
       name: string,
-      handleChecked: (n: string, checked: boolean) => boolean
+      handleChecked: (n: string, checked: boolean) => boolean,
+      index: number
     ) => {
       return (
-        <View style={styles.playerContainer}>
+        <View style={styles.playerContainer} key={index}>
           <CheckBox
             label={name}
             onValueChange={(val) => handleChecked(name, val)}
@@ -241,7 +242,7 @@ export const Doghouse: React.FC<props> = observer(
             showsVerticalScrollIndicator={false}
           >
             {GameState.players.map((val, ind) => {
-              return Player(val.name, handleCheck);
+              return Player(val.name, handleCheck, ind);
             })}
           </ScrollView>
         </Animated.View>
